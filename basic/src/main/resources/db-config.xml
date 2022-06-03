@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="db1" class="basic.ex02.DataBaseInfo">
+		<!-- setter 주입 값도 넣을 수 있음 -->
+		<property name="url"
+			value="jdbc:oracle:thin@localhost:1521:xw" />
+		<property name="uid" value="test" />
+		<property name="upw" value="test123" />
+		<!-- 그냥 setter를 불러와서 각 변수에 값을 넣어준다고 생각하자 -->
+	</bean>
+
+	<bean id="db2" class="basic.ex02.DataBaseInfo">
+		<!-- setter 주입 값도 넣을 수 있음 -->
+		<property name="url"
+			value="jdbc:mysql~~~!~!~" />
+		<property name="uid" value="mysqltest" />
+		<property name="upw" value="test123" />
+		<!-- 그냥 setter를 불러와서 각 변수에 값을 넣어준다고 생각하자 -->
+	</bean>
+
+	<bean id="dao" class="basic.ex02.MemberDAO">
+		<!-- MemberDAO는 DataBaseInfo가 있어야 함으로 property 태그를 통해 작성 -->
+		<property name="dbInfo" ref="db1" />
+		<!-- property의 name은 setter메서드의 setter를 빼고 작성 -->
+		<!-- ref를 db2로 바꾸게 되면 mysql에도 접속 할 수 있으므로 훨씬 편리하게 사용가능  -->
+	</bean>
+	<!-- setter 메서드를 사용할 때 property 태그를 사용하는 거네 -->
+
+
+</beans>
