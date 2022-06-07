@@ -34,4 +34,11 @@ public class UserVO {
 	public void setHobby(List<String> hobby) {
 		this.hobby = hobby;
 	}
+	@Override
+	public String toString() {
+		return "UserVO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", hobby=" + hobby + "]";
+	}
+	// UserVO객체 내의 정보를 가져옴 
+	
+	
 }
