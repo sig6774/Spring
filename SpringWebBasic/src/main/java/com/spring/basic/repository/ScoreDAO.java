@@ -48,8 +48,6 @@ public class ScoreDAO implements IScoreDAO {
 			// 현재 데이터의 사이즈보다 크다는 것은 잘못된 번호를 입력한 것  
 			return null;
 		}
-		
-		
 	}
 
 }

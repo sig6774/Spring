@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
+
+
+	<!-- JDBC, DB 관련 빈을 등록하고 관리하는 설정 파일 -->
+	<!-- 히카리 커넥션 풀 빈 등록 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<!-- property는 객체의 setter처럼 값 주입 -->
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="spring" />
+		<property name="password" value="spring" />
+	</bean>
+
+	<!-- 히카리 데이터 소스 빈 등록 -->
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg ref="hikariConfig" />
+		<!-- 히카리 데이터 소스에 히카리 커넥션 풀 주입 -->
+	</bean>
+
+	<!-- Spring JDBC를 사용하기 위한 핵심 객체인 JdbcTemplate 클래스 빈 등록 -->
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="ds" />
+	</bean>
+
+	<!-- mybatis SQL 동작을 위한 핵심 객체 SqlSessionFactory 클래스 빈 등록 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+<!-- 		<property name="mapperLocations">
 		
+		SessionFactory가 mapper가 어디에 있는지 알려줘야함
+		<array>
+			<value>classpath:/mappers/score/ScoreMapper.xml</value>
+			<value>classpath:/mappers/board/BoardMapper.xml</value>
+			classpath를 작성하면 src/main/resources라는 경로를 한번에 지목할 수 있음
+			array를 통해 여러개 지정 가능
+		</array>
+		</property> -->
+		
+		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
+		<!-- value를 통해 특정 키워드가 포함되면 모두 Mapper로 활용하라는 뜻 -->
+		
+	</bean>
+	
+	<mybatis-spring:scan base-package="com.spring.db.repository"/>
+	<!-- Mapper인터페이스가 어디에 있는지 경로 지정  -->
+
 </beans>

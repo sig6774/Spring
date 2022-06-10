@@ -1,4 +1,4 @@
-package com.spring.basic.controller;
+package com.spring.db.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.basic.model.ScoreVO;
-import com.spring.basic.service.IScoreService;
+import com.spring.db.model.ScoreVO;
+import com.spring.db.service.IScoreService;
 
 @Controller
 // Controller로 bean 등록 
@@ -26,6 +26,7 @@ public class ScoreController {
 	@Autowired
 	// autowired를 통해 bean등록한 것을 자동으로 객체 주입
 	private IScoreService service;
+	
 	
 	// 점수 등록 화면을 열어주는 처리를 하는 메서드 
 	@GetMapping("/register")
@@ -43,8 +44,10 @@ public class ScoreController {
 		System.out.println("/score/register : POST");
 		
 		System.out.println(scores.toString());
+		
 		// Service에 scores를 전달해야함
 		// 위에서 생성한 service를 통해 연결
+		
 		service.insertScore(scores);
 		return "score/write-result";
 	}
@@ -59,6 +62,7 @@ public class ScoreController {
 		model.addAttribute("sList", service.listScore());
 		// 모델 객체에 값을 담아줌 
 		// 보낼 경로를 작성하게 되면 Model 객체는 자동으로 이동
+		
 		return "score/list";
 	}
 	
@@ -68,6 +72,7 @@ public class ScoreController {
 						RedirectAttributes ra) {
 		// delete요청이 들어올 때 stuNum라는 이름의 파라미터 값이 들어오기 때문에 requestParam을 사용
 		// RedirectAttributes 객체를 활용해서 redirect(다시 요청) 진행
+		
 		System.out.println("/score/delete : GET");
 		service.deleteScore(stuNum);
 		ra.addFlashAttribute("message", "학번이 " + stuNum +" 님의 정보가 삭제가 완료되었습니다.");

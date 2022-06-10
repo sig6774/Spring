@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- Mybatis용 맵퍼라는 것을 말함  --> 
+<mapper namespace="com.spring.db.repository.IScoreMapper">
+	<!-- namespace에 적힌 것을 구현하는 xml이라는 뜻 -->
+	<!-- 이제 여기에 sql 코드 작성  -->
+	
+	<!-- 점수 등록 기능  -->
+	<insert id ="insertScore">
+		<!-- id 에는 구현하고자 하는 메서드 -->
+		INSERT INTO scores
+		VALUES(id_seq.NEXTVAL, #{stuName}, #{kor}, #{eng}, #{math}, #{total}, #{average})
+		<!-- ScoreVO가 넘어오는 것은 알고 있고 값을 넣을 때 변수이름만 정확하게 작성하면 됨 -->
+	</insert> 
+</mapper>
+
+    

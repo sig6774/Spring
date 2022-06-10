@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
 <p>
 	이름 : ${score.stuName }<br>
 	국어 점수 : ${score.kor } <br>
