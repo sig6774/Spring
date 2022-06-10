@@ -40,22 +40,25 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds" />
-<!-- 		<property name="mapperLocations">
+		<!-- value를 통해 특정 키워드가 포함되면 모두 Mapper로 활용하라는 뜻 -->
+
+	<property name="mapperLocations">
 		
-		SessionFactory가 mapper가 어디에 있는지 알려줘야함
-		<array>
+<!-- 		 SessionFactory가 mapper가 어디에 있는지 알려줘야함
+ -->		<array>
 			<value>classpath:/mappers/score/ScoreMapper.xml</value>
 			<value>classpath:/mappers/board/BoardMapper.xml</value>
-			classpath를 작성하면 src/main/resources라는 경로를 한번에 지목할 수 있음
-			array를 통해 여러개 지정 가능
+<!-- 		classpath를 작성하면 src/main/resources라는 경로를 한번에 지목할 수 있음
+ 			array를 통해 여러개 지정 가능 -->
 		</array>
-		</property> -->
-		
-		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
-		<!-- value를 통해 특정 키워드가 포함되면 모두 Mapper로 활용하라는 뜻 -->
+		</property>  
+<!-- 	<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
+ -->		
 		
 	</bean>
 	
+	<!-- 지정한 패키지를 스캔하여 존재하는 Mapper 인터페이스를 bean type으로 등록 -->
+	<!-- sqlSessionFactory가 xml파일을 클래스로 변환하여 bean으로 등록하려는 시도를 할 때 타입을 지정해야 하기 때문 -->
 	<mybatis-spring:scan base-package="com.spring.db.repository"/>
 	<!-- Mapper인터페이스가 어디에 있는지 경로 지정  -->
 

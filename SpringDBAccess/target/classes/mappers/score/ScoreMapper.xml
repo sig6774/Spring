@@ -1,19 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<!-- Mybatis용 맵퍼라는 것을 말함  --> 
+
+<!-- Mybatis용 맵퍼라는 것을 말함 -->
 <mapper namespace="com.spring.db.repository.IScoreMapper">
+
+	<!-- DB컬럼명과 VO클래스의 필드(멤버변수)명을 맞추는 ResultMap선언 컬럼명과 VO의 변수명이 서로 일치하지 않는다면 
+		SQL을 잘 작성해도 MyBatis에서 값을 가져오지 못함 -->
+	<resultMap type="com.spring.db.model.ScoreVO" id="ScoreMap">
+		<!-- 값을 리턴하기 위해서 db컬럼명과 변수명을 맞춰주는 것 -->
+		<id property="stuId" column="stu_id" />
+		<!-- property는 set을 제외한 setter 메서드의 이름 column은 db의 컬럼명을 지정 -->
+		<result property="stuName" column="stu_name" />
+		<!-- id태그는 primary key 변수를 맞춰줄 때 사용하고 나머지는 모두 result 태그를 사용 -->
+	</resultMap>
+
+	<!-- ScoreMapper는 namespace에 있는 것을 구현하는 것이라는 뜻 -->
 	<!-- namespace에 적힌 것을 구현하는 xml이라는 뜻 -->
-	<!-- 이제 여기에 sql 코드 작성  -->
-	
-	<!-- 점수 등록 기능  -->
-	<insert id ="insertScore">
-		<!-- id 에는 구현하고자 하는 메서드 -->
+	<!-- 이제 여기에 sql 코드 작성 -->
+
+	<!-- 점수 등록 기능 -->
+	<insert id="insertScore">
+		<!-- IScoreMapper에 있는 메서드의 이름을 id에 적어줌 -->
+		<!-- insertScore는 ScoreVO 객체를 매개변수로 받는데 mybatis는 getter 안쓰고 ScoreVO 변수명만 
+			정확하게 작성하면 sql 실행가능 -->
 		INSERT INTO scores
-		VALUES(id_seq.NEXTVAL, #{stuName}, #{kor}, #{eng}, #{math}, #{total}, #{average})
+		VALUES(id_seq.NEXTVAL, #{stuName}, #{kor}, #{eng},
+		#{math}, #{total}, #{average})
 		<!-- ScoreVO가 넘어오는 것은 알고 있고 값을 넣을 때 변수이름만 정확하게 작성하면 됨 -->
-	</insert> 
+	</insert>
+
+	<!-- 조회를 하는 것이라 select 태그 작성 -->
+	<!-- <select id="listScore" resultType="com.spring.db.model.ScoreVO"> -->
+	<!-- IScoreMapper에 있는 메서드 이름을 id에 적어줌 -->
+	<!-- return이 존재하면 resultType에 return 객체가 있는 디렉토리를 지정 즉 select결과가 어떤 타입으로 
+		포장이 될 건지를 resultType에 넣어줌 -->
+	<!-- resultType에 객체가 있는 디렉토리가 있는 곳의 경로를 작성하면 db의 컬럼명과 객체 변수명이 다르면 불러오지 않음 -->
+
+	<!-- 점수 조회 기능 -->
+	<select id="listScore" resultMap="ScoreMap">
+		<!-- db의 컬럼명과 객체의 변수명이 다를 때 resultMap태그를 활용하여 미리 지정한 것을 알려줌 -->
+		SELECT * FROM scores
+		
+		ORDER BY stu_id ASC
+	</select>
+
+	<!-- 점수 삭제 기능 -->
+	<delete id="deleteScore">
+		DELETE FROM scores
+		WHERE stu_id = #{num}
+		<!-- interface의 deleteScore의 매개변수를 넣어주면 됨 -->
+	</delete>
+
+	<!-- 점수 개별 조회 기능 -->
+	<select id="selectScore" resultMap="ScoreMap">
+		<!-- return이 있으므로 resultMap property 사용 -->
+		SELECT * FROM scores
+		WHERE stu_id = #{num}
+	</select>
+
 </mapper>
 
     

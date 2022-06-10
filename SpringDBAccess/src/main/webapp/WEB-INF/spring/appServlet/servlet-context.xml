@@ -7,22 +7,42 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- DispatcherServlet 객체 관련 설정 -->
 	
-	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- 핸들러 어댑터, 핸들러 매핑 객체가 개발자가 작성한 컨트롤러를 찾을 수 있게 설정하는 태그 
+		  밑의 태그가 있어야 핸들러 어댑터 매핑 객체가 돌아감-->
 	<annotation-driven />
+	
+	<!-- 핸들러 어댑터와 핸들러 매핑는  @Controller를 찾아서 거기에서 지금의 요청을 처리할 수 있는 메서드를 찾음 
+		 핸들러 어댑터은 @RequestMapping을 통해서 적절한 메서드도 찾음
+		  -->
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- 정적 자원(html, css, js, img)등을 절대 경로로 쉽게 매핑해주는 태그 
+		 mapping에 작성된 경로 : 외부로 노출되는 경로 
+		 location : 실제 파일 경로-->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	 
+	 <!-- 중요!!! -->
+	<!-- view resolver bean 등록 설정 -->
+	<!--컨트롤러가 리턴한 view 문자열을 해석하여 경로를 만들어서 파일을 찾아 응답하는 ViewResolver의 Bean 등록 코드
+		- prefix, sufiix (접두어, 접미어) 필드의 setter 주입을 통해 컨트롤러에서 리턴된 문자열을 조립
+	 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<!-- 접두어 접미어를 앞 뒤에 붙여서 경로를 지정해줌 -->
+		<!-- property를 보니깐 set메서드 -->
 	</beans:bean>
 	
-	<context:component-scan base-package="com.spring.db" />
-	
+	<!-- 
+		- annotation을 사용하여 자동으로 bean 등록을 하게 해주는 설정 태그
+		- con.spring.basic으로 경로가 시작되는 모든 클래스에서 annotaion이 지정되어 있는 클래스를 찾아 
+		자동으로 bean 빈등록 해줌
+		- 즉 com.spring.basic에 있는 모든 클래스 중 annotation이 되어 있는 모든 클래스를 container에 bean 등록해라
+	 -->
+	 
+	<context:component-scan base-package="com.spring.db" />	
 	
 	
 </beans:beans>

@@ -16,9 +16,7 @@ import com.spring.db.model.ScoreVO;
 import com.spring.db.service.IScoreService;
 
 @Controller
-// Controller로 bean 등록 
 @RequestMapping("/score")
-// 공통 url 지정 
 public class ScoreController {
 	
 	// Controller는 Service가 무조건 필요하므로 (종속관계)

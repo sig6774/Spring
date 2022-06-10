@@ -7,42 +7,47 @@ import org.springframework.stereotype.Service;
 
 import com.spring.db.model.BoardVO;
 import com.spring.db.repository.IBoardDAO;
+import com.spring.db.repository.IBoardMapper;
 
 @Service
 public class BoardService implements IBoardService {
 	
+//	@Autowired
+//	private IBoardDAO dao;
+	
+	// MyBatis를 사용함으로 Mapper interface 사용 
 	@Autowired
-	private IBoardDAO dao;
+	private IBoardMapper mapper;
 
 	@Override
 	public void insertArticle(BoardVO vo) {
-		dao.insertArticle(vo);
+		mapper.insertArticle(vo);
 	}
 
 	@Override
 	public List<BoardVO> getArticles() {
-		return dao.getArticles();
+		return mapper.getArticles();
 	}
 
 	@Override
 	public BoardVO getArticle(int bId) {
-		return dao.getArticle(bId);
+		return mapper.getArticle(bId);
 	}
 
 	@Override
 	public void deleteArticle(int bId) {
-		dao.deleteArticle(bId );
+		mapper.deleteArticle(bId );
 	}
 
 	@Override
 	public void updateArticle(BoardVO vo) {
-		dao.updateArticle(vo);
+		mapper.updateArticle(vo);
 	}
 	
 	@Override
 	public List<BoardVO> seachList(String keyword) {
 		
-		return dao.seachList("%" + keyword + "%");
+		return mapper.seachList("%" + keyword + "%");
 	}
 
 }

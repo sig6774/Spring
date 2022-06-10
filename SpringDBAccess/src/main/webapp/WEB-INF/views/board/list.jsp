@@ -19,19 +19,24 @@
 			<th>비고</th>
 		</tr>
 		
-		<c:forEach var="article" items="${articles}" >
+		<c:forEach var="article" items="${articles}">
 			<tr>
- 				<td>${article.boardNo}</td>
-				<td><a href="<c:url value='/board/content?boardNo=${article.boardNo}' />">${article.title}</a></td>
+				<td>${article.boardNo}</td>
+				<td>
+					<a href="<c:url value='/board/content?boardNo=${article.boardNo}' />">${article.title}</a>
+				</td>
 				<td>${article.writer}</td>
-				<td><a href="<c:url value='/board/delete?boardNo=${article.boardNo}' />">[삭제]</a></td>
+				<td>
+					<a href="<c:url value='/board/delete?boardNo=${article.boardNo}' />">[삭제]</a>
+				</td>
 			</tr>
 		</c:forEach>
 		
 	</table>
+	
 	<br>
 	
-	<form action="<c:url value='/board/searchList'/>">
+	<form action="<c:url value='/board/searchList' />">
 		<input type="text" name="keyword" placeholder="작성자 이름을 입력하세요.">
 		<input type="submit" value="검색">
 	</form>
@@ -40,3 +45,20 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
