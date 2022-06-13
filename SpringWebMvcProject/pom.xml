@@ -172,7 +172,7 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- Test -->
+		<!-- Test 4.12변경-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -199,6 +199,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				
 				<!-- 버전과 source 변경 -->
 				<version>3.5.1</version>
 				<configuration>

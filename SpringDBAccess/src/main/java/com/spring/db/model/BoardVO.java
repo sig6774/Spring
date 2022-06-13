@@ -23,6 +23,9 @@ public class BoardVO {
 	private String title;
 	private String content;
 	
+	public BoardVO() {}
+	
+	
 	public BoardVO(int boardNo, String writer, String title, String content) {
 		super();
 		this.boardNo = boardNo;
@@ -30,12 +33,15 @@ public class BoardVO {
 		this.title = title;
 		this.content = content;
 	}
+
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
+	
 	public String getWriter() {
 		return writer;
 	}
@@ -54,9 +60,14 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", writer=" + writer + ", title=" + title + ", content=" + content + "]";
 	}
+	
+	
+	
+	
+
 }

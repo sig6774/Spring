@@ -22,5 +22,5 @@ public interface IBoardMapper {
 	void updateArticle(BoardVO vo);
 	
 	//게시글 검색 
-	List<BoardVO>  seachList(String keyword);
+	List<BoardVO> searchList(String keyword);
 }

@@ -1,6 +1,7 @@
 package com.spring.mvc.board.model;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class BoardVO {
 //	    title VARCHAR2(100) NOT NULL,
 //	    content VARCHAR2(2000) NOT NULL,
 //	    writer VARCHAR2(50) NOT NULL,
-//	    reg_data DATE DEFAULT sysdate,
+//	    reg_date DATE DEFAULT sysdate,
 //	    view_cnt NUMBER DEFAULT 0
 //	);
 //
@@ -41,4 +42,6 @@ public class BoardVO {
 	private String writer;
 	private Timestamp regDate;
 	private int viewCnt;
+	
+	
 }

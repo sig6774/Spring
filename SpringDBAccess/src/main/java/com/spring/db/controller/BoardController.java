@@ -78,7 +78,7 @@ public class BoardController {
 	// 게시글 검색 요청 
 	@GetMapping("/searchList")
 	public String searchList(@RequestParam("keyword") String keyword, Model model) {
-		model.addAttribute("articles", service.seachList(keyword));
+		model.addAttribute("articles", service.searchList(keyword));
 		return "board/list";
 	}
 

@@ -45,9 +45,9 @@ public class BoardService implements IBoardService {
 	}
 	
 	@Override
-	public List<BoardVO> seachList(String keyword) {
+	public List<BoardVO> searchList(String keyword) {
 		
-		return mapper.seachList("%" + keyword + "%");
+		return mapper.searchList("%" + keyword + "%");
 	}
 
 }
