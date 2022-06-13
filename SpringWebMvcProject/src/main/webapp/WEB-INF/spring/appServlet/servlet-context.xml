@@ -12,9 +12,20 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- 정적 자원(html, css, js, img ...) 등을 URI 절대 경로로 사용하기 위한 Mapping 처리  -->
+	<!-- mapping에는 사용자에게 노출되는 경로, location에는 실제 파일 경로 -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/css/**" location="/resources/css/" />
+	<!-- css/로 된 경로가 있으면 실제로는 /resources/css/에서 찾아라  -->
+	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/scss/**" location="/resources/scss/" />
+	<resources mapping="/vendor/**" location="/resources/vendor/" />
 
+	
+	
+	
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

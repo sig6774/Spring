@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Parser;
 
 import lombok.extern.log4j.Log4j;
 
@@ -40,6 +41,7 @@ public class BoardControllerTest {
 	
 	@Before
 	public void setUp() {
+		
 		// 가상 구조 세팅 
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 		
@@ -75,7 +77,6 @@ public class BoardControllerTest {
 	public void testWrite() throws Exception {
 		
 		String viewPage = this.mockMvc.perform(MockMvcRequestBuilders.post("/board/write")
-				.param("title", "controller 테스트")
 				.param("content", "controller 테스트")
 				.param("writer", "controller 테스트")
 				).andReturn().getModelAndView().getViewName();
@@ -93,15 +94,16 @@ public class BoardControllerTest {
 	   // /board/content -> get
 	@Test
 	public void testContent() throws Exception {
-		log.info(this.mockMvc.perform(MockMvcRequestBuilders.get("/board/content"))
+		log.info(this.mockMvc.perform(MockMvcRequestBuilders.get("/board/content")
+				// 해당 요청을 Controller에 보냄
+				.param("boardNo", "35"))
+				// 파라미터가 있으므로 파라미터도 추가 
 				.andReturn()
 				.getModelAndView()
 				.getModelMap()
 				);
 	}
 	
-
-
 	   //5번글의 제목과 내용을 수정하는 요청을 보낼 예정입니다.
 	   //전송방식은 post 방식입니다.
 	   //수정 후 이동하는 페이지는 해당 글의 상세보기 페이지입니다.
@@ -109,18 +111,26 @@ public class BoardControllerTest {
 	@Test
 	public void testModify() throws Exception {
 		String viewName = this.mockMvc.perform(MockMvcRequestBuilders.post("/board/modify")
-				.param("title", "test title 수정 테스트")
-				.param("conent", "test content 수정 테스트")
+				.param("title", "test title 수정 테스트123")
+				.param("content", "test content 수정 테스트123")
+				.param("boardNo", "5")
 				).andReturn().getModelAndView().getViewName();
 		
 		log.info(viewName);
 	}
 
-	
-
-
 	   //42번글을 삭제하세요.
 	   //전송 방식은 post방식이고, 이동하는 곳은 목록 요청이 재요청될 것입니다.
 	   //viewName을 출력해 주세요.   
+	@Test
+	public void testDelete() throws Exception {
+		String viewname = this.mockMvc.perform(MockMvcRequestBuilders.post("/board/delete")
+				.param("boardNo", "33"))
+				.andReturn()
+				.getModelAndView()
+				.getViewName();
+		
+		log.info(viewname);
 	
+	}
 }

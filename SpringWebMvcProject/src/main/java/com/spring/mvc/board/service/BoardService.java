@@ -39,7 +39,7 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public void deleteArticle(int boardNo) {
-
+		mapper.deleteArticle(boardNo);
 	}
 
 }
