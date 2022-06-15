@@ -56,6 +56,8 @@
 	 -->
 	<select id="getArticleList" resultMap="BoardMap">
 	<!-- getArticleList는 Paging을 하기 위해서는 PageVO객체가 무조건 필요 -->
+	<!-- list에 표시하기 위해 keyword, condition, PageVO객체의 정보가 모두 필요함
+		 그래서 interface에서 매개값으로 해당 정보가 모두 들어있는 SearchVO 객체를 넣어줌 -->
 		SELECT * FROM 
 			(SELECT ROWNUM as rn, tbl.* FROM 
 				(SELECT * FROM mvc_board 

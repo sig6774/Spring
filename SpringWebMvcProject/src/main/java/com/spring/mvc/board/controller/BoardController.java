@@ -104,8 +104,8 @@ public class BoardController {
 		System.out.println("/board/list : GET");
 		
 		// 매개변수 이름과 파라미터 명이 같으면 @RequsetParam 안써도 됨
-		System.out.println("검색 조건 파라미터 불러오는지 테스트" + search.getCondition());
-		System.out.println("검색어 파라미터 불러오는지 테스트" + search.getKeyword());
+		System.out.println("검색 조건 파라미터 불러오는지 테스트 " + search.getCondition());
+		System.out.println("검색어 파라미터 불러오는지 테스트 " + search.getKeyword());
 		System.out.println("페이지 번호 : "+search.getPage());
 		
 		List<BoardVO> list = service.getArticleList(search);

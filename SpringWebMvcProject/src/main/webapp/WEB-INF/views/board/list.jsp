@@ -62,7 +62,8 @@ header.masthead {
 								<td>
 <%-- 									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content?boardNo=${board.boardNo}' />">
  --%>									
- 									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${board.boardNo} ' />">
+ 									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${board.boardNo}${pc.makeURI(pc.paging.page)}' />">
+ 									<!-- 게시물 제목을 클릭했을 때 이전의 page와 cpp를 같이 보내서 다시 list로  요청을 보낼 때 사용할 수 있게 -->
  																																			
  										${board.title }	
 									</a>
@@ -75,7 +76,7 @@ header.masthead {
 								</td>
 
 								<td>
-									<fmt:formatDate value="${b.regDate }" pattern="yyyy년 MM월 dd일 HH:mm" />
+									<fmt:formatDate value="${board.regDate }" pattern="yyyy년 MM월 dd일 HH:mm" />
 								</td>
 								<td>${board.viewCnt }</td>
 							</tr>
@@ -124,7 +125,7 @@ header.masthead {
 	                            <option value="title ${param.condition == 'title'? 'selected' : '' }">제목</option>
 	                            <option value="content ${param.condition == 'content'? 'selected' : '' }">내용</option>
 	                            <option value="writer ${param.condition == 'writer'? 'selected' : '' }">작성자</option>
-	                            <option value="titleContent ${param.condition == 'titleContent'? 'selected' : '' }">제목+내용</option>
+	                            <option value="titleContent" ${param.condition == 'titleContent'? 'selected' : ''}>제목+내용</option>
 	                        </select>
 	                    </div>
 	                    <div class="form-group col-sm-4">
@@ -161,11 +162,12 @@ header.masthead {
 		//start jQuery
 		$(function() {
 			// 한 페이지당 보여줄 게시물 개수가 변동하는 이벤트 처리
-			$('#count-per-page .btn-cpp').on('click', 'input', function(){
+			$('#count-per-page .btn-cpp').click(function(){
 				const count = $(this).val();
 				/* 현재 이벤트가 발생한 요소의 value */
 				location.href='/board/list?page=1&cpp=' + count;
 			});
+			// 안됨 (고침)
 			
 			// 검색 버튼 이벤트 처리 
 			$('#searchBtn').click(function() {

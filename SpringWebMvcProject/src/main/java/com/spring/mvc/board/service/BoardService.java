@@ -79,6 +79,7 @@ public class BoardService implements IBoardService {
 	
 	@Override
 	public int countArticles(SearchVO search) {
+		// keyword와 condition 정보를 포함해서 게시물 개수를 조회할 수 있으므로 매개값으로 SearchVO 객체를 받음
 		return mapper.countArticles(search);
 	}
 

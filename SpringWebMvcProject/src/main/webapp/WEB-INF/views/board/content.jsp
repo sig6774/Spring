@@ -35,7 +35,7 @@ header.masthead {
 					</div>
 
 					<form id="formObj" role="form"
-						action="<c:url value='/board/delete/' />" method="post">
+						action="<c:url value='/board/delete' />" method="post">
 						<input type="hidden" name="boardNo" value="${article.boardNo}">
 
 						<input id="list-btn" class="btn" type="button" value="목록"
