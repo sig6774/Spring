@@ -24,7 +24,7 @@ public class BoardMapperTest {
 	// 게시글 등록 단위 테스트
 	@Test
 	public void insertTest() {
-		for (int i = 0; i <= 323; i++) {
+		for (int i = 0; i <= 100; i++) {
 			BoardVO board = new BoardVO();
 			board.setTitle("테스트 제목" + i);
 			board.setWriter("문테스트" + i);
@@ -38,17 +38,18 @@ public class BoardMapperTest {
 	
 	//게시글 목록 전체 조회 테스트
 	//게시물 개수 몇개인지 출력하시고, 게시글 모든 내용을 toString()으로 출력
-	@Test
-	public void listTest() {
-		List<BoardVO> boards = mapper.getArticleList();
-		// mapper와 연동해서 전체 게시물 가져옴 
-		
-		System.out.println("전체 게시물 개수 : "+ boards.size());
-		for(BoardVO board : boards) {
-			System.out.println(board.toString());
-			// 전체 게시물의 내용 모두 출력
-		}
-	}
+//	@Test
+//	public void listTest() {
+//		List<BoardVO> boards = mapper.getArticleList();
+	
+//		// mapper와 연동해서 전체 게시물 가져옴 
+//		
+//		System.out.println("전체 게시물 개수 : "+ boards.size());
+//		for(BoardVO board : boards) {
+//			System.out.println(board.toString());
+//			// 전체 게시물의 내용 모두 출력
+//		}
+//	}
 
 	//게시글 단일 조회 테스트	
 	@Test

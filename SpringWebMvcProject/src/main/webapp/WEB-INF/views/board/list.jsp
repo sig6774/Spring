@@ -16,6 +16,9 @@ header.masthead {
 	background-color: #643691;
 	color: white;
 }
+.page-active{
+	background:"orange";
+}
 </style>
 
 <br><br> 
@@ -34,6 +37,7 @@ header.masthead {
 	                     <input class="btn btn-cpp" type="button" value="10">  
 	                     <input class="btn btn-cpp" type="button" value="20">   
 	                     <input class="btn btn-cpp" type="button" value="30">
+	                     <!-- 부모에 event를 걸어서 이벤트로 표시 -->
                      </span>
 					
 				</h2>
@@ -58,9 +62,15 @@ header.masthead {
 								<td>
 <%-- 									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content?boardNo=${board.boardNo}' />">
  --%>									
- 									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${board.boardNo}' />">
+ 									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${board.boardNo}?page=${pc.paging.page }&cpp=${pc.paging.cpp }&keyword=${search.keyword }&condition=${search.condition }' />">
  										${board.title }	
 									</a>
+									
+									<c:if test="${board.newMark }">
+										<!-- boardVO객체의 setnewmark가 true라면 (즉 하루가 지나지 않았으면 발동) -->
+										<img alt="newMark" src="<c:url value ='/img/newMark.gif' />">
+										<!-- 조건문이 true이면 해당 이미지 넣어줌 -->
+									</c:if>
 								</td>
 
 								<td>${board.regDate }</td>
@@ -73,19 +83,30 @@ header.masthead {
 					
 					<!-- 페이징 처리 부분  -->
 					<ul class="pagination justify-content-center">
-                       	<li class="page-item">
-							<a class="page-link" href="#" 
-							style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">이전</a>
-						</li>
 						
-						<li class="page-item">
-						   <a href="#" class="page-link" style="margin-top: 0; height: 40px; color: pink; border: 1px solid #643691;">1</a>
-						</li>
+						<!-- 이전 버튼 -->
+						<c:if test="${pc.prev }">
+	                       	<li class="page-item">
+								<a class="page-link" href="<c:url value='/board/list?page=${pc.beginPage-1 }&cpp=${pc.paging.cpp }'/>" 
+								style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">이전</a>
+							</li>
+						</c:if>
+						
+						<!-- 페이지 버튼 -->	
+						<c:forEach var = "page" begin="${pc.beginPage }" end="${pc.endPage }">
+							<li class="page-item">
+							   <a href="<c:url value='/board/list?page=${page }&cpp=${pc.paging.cpp }&condition=${param.condition }&keyword=${param.keyword }'/>" class="page-link ${pc.paging.page == page ? 'page-active' : '' }" style="margin-top: 0; height: 40px; color: pink; border: 1px solid #643691;">${page }</a>
+							   <!-- 현재 페이지를 표시할 수 있는 style지정 -->
+							</li>
+					   </c:forEach>
 					   
-					    <li class="page-item">
-					      <a class="page-link" href="#" 
-					      style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">다음</a>
-					    </li>
+					   <!-- 다음 버튼 -->
+					   <c:if test="${pc.next }">
+						    <li class="page-item">
+						      <a class="page-link" href="<c:url value='/board/list?page=${pc.endPage+1 }&cpp=${pc.paging.cpp }'/>" 
+						      style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">다음</a>
+						    </li>
+					    </c:if>
 				    </ul>
 					<!-- 페이징 처리 끝 -->
 					</div>
@@ -118,15 +139,40 @@ header.masthead {
 					</div>	
 	</div>
 	
-	<script>
-		
-	</script>
+
 	
 	
 	
 <jsp:include page="../include/footer.jsp" />
 
-
+	<script>
+		const msg = '${msg}';
+		if (msg === 'deleteSuccess'){
+			alert('삭제가 완료되었습니다.');
+		} else if (msg==='regSuccess'){
+			alert('등록이 완료되었습니다.');
+		}
+		
+		
+		//start jQuery
+		$(function() {
+			// 한 페이지당 보여줄 게시물 개수가 변동하는 이벤트 처리
+			$('#count-per-page .btn-cpp').on('click', 'input', function(){
+				const count = $(this).val();
+				/* 현재 이벤트가 발생한 요소의 value */
+				location.href='/board/list?page=1&cpp=' + count;
+			});
+			
+			// 검색 버튼 이벤트 처리 
+			$('#searchBtn').click(function() {
+				const keyword = $('#keywordInput').val();
+				// 사용자가 검색하기 위해 입력한 값을 가져옴 
+				const condition = $('#condition').val();
+				location.href="/board/list?keyword=" + keyword + "&condition=" + condition;
+				// get방식으로 전송 list에 전송
+			});
+		});
+	</script>
 
 
 

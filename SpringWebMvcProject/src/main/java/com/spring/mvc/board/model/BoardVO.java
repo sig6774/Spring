@@ -41,7 +41,9 @@ public class BoardVO {
 	private String content;
 	private String writer;
 	private Timestamp regDate;
+	
 	private int viewCnt;
+	private boolean newMark;
 	
 	
 }

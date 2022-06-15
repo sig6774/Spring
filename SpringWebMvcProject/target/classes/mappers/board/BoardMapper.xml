@@ -13,8 +13,34 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="viewCnt" column="view_cnt"/>
 		<!-- pk가 아닌 데이터는 result 태그로 진행 -->
-		
 	</resultMap>
+	
+	<!-- 동적 쿼리 -->
+	<!-- 중복되는 동적 SQL문을 미리 선언해 놓고 삽입하는 방식 
+		<include refid="sql id" />을 통해 삽입해서 사용
+	-->
+	<sql id="search">
+		<if test="condition == 'title'">
+			<!-- 검색조건이 title이라면 -->
+			WHERE title LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'writer'">
+			<!-- 검색조건이 writer라면 -->
+			WHERE writer LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'content'">
+			<!-- 검색조건이 content라면 -->
+			WHERE content LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'titleContent'">
+			<!-- 검색조건이titleContent라면 -->
+			WHERE title LIKE '%'||#{keyword}||'%' 
+			OR content LIKE '%'||#{keyword}||'%'
+		</if>
+	</sql> 
+	
+	
+	
 	
 	<insert id="insert">
 		<!-- IBoardMapper와 연동하여 DB접근하여 DML 수행   -->
@@ -23,12 +49,41 @@
 		VALUES(board_seq.NEXTVAL, #{title}, #{content}, #{writer})		
 	</insert>
 	
+	<!-- 쿼리문을 작성할 때 '<', '>', '&' 등의 기호를 사용할 경우 
+		 XML파일에서 이를 그냥 사용할 경우, 태그로 인식되는 경우가 종종 있으므로 
+		 해당 기호가 태그가 아니라는 것을 표현하기 위해 <![CDATA[쿼리문]]>을 사용하면 쿼리 내용의 괄호나 
+		 특수문자를 마크업 언어로 인식하지 않고 문자열로 인식 
+	 -->
 	<select id="getArticleList" resultMap="BoardMap">
-		SELECT * FROM mvc_board ORDER BY board_no ASC
+	<!-- getArticleList는 Paging을 하기 위해서는 PageVO객체가 무조건 필요 -->
+		SELECT * FROM 
+			(SELECT ROWNUM as rn, tbl.* FROM 
+				(SELECT * FROM mvc_board 
+				<include refid="search" />
+				<!-- sql태그에서 맞춰진 조건에 따라 WHERE 실행 -->
+				ORDER BY board_no DESC) 
+			tbl)
+		<![CDATA[ 
+		WHERE rn > (#{page} -1) * #{cpp}
+		AND rn <= #{page} * #{cpp}
+		]]>
+		<!-- 해당 select에 전달되는 것이 PageVO객체이므로 해당 변수를 사용  -->
+		<!-- 부등호 <, >는 xml에서는 태그를 연다고 생각함으로 대체할 수 있는 문자(&gt(>), &lt(<))를 사용하거나 
+		<![CDATA[]]>을 사용하면 부등호 사용가능-->
+		<!-- interface에서 @Param이라는 annotation을 지정하면서 이름도 붙였기 때문에 이름도 사용(paging.page 등등) -->
+		
 	</select>
 	
 	<select id="getArticle" resultMap="BoardMap">
 		SELECT * FROM mvc_board WHERE board_no = #{num}
+	</select>
+	
+	<select id="countArticles" resultType="int">
+	<!-- 게시물 숫자가 리턴되므로 resultType 지정 -->
+		SELECT count(*) FROM mvc_board 
+		<include refid="search" />
+		<!-- paging을 하기 위한 sql인데 검색 조건에 따라서 게시물 수가 달라지므로 배치 -->
+ 		
 	</select>
 	
 	<update id="updateArticle">
