@@ -82,7 +82,8 @@ header.masthead {
 		// 목록 버튼 클릭 이벤트
 		$('#list-btn').click(function() {
 			console.log('목록 버튼이 클릭');
-			location.href ='/board/list?page=${p.page}&cpp=${p.cpp}&condition=${p.condition}&keyword=${p.keyword}'; 
+			location.href ='/board/list?page=${p.page}&cpp=${p.cpp}&condition=${p.condition}&keyword=${p.keyword}';
+			// controller가 보내준 model 객체인 p의 값을 가져옴
 		});
 		
 		// 수정 버튼 클릭 이벤트 

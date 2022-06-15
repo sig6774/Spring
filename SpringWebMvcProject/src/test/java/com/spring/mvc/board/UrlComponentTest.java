@@ -11,6 +11,12 @@ public class UrlComponentTest {
 		// uri를 쉽게 작성할 수 있도록 도와주는 유틸 클래스 
 		// UriComponentBuilder
 		
-		UriComponents ucp = UriComponentsBuilder.newInstance().path("/board/list");
+		// 원하는 파라미터와 값을 부여 
+		UriComponents ucp = UriComponentsBuilder.newInstance().queryParam("page", 3)
+							.queryParam("cpp", 10)
+							.queryParam("keyword", "하윙")
+							.queryParam("condition", "title")
+							.build();
+		System.out.println("/board/list" + ucp.toUriString());
 	}
 }

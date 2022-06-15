@@ -54,6 +54,9 @@
 	<mybatis-spring:scan
 		base-package="com.spring.mvc.board.repository" />
 	<!-- Mapper인터페이스가 어디에 있는지 경로 지정 -->
+	<mybatis-spring:scan
+		base-package="com.spring.mvc.user.repository" />
+	<!-- Mapper interface를 bean으로 등록하기 위해 사용  -->
 
 </beans>
 
