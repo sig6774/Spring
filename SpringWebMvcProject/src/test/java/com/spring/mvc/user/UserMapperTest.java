@@ -24,17 +24,17 @@ public class UserMapperTest {
 	@Test
 	public void registTest() {
 		UserVO user = new UserVO();
-		user.setAccount("abc123");
-		user.setPassword("abc123");
-		user.setName("abc초콜릿");
+		user.setAccount("abc12345");
+		user.setPassword("abc12345");
+		user.setName("abcde초콜릿");
 		mapper.regist(user);
 	}
 	
 	// 위에서 회원 가입 아이디로 중복 확인해서 COUNT(*)을 활용해서 1이 리턴되는지 확인
 	@Test
 	public void checkTest() {
-		String acc = "abc123";
-		int checknum = mapper.checkId(acc);
+		String account = "abc123";
+		int checknum = mapper.checkId(account);
 		System.out.println(checknum);
 	}
 	
@@ -54,10 +54,10 @@ public class UserMapperTest {
 	// 탈퇴가 성공했는지 여부를 메서드를 통해 확인 (null 체크)
 	@Test
 	public void delUserTest() {
-		String acc = "abc123";
-		mapper.delete(acc);
+		String account = "abc123";
+		mapper.delete(account);
 		
-		if(mapper.selectOne(acc) == null) {
+		if(mapper.selectOne(account) == null) {
 			System.out.println("회원 삭제 완료");
 		}else {
 			System.out.println("회원 삭제 실패");

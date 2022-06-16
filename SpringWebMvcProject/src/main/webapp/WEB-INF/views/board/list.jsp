@@ -169,8 +169,10 @@ header.masthead {
 			});
 			// 안됨 (고침)
 			
+			// 검색창은 form태그가 아니므로 이벤트를 등록해서 요청을 보냄 
 			// 검색 버튼 이벤트 처리 
 			$('#searchBtn').click(function() {
+				// #searchBtn이 클릭된다면
 				const keyword = $('#keywordInput').val();
 				// 사용자가 검색하기 위해 입력한 값을 가져옴 
 				const condition = $('#condition').val();

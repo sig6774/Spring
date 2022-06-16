@@ -12,12 +12,12 @@
 		<!-- pk가 아니므로 result 태그에서 진행 -->
 	</resultMap>
 	
-	
+	<!-- id는 interfaceMapper의 method이름과 같아야함 -->
 	<!-- 아이디 중복확인 -->
 	<select id="checkId" resultType="int">
 		SELECT count(*) FROM 
 		mvc_user 
-		WHERE account = #{num}
+		WHERE account = #{account}
 	</select>
 	
 	<!-- 회원가입 -->
@@ -25,6 +25,7 @@
 		INSERT INTO mvc_user
 		(account, password, name)
 		VALUES(#{account}, #{password}, #{name})
+		<!-- 객체의 변수명을 정확하게 입력하면 값을 넣을 수 있음 -->
 	</insert>
 	
 	<!-- 회원 정보 출력  -->
@@ -38,6 +39,5 @@
 	<delete id="delete">
 		DELETE FROM mvc_user WHERE account = #{account}
 	</delete>
-	
 	
 </mapper>
