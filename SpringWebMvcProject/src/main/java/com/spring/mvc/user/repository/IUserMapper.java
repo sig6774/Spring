@@ -15,4 +15,7 @@ public interface IUserMapper {
 	
 	// 회원 탈퇴 기능 
 	void delete(String account);
+	
+//	// 로그인 기능 
+//	int loginCheck(String account, String password);
 }

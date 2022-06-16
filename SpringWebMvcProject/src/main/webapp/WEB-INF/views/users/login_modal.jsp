@@ -29,10 +29,10 @@
 						</tr>
 						<tr>
 							<td><input type="text" name="userId" id="signInId"
-								class="form-control tooltipstered" maxlength="10"
+								class="form-control tooltipstered" maxlength="14"
 								required="required" aria-required="true"
 								style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-								placeholder="최대 10자"></td>
+								placeholder="최대 14자"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">
@@ -108,7 +108,7 @@
 								class="form-control tooltipstered" maxlength="14"
 								required="required" aria-required="true"
 								style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-								placeholder="숫자와 영어로 4-10자">
+								placeholder="숫자와 영어로 4-14자">
 								</td>
 							
 						</tr>
@@ -280,7 +280,6 @@
       		else{
       			$(event.target).css('background', 'aqua');
 				$('#pwChk').html('<b style="font-size: 14px; color:skyblue">[비밀번호 입력 확인 완료.]</b>');
-				
 				chk2 = true;
 				// 입력값 검증 성공 표시 
       		}
@@ -348,7 +347,55 @@
       	$('#signup-btn').click(function() {
       		
       		if(chk1 && chk2 && chk3 && chk4){
-      			// 모두 true라면 
+      			// 모두 true라면
+      			// 입력값이 모두 제약조건을 통과했다는 뜻 
+      			
+      			const id = $('#user_id').val();
+      			// 아이디 정보 
+      			
+      			const pw = $('#password').val();
+      			// 비밀번호 정보 
+      			
+      			const name = $('#user_name').val();
+      			// 이름 정보 
+      			
+   				// 여러개의 값을 보낼 때는 객체로 포장해서 전송해야함
+   				// 객체의 property이름은 VO 객체의 변수명과 동일하게 (커맨드 객체 사용하기 위해)
+      			const user = {
+      					'account' : id,
+      					'password' : pw,
+      					'name' : name
+      			};
+      			// 아직은 js객체이므로 JSON으로 변환해서 ajax의 data에 넣어야함
+      			
+      			// 비동기 방식 
+      			$.ajax({
+      				type:'POST',
+      				url:'/user/',
+					headers : {
+						// 객체 전달 
+						'Content-Type' : 'application/json'
+					},
+      				dataType: 'text',
+      				
+      				data: JSON.stringify(user),
+       				// 여러개의 값을 보낼 때는 객체로 포장해서 전송해야함
+       				// user는 js의 객체이므로 해당 객체를 JSON의 문자열로 변환해야함 ================================ 
+       				
+					success: function(result){
+						// ajax를 통해 서버에 값을 보내고 
+						// 서버에서 다시 값을 보내면 result에 들어감
+						console.log('통신 성공 : ' + result);
+						alert("회원가입을 환영합니다.");
+						location.href = '/';
+						// 메인 페이지로 보냄 
+					}, 
+					error : function(){
+						alert("회원가입 실패");
+					}
+      				
+      			}); 
+      			// end ajax(회원가입 처리)
       			
       		} else{
       			// 4가지 중 하나라도 false라면 
@@ -356,6 +403,120 @@
       		}
       		
       	}); // 회원 가입 처리 끝
+      	
+      	
+      	// ==================================================
+      		
+     	// 로그인 검증
+     	
+     	//ID 입력값 검증(공백, 정규표현식)
+      $('#signInId').keyup(function() {
+         if($(this).val() === '') {
+            $(this).css('background-color', 'pink');
+            $('#idCheck').html('<b style="font-size: 14px; color: red">[아이디는 필수 정보입니다!]</b>');
+            chk1 = false;
+         } else if(!getIdCheck.test($(this).val())) {
+            $(this).css('background-color', 'pink');
+            $('#idCheck').html('<b style="font-size: 14px; color: red">[영문, 숫자로 4-14자로 작성!]</b>');
+            chk1 = false;
+         } else {
+            $(this).css('background-color', 'aqua');
+            $('#idCheck').html('<b style="font-size: 14px; color: green">[아이디 입력 완료!]</b>');
+            chk1 = true;
+         }
+      }); //아이디 입력값 검증 끝!
+      
+      //비밀번호 입력값 검증(공백, 정규표현식)
+      $('#signInPw').keyup(function() {
+         if($(this).val() === '') {
+            $(this).css('background-color', 'pink');
+            $('#pwCheck').html('<b style="font-size: 14px; color: red">[비밀번호 쓰세요!]</b>');
+            chk2 = false;
+         } else if(!getPwCheck.test($(this).val())) {
+            $(this).css('background-color', 'pink');
+            $('#pwCheck').html('<b style="font-size: 14px; color: red">[특수문자 포함 8자 이상!]</b>');
+            chk2 = false;
+         } else {
+            $(this).css('background-color', 'aqua');
+            $('#pwCheck').html('<b style="font-size: 14px; color: green">[비밀번호 입력 완료!]</b>');
+            chk2 = true;
+            
+         }
+      }); //비밀번호 입력값 검증 끝!
+     	
+      // 로그인 버튼 클릭 이벤트(ID, 비밀번호 둘 다 올바른 값이어야 이벤트 실행)
+      // chk1, chk2를 재활용해서 사용 
+      // ajax를 이용한 비동기 방식으로 로그인을 처리할 예정 
+      // 비동기 처리를 안해도 되지만 엾으로 함
+      // 비동기 처리는 피료없는 곳은 남용하지 않아도 됨
+      
+      $('#signIn-btn').click(function(){
+    	  if (chk1 && chk2){
+    		  // 로그인 처리 진행 
+    		  /*
+		              아이디, 비밀번호를 가져오셔서 객체로 포장하세요.
+		              비동기 통신을 진행하여 서버로 객체를 json형태로 전송하세요.
+		              그리고, console.log()로 서버가 보내온 데이터를 확인하여
+		              아이디가 없습니다, 비밀번호가 틀렸습니다, 로그인 성공이라는
+		              메세지를 브라우저의 console창에서 확인하세요.
+		              서버에서 클라이언트로 데이터 전송은 text로 이루어 질 것이며
+		              idFail, pwFail, loginSuccess라는 문자열을 리턴할 것입니다.
+		              전송방식: POST, url: /user/loginCheck
+              */
+              
+              let id = $('#signInId').val();
+    		  let pw = $('#signInPw').val();
+    		  
+    		  const IdPw = {
+    				  'account' : id,
+    				  'password' : pw
+    		  }
+    		  
+    		  $.ajax({
+    			  type : 'POST',
+    			  url : 'user/loginCheck',
+    			  headers : {
+						'Content-Type' : 'application/json'
+    			  },
+    			  dataType : 'text',
+    			  data : JSON.stringify(IdPw),
+    			  // js객체를 JSON으로 변경 
+    			  
+    			  success : function(data){
+    				  console.log("통신 성공" + data);
+    				  if (data === 'loginSuccess'){
+    					  console.log("로그인 성공.");
+    					  alert("로그인 성공 ");
+    					  location.href ='/';
+    					  
+    				  } else if(data === 'pwFail'){
+    					  console.log("비밀번호가 틀렸습니다.");
+    					  $('#signInpw').css('background-color', 'pink');
+    			          $('#pwCheck').html('<b style="font-size: 14px; color: red">[비밀번호가 틀렸습니다.]</b>');
+    			          $('#signInPw').val('');
+    			          $('#signInPw').focus();
+    			          chk2=false;
+
+    				  } else{
+    					  console.log("아이디가 틀렸습니다.");
+    					  $('#signInId').css('background-color', 'pink');
+    			          $('#idCheck').html('<b style="font-size: 14px; color: red">[존재하지 않는 아이디입니다.]</b>');
+    			          $('#signInId').val('');
+    			          // 기존에 사용자가 입력한 아이디는 존재하지 않으므로 지워줌 
+    			          $('#signInId').focus();
+    			          // 커서를 이동시키고 스크롤도 해당 위치로 이동 시키는 함수
+    			          chk1=false, chk2=false;
+    			          // chk를 false로 변경해야 사용자가 다시 입력하여 로그인 시도할 수 있음
+    				  }
+    			  },
+    			  error : function(){
+    				  alert("통신 실패")
+    			  }
+    		  });
+    	  } else{
+    	  	alert('입력값을 다시 확인하세요')
+    	  }
+      }); // 로그인 버튼 클릭 이벤트 처리 끝
 	});
 	// end jQuery
 	

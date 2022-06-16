@@ -40,4 +40,12 @@
 		DELETE FROM mvc_user WHERE account = #{account}
 	</delete>
 	
+	
+	
+	<!-- 로그인 -->
+	<select id="loginCheck" resultMap="UserMap">
+		SELECT * FROM mvc_user 
+		WHERE account=#{account} and password=#{password} 
+	</select>
+	
 </mapper>
