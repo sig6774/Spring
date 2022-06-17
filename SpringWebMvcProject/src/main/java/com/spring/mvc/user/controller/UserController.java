@@ -1,7 +1,9 @@
 package com.spring.mvc.user.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -69,7 +71,7 @@ public class UserController {
 	// 로그인 요청 처리 
 	@PostMapping("/loginCheck")
 	public String loginCheck(@RequestBody UserVO user, /* 1번 방법 HttpServletRequest request*/
-			HttpSession session) {
+			HttpSession session, HttpServletResponse response) {
 		System.out.println("/user/loginCheck : POST");
 		
 		// 내가 적은 것 (상당히 비효율적임)
@@ -91,10 +93,7 @@ public class UserController {
 		
 		// 2. 매개값으로 HttpSession 객체 받아서 사용 특정 메서드에 sesion정보 입력
 			// 오버라이딩을 할 경우 매개변수를 마음대로 바꾸지 못해서 2번은 문제가 발생할 수 있음
-		
-		  
-		
-		
+
 		UserVO dbData = service.selectOne(user.getAccount());
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -106,6 +105,40 @@ public class UserController {
 				
 				// 로그인을 성공했다면 로그인 성공 대상으로 세션 정보 생성 
 				session.setAttribute("login", dbData);
+				
+				long limitTime = 60*60*24;
+				// 자동로그인 유효 기간 
+				
+				// 로그인을 성공했고 자동 로그인 체크 시 처리해야 할 내용
+				if (user.isAutoLogin()) {
+					// 자동 로그인을 체크했다면 
+					// 자동 로그인 희망하는 경우 쿠키를 이용하여 자동 로그인 정볼르 저장 
+					System.out.println("자동 로그인 쿠키 생성 중 ...");
+					// 세션 아이디를 가지고 와서 쿠키에 저장(고유한 값이 필요함)
+					
+					// 쿠키 생성 
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					// 이름이 loginCookie이고 값이 sessionID인 쿠키 생성 
+					
+					loginCookie.setPath("/");
+					// 쿠키가 동작할 수 있는 유효한 url 설정
+					
+					loginCookie.setMaxAge((int) limitTime);
+					// 쿠키가 유효할 수 있는 기간 
+					
+					response.addCookie(loginCookie);
+					// 쿠키 추가 
+					
+					// 자동 로그인 유지 시간을 날짜 객체로 변환 
+					// DB에 삽입하기 위해서 (밀리초)
+					long expiredDate = System.currentTimeMillis() + (limitTime * 1000);
+					Date limitDate = new Date(expiredDate);
+					// Date 객체의 생성자에 매개값으로 밀리초의 정수를 전달해주면 날짜 형태로 변경해줌
+					System.out.println("자동 로그인 만료 시간 : " + limitDate);
+					
+					System.out.println("session id : " + session.getId());
+					service.keepLogin(session.getId(), limitDate, user.getAccount());
+				}
 				return "loginSuccess";
 			} else {
 				return "pwFail";
@@ -125,7 +158,7 @@ public class UserController {
 		// 세션 삭제 
 		
 		ra.addFlashAttribute("msg", "logout");
-		// 요청을 보낸 header.jsp에 msg 다시 요청
+		// 요청을 보낸 header.jsp에 msg 보냄
 		
 //		return "redirect:/";
 		// 비동기 전송이라서 화면에 그냥 데이터가 뜸
@@ -134,8 +167,8 @@ public class UserController {
 		
 		// ModelAndView를 사용하게 되면 어디로 보낼 지 지정할 수 있음 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/");
-		// 로그아웃 되었으니 홈화면으로 전달 
+		mv.setViewName("redirect:/");
+		// 로그아웃 되었으니 홈화면으로 다시 요청해서 전달 
 		return mv;
 	}
 }

@@ -1,4 +1,8 @@
 package com.spring.mvc.user.service;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -66,5 +70,15 @@ public class UserService implements IUserService {
 //		System.out.println(num);
 //		return num;
 //	}
+	
+	@Override
+	public void keepLogin(String session, Date limitTime, String account) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("sessionId", session);
+		data.put("limitDate", limitTime);
+		data.put("account", account);
+		
+		mapper.keepLogin(data);
+	}
 
 }

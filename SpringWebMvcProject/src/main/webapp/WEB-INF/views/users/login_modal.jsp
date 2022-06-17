@@ -39,6 +39,9 @@
 								<p><strong>비밀번호를 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="pwCheck"></span></p>
 							</td>
 						</tr>
+						
+					
+											
 						<tr>
 							<td><input type="password" size="17" maxlength="20" id="signInPw"
 							
@@ -47,6 +50,15 @@
 								style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
 								placeholder="최소 8자"></td>
 						</tr>
+						
+						<!-- 자동 로그인 체크 박스  -->
+						<tr>
+							<td>
+								<input type="checkbox" id="auto-Login" name="autoLogin">자동 로그인 
+							</td>
+							
+						</tr>
+						
 						<tr>
 							<td style="padding-top: 10px; text-align: center">
 								<p><strong>로그인하셔서 더 많은 서비스를 이용하세요~</strong></p>
@@ -467,9 +479,17 @@
               let id = $('#signInId').val();
     		  let pw = $('#signInPw').val();
     		  
+    		  // 로그인을 성공했다면 자동 로그인 값도 가져오기 
+    		  let autoLogin = $('#auto-Login').is(':checked');
+    		  // is()함수는 상태 여부를 판단하여 논리값을 리턴 
+    		  // 체크박스가 체크 되었는지에 해당하는 값 가져옴 
+    		  
     		  const IdPw = {
     				  'account' : id,
-    				  'password' : pw
+    				  'password' : pw,
+    				  'autoLogin' : autoLogin
+    				  // controller에서 커맨드 객체를 사용해서 받아오고 있으므로 
+    				  // db에 autoLogin이라는 컬럼 추가
     		  }
     		  
     		  $.ajax({

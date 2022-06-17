@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../include/header.jsp" />
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 header.masthead {
 	
@@ -20,7 +22,7 @@ header.masthead {
         
           <div class="form-group">
             <label>작성자</label>
-            <input type="text" class="form-control" name='writer'>
+            <input type="text" class="form-control" name='writer' value="${login.name }" readonly>
           </div>
           
           <div class="form-group">
