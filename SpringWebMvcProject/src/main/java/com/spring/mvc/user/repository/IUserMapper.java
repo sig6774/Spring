@@ -34,4 +34,7 @@ public interface IUserMapper {
 	 쿠키 안에 있는 세션 id로 회원 정보를 조회해서 마치 희망한 사람이 로그인 중인 것처럼 세션 데이터를 
 	 만들어줌  
 	 */
+	
+//	// 자동 로그인 되어 있는 사용자의 정보를 변경 
+//	void changeLogin(Map<String, Object> data);
 }

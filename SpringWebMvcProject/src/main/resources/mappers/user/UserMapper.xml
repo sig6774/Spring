@@ -67,4 +67,12 @@
 		WHERE session_id = #{sessionId}
 	</select>
 	
+<!-- 	자동로그인 로그아웃 했을 때 session_id와 limit_time 정보를 변경   
+	<update id="changeLogin">
+		UPDATE mvc_user
+		SET SESSION_ID = #{sessionId},
+		LIMIT_TIME = #{limitDate}
+		WHERE ACCOUNT = #{account}
+	</update> -->
+	
 </mapper>

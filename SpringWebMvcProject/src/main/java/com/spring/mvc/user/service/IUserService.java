@@ -25,5 +25,9 @@ public interface IUserService {
 	// 자동 로그인 쿠키값 DB 저장 처리 
 	void keepLogin(String sessoin, Date limitTime, String account);
 	// 해당 데이터는 존재하기 때문에 insert가 아니라 update임
-	// controller에서는 Map으로 포장해서 전달하지 않으므로 Map 사용 X 
+	// controller에서는 Map으로 포장해서 전달하지 않으므로 Map 사용 X
+	
+//	// 자동 로그인 쿠키값 DB 변경 처리 
+//	void changeLogin(String session, Date limitTime, String account);
+
 }

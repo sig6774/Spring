@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.spring.mvc.user.model.UserVO;
 import com.spring.mvc.user.service.IUserService;
@@ -150,12 +151,45 @@ public class UserController {
 	
 	// 로그아웃 처리
 	@GetMapping("/logout")
-	public ModelAndView logout(HttpSession session, RedirectAttributes ra
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, HttpSession session, RedirectAttributes ra
 			/*HttpServletResponse response*/) throws IOException {
 		System.out.println("/user/logout : GET");
 
+		// 자동 로그인 설정을 한 사용자는 쿠키를 삭제해야 완전히 로그아웃 됨 
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		// 쿠키는 request 객체 안에 존재함으로 매개변수로 request객체를 가져옴
+		// 쿠키의 이름이 loginCookie라는 쿠키를 쉽게 가져옴 
+		String sessionId = "none";
+		
+		// db에 저장된 session정보 바꿔야함 
+		// 세션아이디, 만료시간
+		long changeExpiredDate = System.currentTimeMillis();
+		// 현재시간 
+		Date chLimitDate = new Date(changeExpiredDate);
+		// 밀리초로 되어 있는 것을 날짜로 바꿔줌 
+		UserVO user = (UserVO) session.getAttribute("login");
+		// user의 account가 필요함으로 session에서 정보를 받아옴 
+		
+		if (loginCookie != null) {
+			// 만약 사용자가 자동 로그인을 설정했을 때 쿠키가 존재한다면 
+			loginCookie.setMaxAge(0);
+			// 쿠키의 수명을 0으로 바꿔 소멸 
+			loginCookie.setPath("/");
+			// 쿠키 소멸 끝 
+			response.addCookie(loginCookie);
+			
+			service.keepLogin(sessionId, chLimitDate, user.getAccount());
+			
+
+			
+//			service.changeLogin(sessionId, chLimitDate, user.getAccount());
+//			// db에 저장된 session정보 변경 
+			
+		}
+		
 		session.invalidate();
-		// 세션 삭제 
+		// 세션 삭제
+		
 		
 		ra.addFlashAttribute("msg", "logout");
 		// 요청을 보낸 header.jsp에 msg 보냄

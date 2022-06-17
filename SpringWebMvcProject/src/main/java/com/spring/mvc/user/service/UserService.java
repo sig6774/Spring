@@ -80,5 +80,16 @@ public class UserService implements IUserService {
 		
 		mapper.keepLogin(data);
 	}
+	
+//	// 매개값을 받아서 Map객체로 변환 
+//	@Override
+//	public void changeLogin(String session, Date limitTime, String account) {
+//		Map<String, Object> data = new HashMap<>();
+//		data.put("sessionId", session);
+//		data.put("limitDate", limitTime);
+//		data.put("account", account);
+//		
+//		mapper.changeLogin(data);
+//	}
 
 }
