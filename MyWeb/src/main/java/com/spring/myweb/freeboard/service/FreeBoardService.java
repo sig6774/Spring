@@ -54,12 +54,12 @@ public class FreeBoardService implements IFreeBoardService {
 
 	@Override
 	public void update(FreeBoardVO board) {
-
+		mapper.update(board);
 	}
 
 	@Override
 	public void delete(int bno) {
-
+		mapper.delete(bno);
 	}
 
 }

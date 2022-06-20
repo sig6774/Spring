@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,11 +71,15 @@ public class FreeBoardController {
 	}
 	
 	// 상세보기 
-	@GetMapping("/freeDetail")
-	public String freeContent(@RequestParam("bno") int bno, Model model) {
+	@GetMapping("/freeDetail/{bno}")
+	public String freeContent(@PathVariable int bno, Model model, PageVO page) {
+		// 파리미터 이름과 변수 이름이 같으면 ()안적고 넣을 수 있음
 		// 파라미터 명이 bno라는 것을 받아와서 상세보기 구현 
 		System.out.println("/freeBoard/freeDetail : GET");
 		System.out.println("게시물 상세보기 , 게시물 번호 가져오는지 확인 : " + bno);
+		
+		System.out.println("페이지 정보 가지고 오는지 확인 : " + page.toString());
+		model.addAttribute("p", page);
 		
 		FreeBoardVO board = service.getContent(bno);
 		System.out.println("게시물 DB에서 가져오는지 확인 : " + board.getBno());
@@ -82,14 +87,38 @@ public class FreeBoardController {
 		return "/freeBoard/freeDetail";
 	}
 	
-	// 게시물 수정 (태그가 버튼이라서 그런가? jquery가 안먹히네)
-	@GetMapping("/modify")
+	// 게시물 수정
+	@GetMapping("/freeModify")
 	public String freeMoveModi(@RequestParam("bno") int bno, Model model) {
-		System.out.println("/freeBoard/modify : GET");
+		System.out.println("/freeBoard/freeModify : GET");
 		System.out.println("게시물 수정 , 게시물 번호 가져오는지 확인 : " + bno);
 		FreeBoardVO board = service.getContent(bno);
 		
 		model.addAttribute("board", board);
-		return "/freeBoard/modify";
+		return "/freeBoard/freeModify";
 	}
+	
+	// 게시물 수정 
+	@PostMapping("/freeModify")
+	public String freeModi(FreeBoardVO upBoard, RedirectAttributes ra) {
+		System.out.println("/freeBoard/freeModify : POST");
+		System.out.println("수정하고 싶은 값 받오는지 확인 : " + upBoard.toString());
+		service.update(upBoard);
+		
+		ra.addFlashAttribute("msg", "수정완료");
+		return "redirect:/freeBoard/freeDetail/"+upBoard.getBno()+"/";
+	}
+	
+	// 게시물 삭제
+	@PostMapping("/freeDelete")
+	public String freeDelete(@RequestParam("bno") int bno, RedirectAttributes ra) {
+		System.out.println("/freeBoard/freeDelete : POST");
+		System.out.println("게시물 번호 가져오는지 확인 : " + bno);
+		service.delete(bno);
+		
+		ra.addFlashAttribute("msg", "게시글이 정상적으로 삭제되었습니다.");
+		return "redirect:/freeBoard/freeList";
+		// 다시 목록으로 돌아가게 해줌
+	}
+	
 }

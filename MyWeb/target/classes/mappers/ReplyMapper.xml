@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.spring.myweb.reply.mapper.IReplyMapper">
+	
+	<resultMap type="com.spring.myweb.command.ReplyVO" id="replyMap">
+		
+		<result property = "replyId" column = "REPLY_ID"/>
+		<result property = "replyPw" column = "REPLY_PW"/>
+		<result property = "replyDate" column = "REPLY_DATE"/>
+		<result property = "updateDate" column = "UPDATE_DATE"/>
+	</resultMap>
+	
+	<insert id="replyRegist">
+		INSERT INTO freereply(rno, bno, REPLY, REPLY_ID, REPLY_PW)
+		VALUES(freereply_seq.NEXTVAL, #{bno}, #{reply}, #{replyId}, #{replyPw})
+	</insert>
+</mapper>

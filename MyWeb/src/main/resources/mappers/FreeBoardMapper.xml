@@ -63,9 +63,21 @@
 		<include refid="search"/>
 	</select>
 	
-	<select id="getContent" resultMap="boardMap">
-		SELECT * FROM freeboard WHERE bno = #{bno}
+	<select id="getContent" resultType="com.spring.myweb.command.FreeBoardVO">
+		SELECT * FROM freeboard 
+		WHERE bno = #{bno}
 	</select>
+	
+	<update id="update">
+		UPDATE freeboard SET 
+		writer = #{writer}, title = #{title}, content = #{content}, updatedate = sysdate
+		WHERE bno = #{bno}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM freeboard 
+		WHERE bno = #{bno}
+	</delete>
 	
 	
 </mapper>

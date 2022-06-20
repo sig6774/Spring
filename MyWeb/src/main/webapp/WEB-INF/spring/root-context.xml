@@ -69,5 +69,9 @@
 		때문 -->
 	<mybatis-spring:scan
 		base-package="com.spring.myweb.freeboard.mapper" />
+	<mybatis-spring:scan
+		base-package="com.spring.myweb.reply.mapper" />
+			
 	<!-- Mapper인터페이스가 어디에 있는지 경로 지정 -->
+	
 </beans>
