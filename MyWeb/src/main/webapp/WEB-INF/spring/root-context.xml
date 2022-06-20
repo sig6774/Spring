@@ -10,38 +10,32 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<!-- 프로젝트를 구성하다 보면 자주 변경되지 않는 설정 파일들이나 공통 정보들에 대한 내용이 존재하게 되고 그 내용은 한 번 
-		지정되면 잘 바뀌지 않음 이러한 경우에는 .properties라는 파일을 사용하여 텍스트 형식으로 간단히 지정하고 필요할 때 불러와서 
-		사용하는 방식 사용 -->
-
-	<!-- 외부에 따로 설정한 설정 파일을 참조하는 곳에서 찾아서 빈으로 등록하여 사용하는 클래스 -->
-
-<!-- 	<beans:bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location"
-			value="classpath:/db-config/Hikari.properties" />	
-	</beans:bean> -->
-
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location"
-			value="classpath:/db-config/Hikari.properties" />
-		<!-- 경로 지정 -->
-
-	</bean> 
-
+	<!-- 프로젝트를 구성하다 보면 자주 변경되지 않는 설정 파일들이나 공통 정보들에 대한 
+		 내용이 존재하게 되고 그 내용은 한 번 지정되면 잘 바뀌지 않음 
+		 이러한 경우에는 .properties라는 파일을 사용하여 텍스트 형식으로 간단히 지정하고 
+		 필요할 때 불러와서 사용하는 방식 사용  -->
+	
+	<!-- 외부에 따로 설정한 설정 파일을 참조하는 곳에서 찾아서 빈으로 등록하여 사용하는 클래스  -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/db-config/Hikari.properties" />
+		<!-- 경로 지정  -->
+		
+	</bean>
+	
 	<!-- JDBC, DB 관련 빈을 등록하고 관리하는 설정 파일 -->
 	<!-- 히카리 커넥션 풀 빈 등록 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<!-- property는 객체의 setter처럼 값 주입 -->
 		<property name="driverClassName"
 			value="${ds.driverClassName}" />
-		<property name="jdbcUrl" value="${ds.url}" />
+		<property name="jdbcUrl"
+			value="${ds.url}" />
 		<property name="username" value="${ds.username}" />
 		<property name="password" value="${ds.password}" />
-		<!-- 가져온 파일 안에 적혀있는 내용르 작성하면 됨 (db종류에 따라) mysql도 가능 -->
+		<!-- 가져온 파일 안에 적혀있는 내용르 작성하면 됨 (db종류에 따라) 
+			 mysql도 가능   -->
 	</bean>
-
+	
 
 	<!-- 히카리 데이터 소스 빈 등록 -->
 	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
@@ -54,13 +48,19 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds" />
 		<!-- value를 통해 특정 키워드가 포함되면 모두 Mapper로 활용하라는 뜻 -->
-		<!--마이바티스 같은 경우 mapper 구현체를 xml로 대체함으로 해당 xml 파일 경로를 알려주면 됨 -->
-		<!-- <property name="mapperLocations"> SessionFactory가 mapper가 어디에 있는지 
-			알려줘야함 <array> <value>classpath:/mappers/score/ScoreMapper.xml</value> <value>classpath:/mappers/board/BoardMapper.xml</value> 
-			classpath를 작성하면 src/main/resources라는 경로를 한번에 지목할 수 있음 array를 통해 여러개 지정 가능 
-			</array> </property> -->
-		<property name="mapperLocations"
-			value="classpath:/mappers/*Mapper.xml" />
+		<!--마이바티스 같은 경우 mapper 구현체를 xml로 대체함으로 해당 xml 파일 경로를 알려주면 됨-->
+<!-- 		<property name="mapperLocations">
+
+
+			SessionFactory가 mapper가 어디에 있는지 알려줘야함
+			<array>
+				<value>classpath:/mappers/score/ScoreMapper.xml</value>
+				<value>classpath:/mappers/board/BoardMapper.xml</value>
+				classpath를 작성하면 src/main/resources라는 경로를 한번에 지목할 수 있음 array를 통해  여러개 지정 가능
+					
+			</array>
+		</property> -->
+	 <property name="mapperLocations" value="classpath:/mappers/*Mapper.xml"/> 
 
 	</bean>
 
@@ -71,5 +71,3 @@
 		base-package="com.spring.myweb.freeboard.mapper" />
 	<!-- Mapper인터페이스가 어디에 있는지 경로 지정 -->
 </beans>
-
-

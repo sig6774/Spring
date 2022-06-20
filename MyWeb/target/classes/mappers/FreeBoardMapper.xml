@@ -14,18 +14,43 @@
 	
 	</resultMap>
 	
+	<!-- 동적 sql  -->
+	<sql id="search">
+		<if test="condition == 'title'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="condition == 'content'">
+			WHERE content LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="condition == 'writer'">
+			WHERE writer LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		<if test="condition == 'titleContent'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+			OR content LIKE '%'||#{keyword}||'%'
+		</if>
+		
+		
+	</sql>
+	
 	<insert id="regist" >
 		INSERT INTO freeboard(bno, title, writer, content)
 		VALUES(freeboard_seq.NEXTVAL, #{title}, #{writer}, #{content})
 		<!-- 변수명만 제대로 작성하면 insert 끝 -->
 	</insert>
 	
-	<select id="getList" resultMap="boardMap">
+	<select id="getList" resultMap="boardMap" >
 		<!-- interface의 getList라는 메서드의 sql문이며 참고할 것은 baordMap을 통해 참고 -->
+		<!-- resultType="com.spring.myweb.command.FreeBoardVO" -->
 		
 		SELECT * FROM 
 		(SELECT ROWNUM as rn, tbl.* FROM 
-    		(SELECT * FROM freeboard ORDER BY bno DESC) tbl)
+    		(SELECT * FROM freeboard 
+    		<include refid="search" />
+    		ORDER BY bno DESC) tbl)
     		<![CDATA[ 
 		WHERE rn > (#{pageNum} -1 ) * #{cpp}
 		AND rn <= #{pageNum} * #{cpp}
@@ -33,7 +58,13 @@
 	</select>
 	
 	<select id="getTotal" resultType="int">
-		SELECT count(*) FROM freeboard
+		SELECT count(*) FROM freeboard 
+		<!-- 동적 sql paging -->
+		<include refid="search"/>
+	</select>
+	
+	<select id="getContent" resultMap="boardMap">
+		SELECT * FROM freeboard WHERE bno = #{bno}
 	</select>
 	
 	

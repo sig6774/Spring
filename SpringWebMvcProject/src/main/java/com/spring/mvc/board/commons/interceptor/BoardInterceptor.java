@@ -63,9 +63,4 @@ public class BoardInterceptor implements HandlerInterceptor{
 		// 추가할 내용이나 수정할 내용이 있다면 모델 객체를 받아와서 추가, 수정 가능 
 		// 기타 특징을 활용해서 흐름을 제어할 수 있음 (sendRedirect, viewName 수정을 통해)
 	}
-	
-	
-	
-	
-
 }
