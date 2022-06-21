@@ -14,8 +14,37 @@
 		<result property = "updateDate" column = "UPDATE_DATE"/>
 	</resultMap>
 	
+	<!-- 댓글 등록 -->
 	<insert id="replyRegist">
 		INSERT INTO freereply(rno, bno, REPLY, REPLY_ID, REPLY_PW)
 		VALUES(freereply_seq.NEXTVAL, #{bno}, #{reply}, #{replyId}, #{replyPw})
 	</insert>
+	
+	<!-- 댓글 리스트  -->
+	<select id="getList" resultMap = "replyMap">
+		SELECT * FROM 
+			(SELECT ROWNUM AS rn, tbl.* FROM 	
+				(SELECT * FROM freereply
+				WHERE bno = #{bno}
+				ORDER BY rno DESC
+				) tbl
+			)
+		<![CDATA[
+		WHERE rn > (#{paging.pageNum}-1) * #{paging.cpp}
+		AND rn <= #{paging.pageNum} * #{paging.cpp}
+		]]>
+		<!-- getList라는 메서드는 page의 정보가 담긴 PageVO객체와 게시물 번호를 매개변수로 받음 
+			 그렇기 때문에 sql에서 해당 정보를 사용할 수 있음 -->
+	</select>
+	
+	<!-- 댓글 개수 -->
+	<select id="getTotal" resultType="int">
+	<!-- count이므로 반환은 int -->
+		SELECT count(*) FROM freereply
+		WHERE bno = #{bno}
+		
+	</select>
+	
+	
+	
 </mapper>

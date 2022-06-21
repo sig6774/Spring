@@ -41,6 +41,7 @@ public class PageCreator {
    //바로 페이징 버튼 알고리즘이 돌아갈 수 있도록 setter를 커스텀.
    public void setArticleTotalCount(int articleTotalCount) {
       this.articleTotalCount = articleTotalCount;
+      
       calcDataOfPage();
    }
    

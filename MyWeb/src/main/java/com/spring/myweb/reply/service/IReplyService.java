@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.myweb.command.ReplyVO;
+import com.spring.myweb.util.PageVO;
 
 public interface IReplyService {
 
@@ -12,7 +13,7 @@ public interface IReplyService {
 	void replyRegist(ReplyVO reply);
 	
 	// 목록 요청
-	List<ReplyVO> getList(Map<String, Object> data);
+	List<ReplyVO> getList(PageVO page, int bno);
 	
 	// 댓글 개수 
 	int getTotal(int bno);
