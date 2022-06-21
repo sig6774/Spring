@@ -41,9 +41,28 @@
 	<select id="getTotal" resultType="int">
 	<!-- count이므로 반환은 int -->
 		SELECT count(*) FROM freereply
-		WHERE bno = #{bno}
 		
+		WHERE bno = #{bno}
 	</select>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="pwCheck" resultType="int">
+		SELECT count(*) FROM freereply
+		WHERE reply_pw = #{replyPw}
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="update" >
+		UPDATE freereply SET 
+		reply = #{reply}, update_date = sysdate
+		WHERE rno = #{rno}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete">
+		DELETE FROM freereply
+		WHERE rno = #{rno}
+	</delete>
 	
 	
 	

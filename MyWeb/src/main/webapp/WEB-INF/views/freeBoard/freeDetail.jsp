@@ -292,9 +292,8 @@
 							<div class='reply-content'>
 								<div class='reply-group'>
 									<strong class='left'>`+ replyList[i].replyId + `</strong> <small class='left'>` + timeStamp(replyList[i].replyDate) + `</small>
-									<a href='#' class='right'><span
-										class='glyphicon glyphicon-pencil'></span>수정</a> <a href='#'
-										class='right'><span class='glyphicon glyphicon-remove'></span>삭제</a>
+									<a href='` + replyList[i].rno + `' class='right replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>
+									<a href='` + replyList[i].rno + `' class='right replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a> 
 								</div>
 								<p class='clearfix'>` + replyList[i].reply + `</p>
 							</div>
@@ -311,12 +310,229 @@
 				
 		}// end getList() 
 		
+		// 수정, 삭제 
+		/*
+		$('.replyModify').click(function(event) {
+			event.preventDefault();
+			// a태그의 기본 기능 삭제 
+			console.log('수정 이벤트 발생');	
+		});
+		// 동작 안함
+		
+		ajax함수의 실행이 더 늦게 완료되기 때문에 실제 이벤트 선언이 먼저 실행됨 
+		이런 상황에서는 화면에 댓글 관련 창은 아무것도 등록 되어 있지 않은 형태임으로 
+		.click함수가 동작하지 않음
+		이미 존재하는 #replyList에 이벤트를 등록하고 이벤트를 자식에게 전파시켜 사용하는 
+		제이쿼리 이벤트 위임 함수를 사용 
+		
+		.replyModify는 html로 구현된게 아니고 getList함수가 실행되면 나타나는 것이므로 
+		거의 마지막에 진행되기 때문에 이벤트가 발생한 시점에는 .replyModify요소가 없으므로 실행이 안되는 것
+		그래서 이벤트는 실제 html로 구현된 곳에 걸어서 이벤트 전파방식으로 구현해야 됨
+		
+		*/
+		
+		$('#replyList').on('click', 'a', function(event){
+			// id가 replyList인 요소의 a태그에 클릭이 발생하면 모두 event 생김
+			event.preventDefault();
+			// 태그의 고유 기능 중지 
+			
+			// console.log('이벤트 함수 동작');
+			// 이벤트 전파로는 먹히네 
+			
+			
+			// a태그가 두개 (수정, 삭제)이므로 버튼부터 확인 
+			
+			
+			// 수정, 삭제가 발생하는 댓글 번호가 몇 번인지도 확인
+			const rno = $(this).attr('href');			
+			// 이벤트가 발생한 곳의 href라는 속성의 값을 가지고 옴
+			$('#modalRno').val(rno);
+			// 모달 내부의 숨겨진 input 태그에 댓글 번호를 담아서 전송
+			
+			// 모달 창 하나를 이용해서 상황에 따라 수정 / 삭제 모달을 구분하기 위해 조건문 작성
+			// 수정과 삭제를 하나의 모달창으로 진행
+			if($(event.target).hasClass('replyModify')){
+				// replyModify라는 클래스 이름이 존재하는지(true, false)
+				// 수정 버튼을 눌렀다는 뜻
+				// 수정 모달 형식으로 진행 
+				$('.modal-title').html('댓글 수정');
+				$('#modalReply').css('display', 'inline');
+				$('#modalModBtn').css('display', 'inline');
+				
+				$('#modalDelBtn').css('display', 'none');
+				// 수정을 클릭했으면 삭제 버튼이 있어야 할 필요가 없음
+				
+				$('#replyModal').modal('show');
+				// modal 창을 열기 위해서는 modal('show')를 사용
+				// modal 창을 닫기 위해서는 modal('hide')를 사용 
+				
+			}
+			else {
+				// 삭제 버튼을 눌렀음으로 삭제 모달 형식으로 변경 
+				$('.modal-title').html('댓글 삭제');
+				$('#modalReply').css('display', 'none');
+				$('#modalModBtn').css('display', 'none');
+				
+				$('#modalDelBtn').css('display', 'inline');
+				
+				$('#replyModal').modal('show');
+			}
+		}); // 수정 or 삭제 버튼 클릭 이벤트 처리 끝
+		
+		// 수정 처리 함수 
+		// 수정 모달을 열어서 주어 내용을 작성후 수정 내용 작성
+		$('#modalModBtn').click(function() {
+			/*
+	         1. 모달창에 rno값, 수정한 댓글 내용(reply), replyPw값을 얻습니다.
+	         2. ajax함수를 이용해서 post방식으로 reply/update 요청,
+	         	필요한 값은 JSON형식으로 처리해서 요청.
+	         3. 서버에서는 요청받을 메서드 선언해서 비밀번호 확인하고, 비밀번호가 맞다면
+	          	수정을 진행하세요. 만약 비밀번호가 틀렸다면 "pwFail"을 반환해서
+	          	'비밀번호가 틀렸습니다.' 경고창을 띄우세요.
+	         4. 업데이트가 진행된 다음에는 modal창의 모든 값을 ''로 처리해서 초기화 시키시고
+	          	modal창을 닫으세요.
+	          	수정된 댓글 내용이 반영될 수 있도록 댓글 목록을 다시 불러 오세요.
+	         */
+	         
+	         // 수정에 필요한 값들을 모두 가져옴 
+	         const rno = $('#modalRno').val();
+			 // console.log('bno값 :' + bno);
+			 const replyModi = $('#modalReply').val();
+			 const replyPw = $('#modalPw').val();
+			 // console.log(replyModi + replyPw);
+			 
+			 
+			 if (replyModi === '' || replyPw === ''){
+				 // 값들이 비어있다면 함수 종료 
+				 alert('내용, 비밀번호를 확인하세요.');
+				 return;
+			 }
+			 
+			 // ajax 실행 
+			 // 비동기방식으로 controller에 요청을 보내고 객체형식으로 값을 담아서 보냄 
+			 $.ajax({
+				 type:'POST',
+				 url : '<c:url value ="/reply/update" />',
+				 data : JSON.stringify({
+					 'rno' : rno,
+					 'reply' : replyModi,
+					 'replyPw' : replyPw
+				 }),
+				 dataType:'text',
+				 contentType : 'application/json',
+				 
+				 success:function(data){
+					 // 통신이 성공해서 controller로부터 데이터를 받아왔을 때 실행 
+					 console.log('통신성공' + data);
+					 
+					 if (data === 'modSuccess'){
+						 alert('댓글 수정 성공 ');
+						 // 값 초기화
+						 
+						 $('#modalReply').val('');
+						 $('#modalPw').val('');						 
+						 // 사용자가 작성한 값 비우기
+						 
+						 $('#replyModal').modal('hide');
+						 // 모달 창 숨기기
+						 
+						 getList(1, true);
+						 // 새롭게 댓글 불러옴 
+					 }
+				
+					 else{
+						 
+						 alert('비밀번호가 틀렸습니다.');
+						 
+						 $('#modalPw').val('');
+						 // 비밀번호만 지움
+						 
+						 $('#modalPw').focus();
+						 // 비밀번호 부분에 집중
+					 }
+				 },
+				 error : function(){
+					 // 통신에 실패했을 때 
+					 alert("수정에 실패했습니다. 관리자에게 문의해주세요.");
+				 }
+			 }); // end ajax
+			 
+		}); // 수정 처리 이벤트 끄읏
+		
+		// 삭제 함수 
+		$('#modalDelBtn').click(function() {
+			/*
+	         1. 모달창에 rno값, replyPw값을 얻습니다.
+	         2. ajax함수를 이용해서 POST방식으로 /reply/delete 요청
+	          	필요한 값은 JSON 형식으로 처리해서 요청
+	         3. 서버에서는 요청을 받아서 비밀번호를 확인하고, 비밀번호가 맞으면
+	          	삭제를 진행하시면 됩니다.
+	         4. 만약 비밀번호가 틀렸다면, 문자열을 반환해서 
+	          '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
+	         */
+	         
+	         // 삭제 처리를 하기 위해 값을 가져옴 
+	         const rno = $('#modalRno').val();
+			 // console.log('bno값 :' + bno);
+			 const replyPw = $('#modalPw').val();
+			 
+			 if (replyPw === ''){
+				 alert('비밀번호를 입력해주세요.');
+				 return;
+			 }
+			 
+			 // ajax함수를 활용해서 비동기 통신 방식으로 controller에 데이터 전달 
+			 $.ajax({
+				 type:'POST',
+				 url : '<c:url value="/reply/delete" />',
+				 data : JSON.stringify({
+					 'rno' : rno,
+					 'replyPw' : replyPw
+				 }),
+				 dataType:'text',
+				 contentType : 'application/json',
+				 
+				 // 통신에 성공해서 controller에서 값을 다시 줬을 때 
+				 success:function(result){
+					 console.log('통신 성공' + result);
+					 if (result === 'delSuccess'){
+						 alert('댓글 삭제 성공');
+						 
+						 // 사용자가 작성한 값 비우기 
+						 $('#modalReply').val('');
+						 $('#modalPw').val('');
+						 
+						 // 모달 창 숨기기 
+						 $('#replyModal').modal('hide');
+						 
+						 getList(1,true);
+						 // 댓글창 다시 불러오기
+					 }
+					 else{
+						 alert('비밀번호가 틀립니다.');
+						 $('#modalPw').val('');
+						 // 비밀번호 지움 
+						 
+						 $('#modalPw').focus();
+						 // 비밀번호 부분 집중
+					 }
+				 },
+				 // controller에 값을 받아오지 못했을 때 
+				 error : function(){
+					 alert('삭제에 실패했습니다. 관리자에게 문의해주세요.');
+				 }
+			 }); // end ajax
+		}); // 삭제 처리 이벤트 끄읏 
+		
+		
+		
 		// 날짜 처리 함수 
 		function timeStamp(millis) {
-			const date = new Date();
 			
+			const date = new Date();
 			// 현재 날짜를 밀리초로 변환 - 등록일 밀리초 -> 시간 차 
 			const gap = date.getTime() - millis;
+		
 			
 			let time;
 			if(gap < 60 * 60 * 24 * 1000){

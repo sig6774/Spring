@@ -27,8 +27,8 @@ public class ReplyController {
 	// 댓글 등록 
 	@PostMapping("/replyRegist")
 	public String regist(@RequestBody ReplyVO reply) {
-		System.out.println("/reply/regist : POST");
-		System.out.println("값 가져오는지 확인 :" + reply.toString());
+		// System.out.println("/reply/regist : POST");
+		// System.out.println("값 가져오는지 확인 :" + reply.toString());
 		
 		service.replyRegist(reply);
 		return "success";
@@ -56,10 +56,10 @@ public class ReplyController {
 		// page정보와 게시물 번호를 db에 보내줌
 		// db로 부터 조회된 값을 다시 받음 
 		// 댓글 목록 데이터 
-		System.out.println("댓글 목록 가져오는지 확인 : " + replyList.toString());
+		// System.out.println("댓글 목록 가져오는지 확인 : " + replyList.toString());
 		
 		int total = service.getTotal(bno);
-		System.out.println("댓글 개수 가져오는지 확인 : " + total);
+		// System.out.println("댓글 개수 가져오는지 확인 : " + total);
 		// db로 부터 조회된 전체 댓글 개수 
 		
 		Map<String, Object> map = new HashMap<>();
@@ -68,6 +68,45 @@ public class ReplyController {
 		
 		return map;
 		// 다시 detail페이지로 보내줌 
+	}
+	
+	@PostMapping("/update")
+	public String update(@RequestBody ReplyVO reply) {
+		//커맨드 객체 사용 (파라미터이름과 변수명이 같음)
+		System.out.println("/reply/update : POST");
+//		System.out.println("수정 댓글 내용 확인 : " + reply.toString());
+		
+		int num = service.pwCheck(reply);
+		// 비밀번호 확인
+		// 비밀번호가 맞으면 update 진행
+		if (num >= 1) {
+			System.out.println("댓글 수정 진행");
+			service.update(reply);
+			
+			return "modSuccess";
+		} else {
+			// 비밀번호 틀림 
+		
+			return "pwFail";
+		}
+		
+	}
+	
+	@PostMapping("/delete")
+	public String delete(@RequestBody ReplyVO reply) {
+		System.out.println("/reply/delete : post");
+		System.out.println("삭제 댓글 번호 : " + reply.getRno());
+		
+		int num = service.pwCheck(reply);
+		
+		if (num >= 1) {
+			System.out.println("댓글 삭제 진행");
+			service.delete(reply.getRno());
+			
+			return "delSuccess";
+		} else {
+			return "pwFail";
+		}
 	}
 	
 }
