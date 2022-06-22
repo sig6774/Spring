@@ -34,8 +34,9 @@ public class MailSendService {
 		makeRandomNumber();
 		// 난수 생성 
 		
-		String setFrom = "sig6774@gmail.com";
+		String setFrom = "mkr0410@naver.com";
 		// email-config에서 입력한 이메일 주소 
+		// 보내는 이메일 주소 
 		
 		String toMail = email;
 		// 수신받을 이메일 

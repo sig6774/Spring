@@ -23,6 +23,8 @@ public class UserController {
 	@Autowired
 	private MailSendService mailService;
 	
+	// 도로명 주소 승인 키 : devU01TX0FVVEgyMDIyMDYyMjE2MTc1MDExMjcxNjE=
+	
 	// 아이디 중복 확인
 	@PostMapping("/checkId")
 	@ResponseBody

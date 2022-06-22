@@ -15,11 +15,11 @@
 	
 	<!-- 유저 등록 -->
 	<insert id = "join">
-		INSERT INTO users (userId, userPw, userName, userPhone1,
-						   userPhone2, userEmail, userEmail2, 
+		INSERT INTO users(userId, userPw, userName, userPhone1,
+						   userPhone2, userEmail, userEmail2, addrBasic,
 						   addrDetail, addrZipNum)
 		VALUES (#{userId}, #{userPw}, #{userName}, #{userPhone1},
-						   #{userPhone2}, #{userEmail}, #{userEmail2}, 
-						   #{addrDetail}, #{addrZipNum})
+						   #{userPhone2}, #{userEmail}, #{userEmail2},
+						   #{addrBasic}, #{addrDetail}, #{addrZipNum})
 	</insert>
 </mapper>
