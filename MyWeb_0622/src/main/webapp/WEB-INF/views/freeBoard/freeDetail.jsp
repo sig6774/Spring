@@ -374,6 +374,7 @@
 				$('.modal-title').html('댓글 삭제');
 				$('#modalReply').css('display', 'none');
 				$('#modalModBtn').css('display', 'none');
+				// 수정 버튼은 삭제 작업에 필요없음으로 
 				
 				$('#modalDelBtn').css('display', 'inline');
 				

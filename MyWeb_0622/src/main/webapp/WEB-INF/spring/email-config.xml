@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:property-placeholder location="classpath:/db-config/email.properties"/>
+	<!-- 이메일에 대한 정보가 있는 properties에 접근 -->
+	
+	<!-- 이메일 인증 관련 bean 등록  -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- set메서드로 의존성 주입 -->
+		<property name="host" value="smtp.naver.com" />
+		<!-- smtp.naver.com -->
+		<!-- 사용자에게 인증 메일을 보내는 메일 주소의 플랫폼 -->
+		
+		<property name="port"  value="465"/>
+		<!-- 메일 주소 플랫폼의 포트 번호 (gmail: 587, naver : 465) -->
+		
+		<property name="username" value="${email.account}"/>
+		<!-- 보낼 사용자 계정의 아이디 -->
+		<property name="password" value="${email.password}"/>
+		<!-- 보낼 사용자 계정의 비밀번호  -->
+		<!-- properties 파일을 사용해서 value에 넣어줌 위치는 db-config에 있음  -->
+		
+		<property name="javaMailProperties">
+           <!-- 네이버 --> 
+           <props>
+			  <prop key="mail.smtp.auth">true</prop>
+			  <prop key="mail.smtp.starttls.enable">true</prop>
+			  <prop key="mail.smtps.checkserveridentity">true</prop>
+			  <prop key="mail.smtps.ssl.trust">*</prop>
+			  <prop key="mail.debug">true</prop>
+			  
+			  <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+		   </props>
+		</property>
+	</bean>
+	
+</beans>
+
