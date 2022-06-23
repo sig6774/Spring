@@ -26,6 +26,7 @@
                             <button type="button" id = "loginBtn" class="btn btn-info btn-block">로그인</button>
                             <button type="button" id = "registBtn" class="btn btn-primary btn-block">회원가입</button>
                          </div>
+                         
                     </form>                
                 </div>
             </div>
@@ -41,6 +42,7 @@
 		alert('회원 가입 정상 처리 되었습니다.');
 	} else if(msg ==="loginFail"){
 		alert('로그인 실패입니다.');
+		
 	}
 
 	$(function(){

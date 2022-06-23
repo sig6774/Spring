@@ -32,7 +32,7 @@ public class UserService implements IUserService {
 	@Override
 	public UserVO getInfo(String userId) {
 		
-		return null;
+		return mapper.getInfo(userId);
 	}
 
 	@Override

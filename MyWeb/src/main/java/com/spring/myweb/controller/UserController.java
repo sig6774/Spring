@@ -1,5 +1,7 @@
 package com.spring.myweb.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,9 +99,13 @@ public class UserController {
 	public String Login(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
 		System.out.println("/user/userLogin : POST");
 		
-		UserVO user = service.login(id, pw);
+		UserVO loginUser = service.login(id, pw);
 		// 일단 session이나 그런건 나중에 
-		System.out.println("가져온 유저 정보 확인 : " + user.toString());
+		/*
+		 * if (loginUser != null ) { System.out.println("가져온 유저 정보 확인 : " +
+		 * loginUser.toString()); }
+		 */
+		
 
 		
 		/* user 정보를 model에 담아서 리턴은 /user/userLogin으로 셋팅 
@@ -108,10 +114,26 @@ public class UserController {
 		  모델의 객체의 값이 null인지 아닌지 확인하고 null이라면 msg라는 이름으로 loginFail이라는 문자를 담아서 
 		 userLogin.jsp 파일로 응답하도록 viewName을 세팅하고 null이 아니라면 세션 만들어서 홈 화면으로 이동
 		 */
-		model.addAttribute("loginUser", user);
+		model.addAttribute("loginUser", loginUser);
 		
 		
 		return "/user/userLogin";
+	}
+	
+	// MyPage 이동 요청 
+	@GetMapping("/userMypage")
+	public String moveMyPage(HttpSession session, Model model) {
+		
+		// 세션 데이터에서 id를 뽑아야 유저 정보를 가져올 수 있으므로 session을 매개변수로 하고 
+		// 값을 보내야하기 때문에 model도 매개변수로 지정 
+		
+		String id = ((UserVO) session.getAttribute("login")).getUserId();
+		// session을 가지고 와서 해당 session에서 id를 추출  
+		
+		UserVO user = service.getInfo(id);
+		System.out.println("join의 결과 : "  + user);
+		model.addAttribute("userInfo", user);
+		return "/user/userMypage";
 	}
 	
 

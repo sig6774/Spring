@@ -2,33 +2,82 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.spring.myweb.user.mapper.IUserMapper">
 
-	<!-- 중복 아이디 체크  -->
-	<select id="idCheck" resultType="int">
+	<!-- VO클래스의 멤버변수가 컬렉션 타입일 경우에는 collection 태그를 이용 -->
+	<!-- collection 타입의 변수에 값을 매길 때는 어떤 객체로 포장해서 넣을 지를 새로운 resultMap으로 선언 -->
+	<resultMap type="UserVO" id="myPageInfo">
 	
+		<!-- collection 객체를 가져올 때 컬럼명이 같아도 써주는 게 좋음  -->
+		<id property="userId" column="USERID" />
+		<result property="userName" column="USERNAME" />
+		<result property="userPhone1" column="USERPHONE1" />
+		<result property="userPhone2" column="USERPHONE2" />
+		<result property="userEmail1" column="USEREMAIL1" />
+		<result property="userEmail2" column="USEREMAIL2" />
+		<result property="addrBasic" column="ADDRBASIC" />
+		<result property="addrDetail" column="ADDRDETAIL" />
+		<result property="addrZipNum" column="ADDRZIPNUM" />
+		
+		<collection property="userBoardList" resultMap="list" />
+		<!-- board의 값을 가져올 property 생성 -->
+	</resultMap>
+
+
+	<!-- collection에 들어갈 객체가 어떤 식으로 포장 될 지를 명시해주는 resultMap -->
+	<resultMap type="FreeBoardVO" id="list">
+		<id property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="regDate" column="regdate" />
+	</resultMap>
+
+	<!-- 중복 아이디 체크 -->
+	<select id="idCheck" resultType="int">
+
 		SELECT count(*) FROM users
 		WHERE userId = #{userId}
-		
+
 	</select>
-	
+
 	<!-- 유저 등록 -->
-	<insert id = "join">
-		INSERT INTO users(userId, userPw, userName, userPhone1,
-						   userPhone2, userEmail, userEmail2, addrBasic,
-						   addrDetail, addrZipNum)
+	<insert id="join">
+		INSERT INTO users(userId, userPw, userName,
+		userPhone1,
+		userPhone2, userEmail, userEmail2, addrBasic,
+		addrDetail, addrZipNum)
 		VALUES (#{userId}, #{userPw}, #{userName}, #{userPhone1},
-						   #{userPhone2}, #{userEmail}, #{userEmail2},
-						   #{addrBasic}, #{addrDetail}, #{addrZipNum})
+		#{userPhone2}, #{userEmail}, #{userEmail2},
+		#{addrBasic}, #{addrDetail}, #{addrZipNum})
 	</insert>
-	
-	<!-- mybatis는 null이 들어오면 에러가 터지므로 사용자가 insert에 해당하는 값을 모두 입력해야하는 문제가 존재 
-		 
-		  -->
-	
+
+	<!-- mybatis는 null이 들어오면 에러가 터지므로 사용자가 insert에 해당하는 값을 모두 입력해야하는 문제가 존재 -->
+
 	<select id="login" resultType="com.spring.myweb.command.UserVO">
 		SELECT * FROM users
-		WHERE userId = #{id} and userPw = #{pw}
+		WHERE userId =
+		#{id} and userPw = #{pw}
 	</select>
+
+	<select id="getInfo" resultMap="myPageInfo">
+		<!-- myPageInfo를 참조 -->
+		SELECT userId,
+		userName,
+		userPhone1,
+		userPhone2,
+		userEmail,
+		userEmail2,
+		addrBasic,
+		addrDetail,
+		addrZipNum,
+		f.bno,
+		f.title,
+		f.regDate
+		from users u LEFT OUTER JOIN freeboard f ON u.userId = f.writer
+		WHERE
+		u.userId = #{userId}
+		ORDER BY f.bno DESC
+	</select>
+
+
 </mapper>

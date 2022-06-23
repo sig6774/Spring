@@ -39,12 +39,12 @@
                                         <td class="m-title">*비밀번호</td>
                                         <td><input class="form-control input-sm"></td>
                                     </tr>
-                                    <tr>
-                                        <td class="m-title">*비밀번호확인</td>
+<!--                                     <tr>
+                                        <td class="m-title">비밀번호확인</td>
                                         <td><input class="form-control input-sm"></td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
-                                        <td class="m-title">*E-mail</td>
+                                        <td class="m-title">E-mail</td>
                                         <td>
                                             <input class="form-control input-sm">@
                                             <select class="form-control input-sm sel">

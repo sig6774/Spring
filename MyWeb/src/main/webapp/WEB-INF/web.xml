@@ -17,6 +17,7 @@
 
 	<!-- Processes application requests -->
 	<servlet>
+	<!-- 디스패처 서플릿이 실행될 때 같이 실행되는 파일들  -->
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -24,6 +25,7 @@
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
 				/WEB-INF/spring/email-config.xml
+				/WEB-INF/spring/interceptor-config.xml			
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
