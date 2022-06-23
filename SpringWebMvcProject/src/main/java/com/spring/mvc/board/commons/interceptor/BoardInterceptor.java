@@ -56,6 +56,7 @@ public class BoardInterceptor implements HandlerInterceptor{
 		
 		System.out.println("모델 객체 내부 : " + modelAndView.getModel());
 		Object data = modelAndView.getModel().get("article");
+
 		System.out.println("article 이라는 이름의 데이터 : " + data);
 		System.out.println("뷰 페이지 이름 : " + modelAndView.getViewName());
 		
