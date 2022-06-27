@@ -23,6 +23,7 @@
 		<typeAlias type="com.spring.myweb.command.UserVO" alias="UserVO" />
 		<typeAlias type="com.spring.myweb.command.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.spring.myweb.command.FreeBoardVO" alias="FreeBoardVO" />
+		<typeAlias type="com.spring.myweb.command.SnsBoardVO" alias="SnsBoardVO" />		
 	</typeAliases>
 	
 	<!-- 여기서도 mapper 위치 지정 가능 

@@ -23,17 +23,17 @@ public class SnsBoardService implements ISnsBoardService {
 
 	@Override
 	public List<SnsBoardVO> getList(PageVO paging) {
-		return null;
+		return mapper.getList(paging);
 	}
 
 	@Override
 	public SnsBoardVO getDetail(int bno) {
-		return null;
+		return mapper.getDetail(bno);
 	}
 
 	@Override
 	public void delete(int bno) {
-
+		mapper.delete(bno);
 	}
 
 }

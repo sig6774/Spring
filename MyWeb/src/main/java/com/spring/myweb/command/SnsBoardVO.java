@@ -2,13 +2,17 @@ package com.spring.myweb.command;
 
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class SnsBoardVO {
 
 //	-- SNS Board
@@ -30,18 +34,19 @@ public class SnsBoardVO {
 //	    NOCYCLE 
 //	    NOCACHE;
 	
-	public SnsBoardVO(int bno, String writer, String uploadpath, String fileloca, String filename, String filerealname,
-			String content, Timestamp regdate) {
-		super();
-		this.bno = bno;
-		this.writer = writer;
-		this.uploadpath = uploadpath;
-		this.fileloca = fileloca;
-		this.filename = filename;
-		this.filerealname = filerealname;
-		this.content = content;
-		this.regdate = regdate;
-	}
+//	public SnsBoardVO(int bno, String writer, String uploadpath, String fileloca, String filename, String filerealname,
+//			String content, Timestamp regdate) {
+//		super();
+//		this.bno = bno;
+//		this.writer = writer;
+//		this.uploadpath = uploadpath;
+//		this.fileloca = fileloca;
+//		this.filename = filename;
+//		this.filerealname = filerealname;
+//		this.content = content;
+//		this.regdate = regdate;
+//	}
+	
 	private int bno;
 	private String writer;
 	private String uploadpath;

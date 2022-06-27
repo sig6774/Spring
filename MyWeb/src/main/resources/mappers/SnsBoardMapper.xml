@@ -9,10 +9,39 @@
 	<insert id="insert">
 		INSERT INTO snsboard(
 		bno, writer, uploadpath, fileloca, filename, filerealname, content) 
-		VALUES(snsboard_seq.NEXTVAL, ${writer}, #{uploadpath}, #{fileloca},
+		VALUES(snsboard_seq.NEXTVAL, #{writer}, #{uploadpath}, #{fileloca},
 			  #{filename}, #{filerealname}, #{content})
 	</insert>
 	
+	<!-- 글 전체 목록 -->
+	<select id="getList" resultType="SnsBoardVO">
+	<!-- 별칭을 지정했기 때문에 resultType를 간단하게 작성  -->
+		SELECT * FROM 
+			(SELECT ROWNUM AS rn, tbl.* FROM 	
+				(SELECT * FROM snsboard
+				ORDER BY bno DESC
+				) tbl
+			)
+		<![CDATA[
+		WHERE rn > (#{pageNum}-1) * #{cpp}
+		AND rn <= #{pageNum} * #{cpp}
+		]]>
+		<!-- getList라는 메서드는 page의 정보가 담긴 PageVO객체와 게시물 번호를 매개변수로 받음 
+			 그렇기 때문에 sql에서 해당 정보를 사용할 수 있음 -->
+		
+	</select>
 	
+	<select id="getDetail" resultType="SnsBoardVO">
+		SELECT * FROM 
+		snsboard 
+		WHERE bno = #{bno}
+	
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM 
+		snsboard 
+		WHERE bno = #{bno}
+	</delete>
 	
 </mapper>
