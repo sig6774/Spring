@@ -20,7 +20,7 @@
 	                        <tbody class="t-control">
 	                            <tr>
 	                                <td class="t-title">NAME</td>
-	                                <td><input class="form-control input-sm" name ="writer" id = "newName"></td>
+	                                <td><input class="form-control input-sm" name ="writer" id = "newName" value="${login.userId }" readonly></td>
 	                            </tr>
 	                            <tr>
 	                                <td class="t-title">TITLE</td>

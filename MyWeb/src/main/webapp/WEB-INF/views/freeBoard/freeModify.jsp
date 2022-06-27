@@ -25,7 +25,7 @@
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" name='writer' value= "${board.writer }">
+                                <input class="form-control" name='writer' value= "${board.writer }" id="boardWriter">
                             </div>    
                             <div class="form-group">
                                 <label>제목</label>
@@ -82,7 +82,7 @@
         		if (confirm('정말 삭제하시겠습니까?')){
         			// document.updateForm.setAttribute('action', '<c:url value="/freeBoard/freeDelete" />');
         			
-        			$('form[name=modifyForm]').attr('action', '<c:url value="/freeBoard/freeDelete" />');
+        			$('form[name=modifyForm]').attr('action', '<c:url value="/freeBoard/freeModify?writer=${board.writer}" />');
         			// attr함수를 통해서 form 태그의 action을 바꿔줌
         			document.modifyForm.submit();
         		}

@@ -44,7 +44,7 @@
 					</div>
 <%-- 					<input type="hidden" name="boardNo" value="${board.bno}">
  --%>					
-					<button type="button" class="btn btn-primary" onclick="location.href = '<c:url value="/freeBoard/freeModify?bno=${board.bno}" />'">변경</button>
+					<button type="button" class="btn btn-primary" onclick="location.href = '<c:url value="/freeBoard/freeModify?bno=${board.bno}&writer=${board.writer }" />'">변경</button>
 					<button type="button" class="btn btn-dark" onclick="location.href = '${pageContext.request.contextPath}/freeBoard/freeList?pageNum=${p.pageNum }&cpp=${p.cpp }&condition=${p.condition }&keyword=${p.keyword }'">목록</button>
 																														
 				</form>

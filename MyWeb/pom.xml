@@ -196,9 +196,9 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-		
-		<!-- 간단한 설정을 통해 메일 라이브러리를 사용할 수 있도록 도와주는 spring-context-support 
-			 메일 뿐 아니라 캐시메모리, 메일, 스케쥴링 UI와 관련된 다양한 부가기능등을 지원하는 라이브러리-->
+
+		<!-- 간단한 설정을 통해 메일 라이브러리를 사용할 수 있도록 도와주는 spring-context-support 메일 뿐 아니라 
+			캐시메모리, 메일, 스케쥴링 UI와 관련된 다양한 부가기능등을 지원하는 라이브러리 -->
 		<!-- spring-context-support -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
@@ -206,6 +206,25 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+
+		<!-- 파일 업로드 API -->
+		<!-- 서블릿 3.0 이상 사용가능 -->
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		
+		<!-- commons-io -->
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+
 
 
 

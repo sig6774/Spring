@@ -10,6 +10,11 @@
 	
 	<bean id="UserLoginSuccessHandler" class="com.spring.myweb.util.interceptor.UserLoginSuccessHandler" />
 	
+	<!-- 생성한 interceptor bean 등록  -->
+	<bean id="UserAuth" class="com.spring.myweb.util.interceptor.UserAuthHandler" />
+	
+	<bean id="UserAuthBoard" class="com.spring.myweb.util.interceptor.BoardAuthHandler" />
+	
 	<mvc:interceptors>
 		<!-- root-context.xml에 등록하는 거랑 똑같음  -->
 		<!-- 로그인 이후에 실행되는 postHandler -->
@@ -19,8 +24,25 @@
 			<ref bean="UserLoginSuccessHandler" />
 			<!-- 참조하는 bean 지정  -->
 		</mvc:interceptor>	
+		
+		<!-- 로그인 권한을 체크하는 핸들러  -->
+		<mvc:interceptor>
+			<!-- 로그인 권한을 체크하기 위해 해당 요청을 interceptor가 먼저 체크  -->
+			<mvc:mapping path="/freeBoard/freeRegist" />
+			<mvc:mapping path="/user/userMypage"/>
+			<ref bean="UserAuth" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/freeBoard/freeModify"/>
+			<mvc:mapping path="/freeBoard/freeDelete"/>
+			<!-- 수정 및 삭제 페이지 요청이 들어오면 interceptor가 먼저 가로채도록 -->
+			<ref bean="UserAuthBoard" />
+			
+		</mvc:interceptor>
 			
 	</mvc:interceptors>
+	
 
 </beans>
 

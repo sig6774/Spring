@@ -136,6 +136,17 @@ public class UserController {
 		return "/user/userMypage";
 	}
 	
+	@PostMapping("/userUpdate")
+	public String update(UserVO user, RedirectAttributes ra) {
+		// 커맨드 객체를 활용하여 값을 받아옴 
+		System.out.println("마이페이지에서 데이터 가져오는지 확인 " + user.toString());
+		service.updateUser(user);
+		
+		ra.addFlashAttribute("msg", "수정이 완료되었습니다.");
+		
+		return "redirect:/user/userMypage";
+	}
+	
 
 	
 	

@@ -37,7 +37,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public void updateUser(UserVO user) {
-		// TODO Auto-generated method stub
+		mapper.updateUser(user);
 
 	}
 
