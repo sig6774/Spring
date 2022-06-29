@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,14 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.myweb.command.SnsBoardVO;
+import com.spring.myweb.command.SnsLikeVO;
 import com.spring.myweb.command.UserVO;
 import com.spring.myweb.snsboard.service.ISnsBoardService;
 import com.spring.myweb.util.PageVO;
@@ -36,11 +40,18 @@ public class SnsBoardController {
 	@Autowired
 	private ISnsBoardService service;
 	
+	
+	
 	@GetMapping("/snsList")
 	public void snsList() {
 		
 	}
 	
+//	private static final Logger logger = LoggerFactory.getLogger(SnsBoardController.class);
+	// log를 출력하기 위해 사용
+	
+	private static final Logger logger = LoggerFactory.getLogger(SnsBoardController.class);
+	// 자동 생성 추가해서 쉽게 생성 가능 
 	
 	// 비동기 통신 
 	@PostMapping("/upload")
@@ -60,6 +71,7 @@ public class SnsBoardController {
 		
 		// 저장할 폴더 경로 
 		String uploadPath = "C:\\Users\\user\\Desktop\\upload\\" + filelocation;
+		// String uploadPath = "/Users/sig6774/Desktop/Web/" + filelocation;
 		
 		// 폴더가 없으면 생성하도록 진행 
 		File folder = new File(uploadPath);
@@ -88,7 +100,7 @@ public class SnsBoardController {
 		String fileName = uuids + fileExtention;
 		
 		// 업로드한 파일을 서버 컴퓨터 내에 지정한 경로에 실제 저장 
-		File saveFile = new File(uploadPath + "\\" + fileName);
+		File saveFile = new File(uploadPath + "/" + fileName);
 		
 		// 예외처리가 발생함으로 try catch 사용 
 		try {
@@ -99,7 +111,7 @@ public class SnsBoardController {
 		}
 		
 		// db에 insert 작업 진행 
-		SnsBoardVO snsBoard = new SnsBoardVO(0, writer, uploadPath, filelocation, fileName, fileRealName, content, null);
+		SnsBoardVO snsBoard = new SnsBoardVO(0, writer, uploadPath, filelocation, fileName, fileRealName, content, null, 0);
 		// null을 줘도 mybatis-config에서 null을 다른 값으로 바꿔줬기 때문에 상관 x 
 		service.insert(snsBoard);
 		// db에 값을 넣음
@@ -115,7 +127,17 @@ public class SnsBoardController {
 		paging.setCpp(5);
 		System.out.println("/snsBoard/getList : GET");
 		// 한페이지당 보여줄 게시물 개수 
-		return service.getList(paging);
+		System.out.println(paging.getPageNum());
+		List<SnsBoardVO> snsList = service.getList(paging);
+		logger.info("/snsBoard/getList : GET");
+		
+		// 글목록을 불러올 때 마다 각 게시물의 좋아요 개수를 출력해주는 로직 
+		// 반복문으로 각 게시물 마다 좋아요 개수를 설정해줌 
+		for (SnsBoardVO svo : snsList) {
+			svo.setLikeCnt(service.likeCnt(svo.getBno()));
+			System.out.println(svo);
+		}
+		return snsList;
 	}
 	
 	// 게시글의 이미지 파일 전송 요청
@@ -128,8 +150,11 @@ public class SnsBoardController {
 		System.out.println("/snsBoard/display : GET");
 		System.out.println("fileName : " + fileName + "fileLocation : " + fileLocation);
 		
+
 		
 		File file = new File("C:\\Users\\user\\Desktop\\upload\\" + fileLocation + "\\" + fileName);
+		//File file = new File("/Users/sig6774/Desktop/Web/" + fileLocation + "/" + fileName);
+
 		System.out.println(file);
 		
 		ResponseEntity<byte[]> result = null;
@@ -144,7 +169,7 @@ public class SnsBoardController {
 			// ResponseEntity<>(응답 객체에 담을 내용, 헤더에 담을 내용, 상태 메세지)
 			// FileCopyUtils : 파일 및 스트림 데이터 복사를 위한 간단한 유틸리티 메서드 집합체 
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
-			// FileCopyUtils.copyToByteArray(경로) : 경로를 byte로 변환 
+			// FileCopyUtils.copyToByteArray(경로) : 경로를 byte배열로 변환 
 			// ResponseEntity에 보내고자 하는 값들을 전달 
 			// ResponseEntity는 응답에 관련된 여러 정보를 담아서 보낼 수 있음 
 			
@@ -193,5 +218,85 @@ public class SnsBoardController {
 		return file.delete() ? "Success" : "fail";
 		// 파일 삭제 메서드
 		
+	}
+	
+	@GetMapping("/download")
+	@ResponseBody
+	public ResponseEntity<byte[]> download(String fileLoca, String fileName){
+		System.out.println("/snsBoard/download : GET ");
+		System.out.println("filename : " + fileName);
+		System.out.println("fileLoca : " + fileLoca);
+		
+		File file = new File("/Users/sig6774/Desktop/Web/" + fileLoca + "/" + fileName);
+		// File 객체를 사용 
+		
+		ResponseEntity<byte[]> result = null;
+		
+		//응답하는 본문을 브라우저가 어떻게 표시해야 할 지 알려주는 헤더 정보를 추가합니다.
+        //inline인 경우 웹 페이지 화면에 표시되고, attachment인 경우 다운로드를 제공합니다.
+        
+        //request객체의 getHeader("User-Agent") -> 단어를 뽑아서 확인
+        //ie: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko  
+        //chrome: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36
+        
+        //파일명한글처리(Chrome browser) 크롬
+        //header.add("Content-Disposition", "attachment; filename=" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") );
+        //파일명한글처리(Edge) 엣지 
+        //header.add("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
+        //파일명한글처리(Trident) IE
+        //Header.add("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", " "));
+		
+		HttpHeaders header = new HttpHeaders();
+		
+		header.add("Content-Disposition",  "attachment; filename=" + fileName);
+		// 응답 헤더 파일에 content-disposition을 attachment로 준다면 브라우저 내에서 다운로드로 처리 
+		// filename= 파일명.확장자 로 전송 
+		// attachment라는 키워드를 적어야 download가 가능 
+		// 특정 이름으로 값을 header에 저장 
+		
+		try {
+			result = new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 좋아요 버튼 클릭 처리 
+	@PostMapping("/like")
+	@ResponseBody
+	public String likeConfirm(@RequestBody SnsLikeVO like) {
+		// JSON으로 값이 들어오기 때문에 @RequestBody와 커맨드 객체를 사용해서 JSON 타입을 객첼 변경 
+		System.out.println("/snsBoard/like : POST ");
+		System.out.println("좋아요 기능 값을 가져오는지 확인 : " + like);
+		
+		// 좋아요 버튼은 버튼이 하나임으로 버튼을 클릭 유무에 따라 좋아요 선택 및 취소를 뜻
+		
+		int result = service.searchLike(like);
+		// 좋아요를 눌렀다면 1이 오고 좋아요를 누르지 않았다면 0이 옴 
+		System.out.println("좋아요 유무 확인 : " + result);
+		if(result == 0) {
+			// 좋아요를 누르지 않았다면 해당 정보를 db에 저장 
+			service.createLike(like);
+			return "like";
+		}
+		else {
+			// 좋아요를 눌렀으므로 db에서 해당 값 삭제 
+			service.deleteLike(like);
+			return "delete";
+		}
+	}
+	
+	// 회원이 글 목록 진입시 좋아요 게시물 수 체크 
+	@PostMapping("/listLike")
+	@ResponseBody
+	public List<Integer> listLike(@RequestBody String userId){
+		System.out.println("/snsBoard/listLike : POST");
+		System.out.println("좋아요 게시물 체크 : " + userId);
+		
+		List<Integer> likeList = service.listLike(userId);
+		System.out.println(likeList);
+		return likeList;
 	}
 }

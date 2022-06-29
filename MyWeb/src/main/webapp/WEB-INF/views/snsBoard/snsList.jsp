@@ -293,6 +293,12 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 								<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>
 								<a href="##"><i class="glyphicon glyphicon-share-alt"></i>공유하기</a>
 							</div>
+							
+							<div>
+								
+								
+							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -340,7 +346,7 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 				alert('로그인이 필요한 서비스 입니다.');
 				return;
 			}
-			else{
+			
 				// 개발자가 원하는 파일 형식을 만족했으므로 비동기 방식으로 업로드 진행 
 				// ajax 폼 전송의 핵심인 FormData 객체
 				const formData = new FormData();
@@ -410,21 +416,73 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 				});// end ajax
 				
 				
-			} // end regist()
 			
-		}
+			
+		} // end regist()
 			// 리스트 작업 
 			let str ='';
 			let page = 1;
-			getList(1, true);
+			getListLike(true).done(getList);			
+			// getListLike함수에 promise를 사용해서 순서를 지목하고 해당 함수에 done을 작성하게 되면 
+			// getListLike()함수를 먼저 실행하고 getLis함수를 실행하라는 순서를 지목해줌
+			// 콜백방식으로 getList함수에 매개값을 전달 
 			
-			function getList(page, reset){
+			// 게시판에 들어온 회원의 종아요 게시물 목록을 받아오는 함수 
+			function getListLike(isReset){
+				let deferred = $.Deferred();
+				// jquery에서 제공하는 Deferred함수이며 함수들의 실행순서를 정할 수 있게 해줌 
+				
+				console.log('페이지 번호 : ' + page);
+				
+				console.log('먼저 실행되어야 합니다.');
+				const userId = '${login.userId}';
+				
+				if(userId !== ''){
+					// 로그인을 한 사용자라면 
+					$.ajax({
+						type : 'post',
+						url : '<c:url value="/snsBoard/listLike" />',
+						data : userId,
+						contentType:'application/json',
+						
+						success : function(result){
+							console.log('result : ' + result); 
+							// 게시물 번호들
+							
+							// reset여부 
+							if (isReset){
+								deferred.resolve(result, page, true);								
+							}
+							else {
+								deferred.resolve(result, page, false);
+							}	
+						}
+						
+						
+					}); // end ajax
+				}
+				else{
+					if (isReset){
+						deferred.resolve(null, page, true);								
+					}
+					else {
+						deferred.resolve(null, page, false);
+					}				
+				}
+				
+				return deferred.promise();
+				// 순서를 지목하기 위해 promise 사용  
+			}
+			
+
+			function getList(data , page, reset){
 				if (reset === true){
 					// 화면 reset여부가 true라면 str 초기화
 					str = '';
 				}
+				console.log(page);
 				$.getJSON(
-					'<c:url value="/snsBoard/getList?pageNum=' + page + '" />',
+						'<c:url value="/snsBoard/getList?pageNum=' + page + '" />',
 					function(boardList){
 						// 서버가 전달해준 글목록
 						console.log(boardList);
@@ -439,7 +497,9 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 								<div class="title">
 									<p>` + boardList[i].writer + `</p>
 									<small>` + timeStamp(boardList[i].regdate) + `</small> &nbsp; &nbsp;
-									<a href=''>이미지 다운로드</a>
+									<a href="<c:url value='/snsBoard/download?fileLoca=` + boardList[i].fileloca + `&fileName=` + boardList[i].filename + `' />">이미지 다운로드</a>
+									<!--요청을 보낼 때 다른 값도 같이 보내줌 -->
+									
 								</div>
 							</div>
 							
@@ -450,7 +510,7 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 							</div>
 							<div class="image-inner">
 								<!-- 이미지영역 -->
-								<a href="`+ boardList[i].bno + `">
+								<a href="` + boardList[i].bno + `">
 								
 								<img src="<c:url value='/snsBoard/display?fileLocation=` + boardList[i].fileloca + `&fileName=` + boardList[i].filename + `'/>">
 								<!-- 요청 url을 작성해서 거기서 로컬에 있는 파일을 불러옴 
@@ -459,12 +519,24 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 							</div>
 							<div class="like-inner">
 								<!--좋아요-->
-								<img src="../resources/img/icon.jpg"> <span>522</span>
+								<img src="../resources/img/icon.jpg"> <span>` + boardList[i].likeCnt + `</span>
 							</div>
-							<div class="link-inner">
-								<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
-								<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
-								<a href="`+boardList[i].bno + `"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
+							<div class="link-inner">`;
+								if (data != null){
+									if (data.includes(boardList[i].bno)){
+										str += `<a id="likeBtn" href="` + boardList[i].bno + `"><img src="${pageContext.request.contextPath}/img/like2.png" width="20px" height="20px">좋아요</a>`;
+									}
+									else{
+										str += `<a id="likeBtn" href="` + boardList[i].bno + `"><img src="${pageContext.request.contextPath}/img/like1.png" width="20px" height="20px">좋아요</a>`;
+									}
+								}
+								else {
+									str += `<a id="likeBtn" href="` + boardList[i].bno + `"><img src="${pageContext.request.contextPath}/img/like1.png"" width="20px" height="20px">좋아요</a>`;
+								}
+								
+								str += `
+								<a id="commentBtn" href="` +boardList[i].bno + `"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
+								<a id="delBtn" href="`+boardList[i].bno + `"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
 							
 							</div>`;
 							$('#contentDiv').html(str);
@@ -477,8 +549,8 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 			// 상세보기 처리 (모달창 열어줌)
 			// 실제 이벤트가 발생하는 곳은 반복문에 의해 생성되는 곳임으로 이벤트가 먹히지 않을 수 있음 
 			// 그렇기 때문에 실제 요소가 있는 곳에 이벤트를 걸어 이벤트 전파방식으로 진행 
-			$('#contentDiv').on('click', '.image-inner a', function(event){
-				// image-inner안의 a태그에 클릭이 발생하면 함수 발동 
+			$('#contentDiv').on('click', '.image-inner a, .link-inner #commentBtn', function(event){
+				// image-inner안의 a태그에 클릭이 발생하면 함수 발동하고 class가 link-inner안에 id가 commentBtn인 것을 클릭해도 함수가 발동 
 				event.preventDefault();
 				// a태그의 고유기능 중지
 				
@@ -509,7 +581,9 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 							$('#snsContent').text('');
 						}
 						const src ='<c:url value="/snsBoard/display?fileLocation=' + data.fileloca + '&fileName=' + data.filename + '"/>';
+						// display에 요청해서 사진이 저장된 로컬 경로에 접근해서 이미지 불러
 						// const src = "<c:url value='/snsBoard/display?fileLocation=` + data.fileloca + `&fileName=` + data.filename + `'/>";
+						
 						$('#snsImg').attr("src", src);
 
 					}
@@ -518,12 +592,7 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
 			}); // 상세보기 처리 끝
 			
 			//삭제 처리
-		    //삭제하기 링크를 클릭했을 때 이벤트를 발생 시켜서
-		    //비동기 방식으로 삭제를 진행해 주세요. (삭제 버튼은 한 화면에 여러개 겠죠?)
-		    //서버쪽에서 권한을 확인 해 주세요. (작성자와 로그인 중인 사용자의 id를 비교해서)
-		    //일치하지 않으면 문자열 "noAuth" 리턴, 성공하면 "Success" 리턴.
-		    // url: /snsBoard/delete, method: post
-   			$('#contentDiv').on('click', '.link-inner a', function(event){
+   			$('#contentDiv').on('click', '.link-inner #delBtn', function(event){
    				// 이벤트가 발생한 곳을 지정해서 삭제 
 				event.preventDefault();
    			 	const bno = $(this).attr('href');
@@ -539,7 +608,7 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
   			 		success:function(result){
   			 			if (result === 'Success') {
   			 				alert("게시글이 정상적으로 삭제 완료되었습니다.");
-  			 				getList(1, true);
+  			 				getListLike(true).done(getList);
   			 				// 삭제가 되었으니 값을 다시 불러옴
   			 			}
   			 			else if (result==='noAuth') {
@@ -565,13 +634,92 @@ ul.nav li.drophover:hover>ul.dropdown-menu {
    					// 스크롤이 끝까지 내려왔다면 
    					// 사용자의 스크롤이 바닥에 닿았을 때 페이지 변수의 값을 하나 올리고 reset여부는 false를 주어서 누적해서 계속 불러오면 됨 
    					// 게시글을 몇개씩 불러올지는 페이징 알로기즘에서 정해주면 됨
-   					getList(++page, false);
+   					page++;
+   					getListLike(false).done(getList);
    					// 값을 새롭게 불러줌 
    					// reset하면 안됨 (누적해서 불러와야 하기 때문)
    				}
    				
    				
    			}); // 무한 스크롤 끝 
+   			
+   			// 좋아요 기능 구현 
+   			$('#contentDiv').on('click', '#likeBtn', function(event) {
+   				// 좋아요 버튼은 반복문을 돌면서 생기기 때문에 실제 존재하는 contetnDiv에서 이벤트 전파 방식 사용
+   				
+				event.preventDefault();
+   				console.log('좋아요 버튼 클릭');
+   				
+   				if (event.target.matches('img')){
+   					$('#likeBtn').click();
+   					return;
+   				}
+   				
+   				const bno = $(this).attr('href');
+   				// href에 묻혀져 있는 게시글 번호 가져옴 
+   				const id = '${login.userId}';
+   				// 현재 로그인 중인 아이디 
+   				// session에서가져옴 
+   				
+   				if (id === ''){
+   					alert('로그인한 사용자만 가능합니다.');
+   					return;
+   				}
+   				
+   				$.ajax({
+   					type :'post',
+   					url : '<c:url value="/snsBoard/like" />',
+   					// url에 묻혀서 보낼 수 있
+   					
+   					contentType : 'application/json',
+   					data : JSON.stringify({
+   						'bno' : bno,
+   						'userId' : id
+   					}),
+   					success : function(result){
+   						if (result === 'like'){
+   							// vanilla JS
+   							
+   							// 좋아요를 눌렀다면 스타일 변경 
+  							event.target.firstChild.setAttribute('src', '${pageContext.request.contextPath}/img/like2.png'); 
+  							// 이벤트가 발생한 곳의 html 삽입 
+  							event.target.style.color = 'blue';
+  							// 이벤트가 발생한 곳의 글자색을 바꿈 
+  							
+   							const $cnt = event.target.parentNode.previousElementSibling.children[1]; 
+  							// 현재 이벤트가 발생한 곳의 부모노드의 형제 노드의 두번째 자식노드를 지목 
+  							// console.log($cnt);
+  							// 값을 가져오는 것을 확인 
+  							$cnt.textContent = Number($cnt.textContent) + 1; 
+   							// 기존의 html의 값을 숫자로 변환해서 하나 더 올려줌 
+   							
+   						}
+   						else{
+   							// vanilla JS
+   							event.target.firstChild.setAttribute('src', '${pageContext.request.contextPath}/img/like1.png');
+   							event.target.style.color = 'black';
+   							// 이벤트가 발생항 곳의 html을 삽입하고 글자색을 변경 
+   						
+   							const $cnt = event.target.parentNode.previousElementSibling.children[1]; 
+  							// 현재 이벤트가 발생한 곳의 부모노드의 형제 노드의 두번째 자식노드를 지목 
+  							// console.log($cnt);
+  							// 값을 가져오는 것을 확인 
+  							$cnt.textContent = Number($cnt.textContent) -1; 
+   							// 기존의 html의 값을 숫자로 변환해서 하나 더 빼
+
+   							
+   						}
+   					},
+   					error : function(){
+   						alert('좋아요 기능에서 오류가 발생했습니다.');
+   					}
+   					
+   					
+   					
+   				}); // end ajax
+   				
+   				
+   			}); // 좋아요 기능 끄읏~ 
 
 	}); // end jQuery
 	
