@@ -31,6 +31,7 @@ public class ReplyService implements IReplyService {
 		// controller에서도 map으로 포장해도 되지만 service가 더 적합함으로 
 		// map객체를 이용해서 값들을 넣어줌 
 		
+		// mybatis는 여러값을 보낼 수 없으므로 map객체를 활용해서 다중 정보를 담아서 보냄
 		return mapper.getList(data);
 	}
 

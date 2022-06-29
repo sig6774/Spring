@@ -18,6 +18,7 @@ import com.spring.myweb.reply.service.IReplyService;
 import com.spring.myweb.util.PageVO;
 
 @RestController
+// 비동기 방식의 controller일 때 사용 
 // Bean 등록
 @RequestMapping("/reply")
 public class ReplyController {
@@ -27,11 +28,13 @@ public class ReplyController {
 	// 댓글 등록 
 	@PostMapping("/replyRegist")
 	public String regist(@RequestBody ReplyVO reply) {
+		// JSON으로 값이 들어오기 때문에 그것을 특정 객체로 바꿔주기 위해 @RequestBody annotation 사용 
 		// System.out.println("/reply/regist : POST");
 		// System.out.println("값 가져오는지 확인 :" + reply.toString());
 		
 		service.replyRegist(reply);
 		return "success";
+		// 요청을 보낸 곳으로 다시 보냄 
 	}
 	
 	// 페이징이 추가된 댓글 목록 
@@ -45,7 +48,7 @@ public class ReplyController {
 		// Map or @Param Annotation을 사용해서 보내고 ReplyMapper.xml에 sql문을 페이징 쿼리로 작성
 		
 		// rest방식은 화면에 필요한 값을 여러개 보낼 때, 
-		//return에 Map이나 VO 형식으로 필요한 데이터를 한번에 담아서 처리(댓글 목록 리스트와 전체 댓글 게스를 함께 전달)
+		// return에 Map이나 VO 형식으로 필요한 데이터를 한번에 담아서 처리(댓글 목록 리스트와 전체 댓글 게스를 함께 전달)
 		
 		PageVO page = new PageVO();
 		page.setPageNum(pageNum);

@@ -15,6 +15,8 @@
                         </div>
                         
                         <form action="<c:url value='/freeBoard/freeModify' /> " method="post" name="modifyForm">
+                        <!-- 서버에 /freeBoard/freeModify로 요청을 보냄 -->
+                        
                             <div>
                                 <label>DATE</label>
                                 <p>${board.regDate }</p>
@@ -61,20 +63,16 @@
 	        	location.href="<c:url value='/freeBoard/freeList' />"
 	        });
         
-      //수정 버튼 이벤트 처리
-        /*
-        1. 폼 데이터가 공백인지 확인 처리
-        2. 공백이 없으면 Controller에 freeUpdate 요청으로 데이터를 전송
-        3. 컨트롤러에서 처리가 완료된 후에 "게시글 수정이 정상 처리되었습니다."라는 알림창이
-        	글 상세보기 페이지에서 처리될 수 있도록 해 주세요.
-        */
+      		//수정 버튼 이벤트 처리
         	$('#modifyBtn').click(function() {
         		if ($('input[name=writer]').val() === '' || $('input[name=title]').val() === '' || $('textarea[name=content]').val() === ''){
+        			// 수정하기 위해서는 writer과 title, name이 필수값이므로 검증 진행  
         			alert('수정하신 값 중 입력하지 않은 곳이 있습니다.')	
         			return;
         		}else{
         			alert("게시글 수정이 정상 처리되었습니다.");
         			document.modifyForm.submit();
+        			// 다시 서버에 데이터와 함께 요청을 보냄 
         		}
         	});
         	
@@ -84,6 +82,7 @@
         			
         			$('form[name=modifyForm]').attr('action', '<c:url value="/freeBoard/freeModify?writer=${board.writer}" />');
         			// attr함수를 통해서 form 태그의 action을 바꿔줌
+        			// attr함수를 통해 지정된 값을 바꿔줌 
         			document.modifyForm.submit();
         		}
         	});	
@@ -91,12 +90,7 @@
         
         
         
-        //삭제 이벤트 처리
-         /*
-                  삭제같은 경우에는 번호가 노출되면 안되기 때문에 
-         form태그를 이용해서 데이터를 전송시키세요. (post)
-         action 속성을 delete에 맞게 바꿔서 전송하시면 됩니다.
-         */
+
          
          
         </script>

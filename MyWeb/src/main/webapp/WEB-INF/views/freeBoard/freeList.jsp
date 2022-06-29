@@ -46,6 +46,7 @@
                         </thead>
                         <tbody>
                         	<c:forEach var="vo" items="${boardList}">
+                        	<!-- 반복문을 통해서 서버에서 받은 데이터를 화면에 뿌려줌  -->
 	                            <tr>
 	                                <td>${vo.bno}</td>
 	                                <td>
@@ -73,12 +74,14 @@
                     <hr>
                     <ul id = "pagination" class="pagination pagination-sm">
 	                    <c:if test="${pcv.prev }">
+	                    <!-- 모델 객체로 보내진 pcv라는 이름의 값에서 prev가 true라면 밑의 내용 실행  -->
 	                        <li>
 	                        <a href="#" data-pagenum="${pcv.beginPage-1 }">이전</a>
 		                        </li>				                    
 						</c:if>
 	                    
 	                    <c:forEach var = "page" begin="${pcv.beginPage }" end = "${pcv.endPage }">
+	                    <!-- 페이지 구성  -->
 	                        <li  class="${pcv.paging.pageNum == page ? 'active' : '' }"><a href="#" data-pagenum="${page}">${page}</a></li>
 	                        
 	                        <!-- <li><a href="#">2</a></li>
@@ -100,6 +103,7 @@
                     <input type="hidden" name="cpp" value="${pcv.paging.cpp }">
                     <input type="hidden" name="condition" value="${pcv.paging.condition }">
                     <input type="hidden" name="keyword" value="${pcv.paging.keyword }">
+                    <!-- type을 hidden으로 작성해서 해당 값들을 숨겨서 보내줌  -->
 		    </form>
 
                 </div>
@@ -140,6 +144,7 @@
 				// 페이지 버튼들을 감싸고 있는 form태그를 name으로 지목해서 
 				// 그 안에 숨겨져 있는 pageNum이라는 input 태그의 value에 위에서 얻은 
 				// data-pageNum의 값을 삽입한 후 submit
+				// 그러면 서버에서 page의 정보를 다시 받아서 다시 목록 출력 
 				document.pageForm.pageNum.value = value;
 				document.pageForm.submit();
 			});

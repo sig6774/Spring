@@ -12,7 +12,8 @@
 				<div class="titlebox">
 					<p>상세보기</p>
 				</div>
-
+				
+				<!-- 서버에서 받은 데이터를 화면에 뿌려줌  -->
 				<form id ="form-obj">
 					<div>
 						<label>DATE</label>
@@ -40,12 +41,15 @@
 
 					<div class="form-group">
 						<label>내용</label>
+						
 						<textarea class="form-control" rows="10" name='content' readonly>${board.content }</textarea>
 					</div>
 <%-- 					<input type="hidden" name="boardNo" value="${board.bno}">
  --%>					
 					<button type="button" class="btn btn-primary" onclick="location.href = '<c:url value="/freeBoard/freeModify?bno=${board.bno}&writer=${board.writer }" />'">변경</button>
+					<!-- 변경을 하기 위해서는 게시물 번호와 작성자가 필요함으로 요청을 보낼 때 같이 보내줌 -->
 					<button type="button" class="btn btn-dark" onclick="location.href = '${pageContext.request.contextPath}/freeBoard/freeList?pageNum=${p.pageNum }&cpp=${p.cpp }&condition=${p.condition }&keyword=${p.keyword }'">목록</button>
+					<!-- 목록을 요청할 때 필요한 값이 있으므로 해당 값들을 요청을 보낼 때 같이 보내줌 -->
 																														
 				</form>
 			</div>
@@ -148,16 +152,8 @@
 	
 	$(document).ready(function() {
 		$('#replyRegist').click(function() {
-			
-			/*
-		         댓글을 등록하려면 게시글 번호도 보내 주셔야 합니다.
-		         댓글 내용, 작성자, 댓글 비밀번호, 게시글 번호를 
-		         json 표기 방법으로 하나로 모아서 전달해 주시면 됩니다.
-		         비동기 통신으로 댓글 삽입을 처리해 주시고,
-		         console.log를 통해 '댓글 등록 완료!'를 확인하시고
-		         실제 DB에 댓글이 추가되는지도 확인해 주세요.
-		         전송방식: POST, url: /reply/replyRegist
-	         */
+			// 등록하기 버튼을 누르게 된다면 
+
 	         const content = $('#reply').val();
 			 const name = $('#replyId').val();
 			 const pw = $('#replyPw').val();
@@ -178,26 +174,28 @@
 				  $.ajax({
 					  type : 'POST',
 					  url:'<c:url value ="/reply/replyRegist" />',
-
+					  // 서버에 요청을 보냄 
 					  data : JSON.stringify({
 						
 							'bno' : bno,
 							'reply' : content,
 							'replyId' : name,
 							'replyPw' : pw
-
+						// 객체 형식의 JSON으로 만들어줌 
 					  }),
 					  dataType : 'text', // 서버로 부터 어떤 형식으로 받을지
 					  contentType: 'application/json',
 
 					  success: function(result){
-						  // 컨트롤러에서 다시 받은 값 
+						  // 통신에 성공했을 때 서버로부터 받음 
 						  console.log('통신 성공' + result);
 						  
 						  alert('댓글 등록이 완료되었습니다.');
 						  $('#reply').val('');
 						  $('#replyId').val('');
 						  $('#replyPw').val('');
+						  // 등록이 완료되었다면 다시 등록할 수 있도록 값을 비워줌 
+						  
 						  // 등록 완료 후 댓글 목록 함수를 호출해서 비동기식으로 목록 표현
 						  
 						  getList(1, true);
@@ -249,11 +247,13 @@
 			$.getJSON(
 					
 				"<c:url value='/reply/getList/' />" + bno + '/' + pageNum,
-				// 요청을 보냄 
+				// 서버에 데이터와 함께 요청을 보냄 
 				
 				function(data){
 					// 요청에 대한 응답의 데이터 
-					// 서버가 전송한 데이터는 data에 저장 
+					// 서버가 전송한 데이터는 data에 저장
+					
+					// data에는 서버가 보낸 댓글들과 전체 댓글 개수가 담아져 있음 
 					console.log(data);
 					
 					// data에는 replyList와 total이라는 이름의 데이터가 존재 
@@ -265,6 +265,7 @@
 					// 초기화를 해서 화면이 리셋된 것처럼 보여줘야 함
 					if (reset === true){
 						strAdd = '';
+						// 값을 초기화 
 						page = 1;						
 					}
 					
@@ -303,6 +304,7 @@
 						</div>`;
 						// ``을 통해서 한번에 넣어줌
 						// 댓글 영역의 html내용을 가지고 와서 반복문과 ``을 활용해서 필요한 곳에 값을 넣어줌
+						// 반복문을 통해 서버에서 받아온 데이터를 화면에 뿌려줌 
 					} // for 문 끝
 					$('#replyList').html(strAdd);
 					// 반복문에서 작성한 html을 품을 수 있는 노드를 찾아서 문자열 형식으로 넣어줌
@@ -349,6 +351,7 @@
 			// 수정, 삭제가 발생하는 댓글 번호가 몇 번인지도 확인
 			const rno = $(this).attr('href');			
 			// 이벤트가 발생한 곳의 href라는 속성의 값을 가지고 옴
+			
 			$('#modalRno').val(rno);
 			// 모달 내부의 숨겨진 input 태그에 댓글 번호를 담아서 전송
 			
@@ -386,17 +389,6 @@
 		// 수정 처리 함수 
 		// 수정 모달을 열어서 주어 내용을 작성후 수정 내용 작성
 		$('#modalModBtn').click(function() {
-			/*
-	         1. 모달창에 rno값, 수정한 댓글 내용(reply), replyPw값을 얻습니다.
-	         2. ajax함수를 이용해서 post방식으로 reply/update 요청,
-	         	필요한 값은 JSON형식으로 처리해서 요청.
-	         3. 서버에서는 요청받을 메서드 선언해서 비밀번호 확인하고, 비밀번호가 맞다면
-	          	수정을 진행하세요. 만약 비밀번호가 틀렸다면 "pwFail"을 반환해서
-	          	'비밀번호가 틀렸습니다.' 경고창을 띄우세요.
-	         4. 업데이트가 진행된 다음에는 modal창의 모든 값을 ''로 처리해서 초기화 시키시고
-	          	modal창을 닫으세요.
-	          	수정된 댓글 내용이 반영될 수 있도록 댓글 목록을 다시 불러 오세요.
-	         */
 	         
 	         // 수정에 필요한 값들을 모두 가져옴 
 	         const rno = $('#modalRno').val();
@@ -404,6 +396,7 @@
 			 const replyModi = $('#modalReply').val();
 			 const replyPw = $('#modalPw').val();
 			 // console.log(replyModi + replyPw);
+			 // 수정을 하기 위한 값을 가져와서 저장 
 			 
 			 
 			 if (replyModi === '' || replyPw === ''){
@@ -421,6 +414,7 @@
 					 'rno' : rno,
 					 'reply' : replyModi,
 					 'replyPw' : replyPw
+					 // js의 객체 형식으로 JSON으로 바꿔서 서버에 전송 
 				 }),
 				 dataType:'text',
 				 contentType : 'application/json',
@@ -434,14 +428,14 @@
 						 // 값 초기화
 						 
 						 $('#modalReply').val('');
-						 $('#modalPw').val('');						 
-						 // 사용자가 작성한 값 비우기
+						 $('#modalPw').val('');		
+						 // 수정이 완료되었으니 사용자가 작성한 값 비우기
 						 
 						 $('#replyModal').modal('hide');
 						 // 모달 창 숨기기
 						 
 						 getList(1, true);
-						 // 새롭게 댓글 불러옴 
+						 // 수정을 성공했으니 다시 새롭게 댓글 불러옴 
 					 }
 				
 					 else{
@@ -465,15 +459,6 @@
 		
 		// 삭제 함수 
 		$('#modalDelBtn').click(function() {
-			/*
-	         1. 모달창에 rno값, replyPw값을 얻습니다.
-	         2. ajax함수를 이용해서 POST방식으로 /reply/delete 요청
-	          	필요한 값은 JSON 형식으로 처리해서 요청
-	         3. 서버에서는 요청을 받아서 비밀번호를 확인하고, 비밀번호가 맞으면
-	          	삭제를 진행하시면 됩니다.
-	         4. 만약 비밀번호가 틀렸다면, 문자열을 반환해서 
-	          '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
-	         */
 	         
 	         // 삭제 처리를 하기 위해 값을 가져옴 
 	         const rno = $('#modalRno').val();
@@ -492,6 +477,7 @@
 				 data : JSON.stringify({
 					 'rno' : rno,
 					 'replyPw' : replyPw
+					 // js의 객체형태로 JSON형식으로 서버에 데이터를 보냄 
 				 }),
 				 dataType:'text',
 				 contentType : 'application/json',

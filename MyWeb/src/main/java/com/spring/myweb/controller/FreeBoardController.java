@@ -39,11 +39,14 @@ public class FreeBoardController {
 
 	@PostMapping("/freeRegist")
 	public String freeRegi(FreeBoardVO board, RedirectAttributes ra) {
+		// 요청받은 데이터의 name속성 값이 board의 변수 이름과 같으므로 커맨드 객체 이용해서 @RequestParam을 하나씩 하지 않아도 됨  
 		System.out.println("/freeBoard/freeRegist : POST");
+		
 		System.out.println("게시물 값 가져오는지 확인" + board.toString());
 		
 		service.regist(board);
 		ra.addFlashAttribute("msg", "정상 등록 처리되었습니다.");
+		// 다시 요청을 보낼 때 msg라는 이름으로 값을 보냄 
 		return "redirect:/freeBoard/freeList";
 	}
 	
@@ -51,17 +54,25 @@ public class FreeBoardController {
 	// 목록 
 	@GetMapping("/freeList")
 	public String freeList(PageVO page, Model model) {
+		// 페이지의 정보가 들어있는 객체가 들어옴
+		// page객체가 들어옴으로 mapper에서 page안의 변수의 값에 따라 조회할 데이터가 달라지므로 중요 
+		
 		System.out.println("/freeboard/freeList : GET");
 		System.out.println("page : " + page.toString());
 		// 페이지 들고 오는지 확인 
 		
 		List<FreeBoardVO> allList = service.getList(page);
+		// db에서 조회된 결과를 List<FreeBoardVO>형태로 가져옴 
+		
 		model.addAttribute("boardList", allList);
-		// 모델에 데이터를 담아서 보내줌
+		// 모델에 조회된 결과를 담아서 보냄  
+		
 		
 		PageCreator pcv = new PageCreator();
 		pcv.setPaging(page);
 		pcv.setArticleTotalCount(service.getTotal(page));
+		// 전체 게시물의 개수를 set해줘야 begin, end page 등의 정보를 만들 수 있음(그렇게 만들었기 때문에)
+		
 		System.out.println("pcv 객체 확인 : " + pcv.toString());
 		
 		model.addAttribute("pcv", pcv);
@@ -82,6 +93,7 @@ public class FreeBoardController {
 		model.addAttribute("p", page);
 		
 		FreeBoardVO board = service.getContent(bno);
+		// 가져온 bno값을 통해 게시판 정보를 가져옴 
 		System.out.println("게시물 DB에서 가져오는지 확인 : " + board.getBno());
 		model.addAttribute("board", board);
 		return "/freeBoard/freeDetail";

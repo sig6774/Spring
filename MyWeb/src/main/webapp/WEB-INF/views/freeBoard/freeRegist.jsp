@@ -54,6 +54,7 @@
     	$('#registBtn').click(function(){
     		
     		if ($('input[name=title]').val() === ''){
+    			// 지목한 요소의 값이 비어있다면 로직 진행 
     			alert('제목은 필수 항목입니다.');
     			$('input[name=title]').focus();
     			return;
@@ -62,13 +63,15 @@
     			$('textarea[name=content]').focus();
     			return;
     		} else{
+    			// 지목한 요소의 값이 모두 비어있지 않다면 form태그를 통해 서버에 데이터들을 전송 
     			document.registForm.submit();
     			// form 태그로 되어 있으므로 form의 id를 지목해서 submit하게 되면 데이터가 보내짐
     		}
     		
     	$('#listBtn').click(function() {
     		if(confirm('목록으로 돌아가시겠습니까?')){
-    			location.href = '<c:url value="/freeBoard/freeList" />'; 
+    			location.href = '<c:url value="/freeBoard/freeList" />';
+    			// 서버에 요청을 보냄 
     		}else {
     			return;
     		}
