@@ -21,8 +21,9 @@
 	
 	 <!-- 날짜별 로그 파일 생성 -->
     <appender name="rollingFile" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="C:/Spring/LOG/all.log"/>
-        <param name="Append" value="true"/>
+<!--         <param name="File" value="C:/Spring/LOG/all.log"/> -->
+        <param name="File" value="/Users/sig6774/Review_Spring/LOG/all.log"/>        
+		<param name="Append" value="true"/>
         <!-- param name="MaxFileSize" value="100MB"/ -->
         <!-- param name="MaxBackupIndex" value="2"></param -->
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
@@ -41,7 +42,9 @@
     <!-- 날짜별 로그 파일 생성(에러만) -->
     <appender name="errFile" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="Threshold" value="ERROR"/>
-        <param name="File" value="C:/Spring/LOG/error.log"/>
+        
+        <!-- <param name="File" value="C:/Spring/LOG/error.log"/> -->
+        <param name="File" value="/Users/sig6774/Review_Spring/LOG/error.log"/>
         <param name="Append" value="true"/>
         <!-- param name="MaxFileSize" value="100MB"/ -->
         <!-- param name="MaxBackupIndex" value="2"></param -->

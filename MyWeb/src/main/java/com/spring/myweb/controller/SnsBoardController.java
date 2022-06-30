@@ -70,8 +70,8 @@ public class SnsBoardController {
 		String filelocation = sdf.format(date);
 		
 		// 저장할 폴더 경로 
-		String uploadPath = "C:\\Users\\user\\Desktop\\upload\\" + filelocation;
-		// String uploadPath = "/Users/sig6774/Desktop/Web/" + filelocation;
+		//String uploadPath = "C:\\Users\\user\\Desktop\\upload\\" + filelocation;
+		 String uploadPath = "/Users/sig6774/Desktop/Web/" + filelocation;
 		
 		// 폴더가 없으면 생성하도록 진행 
 		File folder = new File(uploadPath);
@@ -152,8 +152,8 @@ public class SnsBoardController {
 		
 
 		
-		File file = new File("C:\\Users\\user\\Desktop\\upload\\" + fileLocation + "\\" + fileName);
-		//File file = new File("/Users/sig6774/Desktop/Web/" + fileLocation + "/" + fileName);
+		// File file = new File("C:\\Users\\user\\Desktop\\upload\\" + fileLocation + "\\" + fileName);
+		File file = new File("/Users/sig6774/Desktop/Web/" + fileLocation + "/" + fileName);
 
 		System.out.println(file);
 		
