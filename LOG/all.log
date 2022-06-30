@@ -1,152 +1,324 @@
-2022-06-29 12:05:34,212 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
-2022-06-29 12:05:35,064 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... []
-2022-06-29 12:05:35,519 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection opened []
-2022-06-29 12:05:35,519 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.new Connection returned  []
-2022-06-29 12:05:35,519 INFO [com.zaxxer.hikari.pool.PoolBase] HikariPool-1 - Driver does not support get/set network timeout for connections. (oracle.jdbc.driver.T4CConnection.getNetworkTimeout()I) []
-2022-06-29 12:05:35,520 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,521 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,523 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.isValid(1) returned true []
-2022-06-29 12:05:35,523 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.getTransactionIsolation() returned 2 []
-2022-06-29 12:05:35,528 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed. []
-2022-06-29 12:05:35,662 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 2. Connection opened []
-2022-06-29 12:05:35,663 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 2. Connection.new Connection returned  []
-2022-06-29 12:05:35,663 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 2. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,664 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 2. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,692 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 3. Connection opened []
-2022-06-29 12:05:35,692 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 3. Connection.new Connection returned  []
-2022-06-29 12:05:35,692 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 3. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,693 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 3. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,711 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 4. Connection opened []
-2022-06-29 12:05:35,711 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 4. Connection.new Connection returned  []
-2022-06-29 12:05:35,711 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 4. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,712 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 4. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,737 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 5. Connection opened []
-2022-06-29 12:05:35,737 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 5. Connection.new Connection returned  []
-2022-06-29 12:05:35,737 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 5. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,737 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 5. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,762 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 6. Connection opened []
-2022-06-29 12:05:35,762 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 6. Connection.new Connection returned  []
-2022-06-29 12:05:35,762 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 6. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,762 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 6. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,790 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 7. Connection opened []
-2022-06-29 12:05:35,791 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 7. Connection.new Connection returned  []
-2022-06-29 12:05:35,791 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 7. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,791 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 7. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,823 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 8. Connection opened []
-2022-06-29 12:05:35,823 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 8. Connection.new Connection returned  []
-2022-06-29 12:05:35,823 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 8. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,824 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 8. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,843 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 9. Connection opened []
-2022-06-29 12:05:35,844 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 9. Connection.new Connection returned  []
-2022-06-29 12:05:35,844 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 9. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,844 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 9. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:35,861 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 10. Connection opened []
-2022-06-29 12:05:35,861 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 10. Connection.new Connection returned  []
-2022-06-29 12:05:35,861 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 10. Connection.isReadOnly() returned false []
-2022-06-29 12:05:35,861 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 10. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:36,018 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 1801 ms []
-2022-06-29 12:05:36,083 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
-2022-06-29 12:05:38,158 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2075 ms []
-2022-06-29 12:05:39,442 INFO [com.spring.myweb.HomeController] Welcome home! The client locale is ko_KR. []
-2022-06-29 12:05:47,439 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.user.service.UserService@18313a9b []
-2022-06-29 12:05:47,443 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : UserVO com.spring.myweb.user.service.IUserService.login(String,String) []
-2022-06-29 12:05:47,444 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [moon123, abc12345] []
-2022-06-29 12:05:47,495 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.isValid(5) returned true []
-2022-06-29 12:05:47,502 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.getAutoCommit() returned true []
-2022-06-29 12:05:47,738 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.new PreparedStatement returned  []
-2022-06-29 12:05:47,739 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.prepareStatement(SELECT * FROM users
-		WHERE userId =
-		? and userPw = ?) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@483ba516 []
-2022-06-29 12:05:47,746 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.setQueryTimeout(3000) returned  []
-2022-06-29 12:05:47,748 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.setString(1, "moon123") returned  []
-2022-06-29 12:05:47,750 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.setString(2, "abc12345") returned  []
-2022-06-29 12:05:47,755 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] SELECT * FROM users WHERE userId = 'moon123' and userPw = 'abc12345' 
- []
-2022-06-29 12:05:47,806 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] SELECT * FROM users WHERE userId = 'moon123' and userPw = 'abc12345' 
- {executed in 50 msec} []
-2022-06-29 12:05:47,807 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.execute() returned true []
-2022-06-29 12:05:47,822 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.new ResultSet returned  []
-2022-06-29 12:05:47,823 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@6a9640cc []
-2022-06-29 12:05:47,834 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getMetaData() returned oracle.jdbc.driver.OracleResultSetMetaData@246f4b25 []
-2022-06-29 12:05:47,837 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getType() returned 1003 []
-2022-06-29 12:05:47,838 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.next() returned true []
-2022-06-29 12:05:47,842 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USERID) returned moon123 []
-2022-06-29 12:05:47,844 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,845 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USERPW) returned abc12345 []
-2022-06-29 12:05:47,845 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,846 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USERNAME) returned 문경록 []
-2022-06-29 12:05:47,846 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,847 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USERPHONE1) returned 010 []
-2022-06-29 12:05:47,847 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,849 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USERPHONE2) returned 123123 []
-2022-06-29 12:05:47,849 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,850 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USEREMAIL) returned fpdl1006 []
-2022-06-29 12:05:47,850 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,853 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(USEREMAIL2) returned @naver.com []
-2022-06-29 12:05:47,854 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,855 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(ADDRBASIC) returned 경기 성남시 분당구 판교역로 235 []
-2022-06-29 12:05:47,855 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,856 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(ADDRDETAIL) returned ㅋㅋㅇ []
-2022-06-29 12:05:47,857 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,858 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getString(ADDRZIPNUM) returned void []
-2022-06-29 12:05:47,858 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned true []
-2022-06-29 12:05:47,859 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.getTimestamp(REGDATE) returned 2022-06-23 09:18:41.0 []
-2022-06-29 12:05:47,860 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.wasNull() returned false []
-2022-06-29 12:05:47,863 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 
-|--------|---------|---------|-----------|-----------|----------|-----------|--------------------|-----------|-----------|----------------------|
-|userid  |userpw   |username |userphone1 |userphone2 |useremail |useremail2 |addrbasic           |addrdetail |addrzipnum |regdate               |
-|--------|---------|---------|-----------|-----------|----------|-----------|--------------------|-----------|-----------|----------------------|
-|moon123 |abc12345 |문경록      |010        |123123     |fpdl1006  |@naver.com |경기 성남시 분당구 판교역로 235 |ㅋㅋㅇ        |[null]     |2022-06-23 09:18:41.0 |
-|--------|---------|---------|-----------|-----------|----------|-----------|--------------------|-----------|-----------|----------------------|
- []
-2022-06-29 12:05:47,864 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.next() returned false []
-2022-06-29 12:05:47,865 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. ResultSet.close() returned void []
-2022-06-29 12:05:47,865 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@45300aed []
-2022-06-29 12:05:47,866 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.isClosed() returned false []
-2022-06-29 12:05:47,867 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. PreparedStatement.close() returned  []
-2022-06-29 12:05:47,873 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.clearWarnings() returned  []
-2022-06-29 12:05:47,874 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.435초 []
-2022-06-29 12:05:47,924 INFO [com.spring.myweb.HomeController] Welcome home! The client locale is ko_KR. []
-2022-06-29 12:08:18,698 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated... []
-2022-06-29 12:08:18,702 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection closed []
-2022-06-29 12:08:18,703 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 1. Connection.close() returned  []
-2022-06-29 12:08:18,703 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 2. Connection closed []
-2022-06-29 12:08:18,703 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 2. Connection.close() returned  []
-2022-06-29 12:08:18,704 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 3. Connection closed []
-2022-06-29 12:08:18,704 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 3. Connection.close() returned  []
-2022-06-29 12:08:18,705 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 4. Connection closed []
-2022-06-29 12:08:18,705 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 4. Connection.close() returned  []
-2022-06-29 12:08:18,706 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 5. Connection closed []
-2022-06-29 12:08:18,706 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 5. Connection.close() returned  []
-2022-06-29 12:08:18,707 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 6. Connection closed []
-2022-06-29 12:08:18,707 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 6. Connection.close() returned  []
-2022-06-29 12:08:18,707 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 7. Connection closed []
-2022-06-29 12:08:18,708 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 7. Connection.close() returned  []
-2022-06-29 12:08:18,708 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 8. Connection closed []
-2022-06-29 12:08:18,708 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 8. Connection.close() returned  []
-2022-06-29 12:08:18,709 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 9. Connection closed []
-2022-06-29 12:08:18,709 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 9. Connection.close() returned  []
-2022-06-29 12:08:18,710 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 10. Connection closed []
-2022-06-29 12:08:18,710 INFO [net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator] 10. Connection.close() returned  []
-2022-06-29 12:08:18,711 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed. []
-2022-06-29 12:17:01,035 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
-2022-06-29 12:17:02,050 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... []
-2022-06-29 12:17:02,536 INFO [com.zaxxer.hikari.pool.PoolBase] HikariPool-1 - Driver does not support get/set network timeout for connections. (oracle.jdbc.driver.T4CConnection.getNetworkTimeout()I) []
-2022-06-29 12:17:02,545 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed. []
-2022-06-29 12:17:03,081 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 2040 ms []
-2022-06-29 12:17:03,159 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
-2022-06-29 12:17:05,623 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2463 ms []
-2022-06-29 12:17:07,260 INFO [com.spring.myweb.HomeController] Welcome home! The client locale is ko_KR. []
-2022-06-29 12:17:19,804 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.user.service.UserService@2e22c736 []
-2022-06-29 12:17:19,808 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : UserVO com.spring.myweb.user.service.IUserService.login(String,String) []
-2022-06-29 12:17:19,809 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [moon123, abc12345] []
-2022-06-29 12:17:20,154 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.35000000000000003초 []
-2022-06-29 12:17:20,196 INFO [com.spring.myweb.HomeController] Welcome home! The client locale is ko_KR. []
-2022-06-29 12:17:46,096 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.freeboard.service.FreeBoardService@50c224b9 []
-2022-06-29 12:17:46,097 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : List com.spring.myweb.freeboard.service.IFreeBoardService.getList(PageVO) []
-2022-06-29 12:17:46,097 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [PageVO(pageNum=1, cpp=5, keyword=null, condition=null)] []
-2022-06-29 12:17:46,189 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.093초 []
-2022-06-29 12:17:46,192 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.freeboard.service.FreeBoardService@50c224b9 []
-2022-06-29 12:17:46,192 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.freeboard.service.IFreeBoardService.getTotal(PageVO) []
-2022-06-29 12:17:46,192 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [PageVO(pageNum=1, cpp=5, keyword=null, condition=null)] []
-2022-06-29 12:17:46,203 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.011초 []
+2022-06-30 09:49:46,838 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 09:49:47,452 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... []
+2022-06-30 09:49:49,331 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed. []
+2022-06-30 09:49:50,040 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 3195 ms []
+2022-06-30 09:49:50,113 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 09:49:52,563 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2450 ms []
+2022-06-30 09:49:53,102 INFO [com.spring.myweb.HomeController] Welcome home! The client locale is ko_KR. []
+2022-06-30 09:50:03,536 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.user.service.UserService@1c4c30c1 []
+2022-06-30 09:50:03,540 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : UserVO com.spring.myweb.user.service.IUserService.login(String,String) []
+2022-06-30 09:50:03,541 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [moon123, abc12345] []
+2022-06-30 09:50:04,364 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.8280000000000001초 []
+2022-06-30 09:50:04,428 INFO [com.spring.myweb.HomeController] Welcome home! The client locale is ko_KR. []
+2022-06-30 09:51:11,771 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.freeboard.service.FreeBoardService@441a5409 []
+2022-06-30 09:51:11,774 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : List com.spring.myweb.freeboard.service.IFreeBoardService.getList(PageVO) []
+2022-06-30 09:51:11,774 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [PageVO(pageNum=1, cpp=5, keyword=null, condition=null)] []
+2022-06-30 09:51:11,915 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.14400000000000002초 []
+2022-06-30 09:51:11,927 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.freeboard.service.FreeBoardService@441a5409 []
+2022-06-30 09:51:11,928 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.freeboard.service.IFreeBoardService.getTotal(PageVO) []
+2022-06-30 09:51:11,928 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [PageVO(pageNum=1, cpp=5, keyword=null, condition=null)] []
+2022-06-30 09:51:11,946 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.019초 []
+2022-06-30 09:51:37,372 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,374 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : List com.spring.myweb.snsboard.service.ISnsBoardService.listLike(String) []
+2022-06-30 09:51:37,375 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [moon123] []
+2022-06-30 09:51:37,527 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.155초 []
+2022-06-30 09:51:37,575 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,575 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : List com.spring.myweb.snsboard.service.ISnsBoardService.getList(PageVO) []
+2022-06-30 09:51:37,576 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [PageVO(pageNum=1, cpp=5, keyword=null, condition=null)] []
+2022-06-30 09:51:37,703 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.128초 []
+2022-06-30 09:51:37,704 INFO [com.spring.myweb.controller.SnsBoardController] /snsBoard/getList : GET []
+2022-06-30 09:51:37,712 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,713 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.snsboard.service.ISnsBoardService.likeCnt(int) []
+2022-06-30 09:51:37,713 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [7] []
+2022-06-30 09:51:37,738 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.026000000000000002초 []
+2022-06-30 09:51:37,739 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,739 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.snsboard.service.ISnsBoardService.likeCnt(int) []
+2022-06-30 09:51:37,739 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [6] []
+2022-06-30 09:51:37,755 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.016초 []
+2022-06-30 09:51:37,756 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,756 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.snsboard.service.ISnsBoardService.likeCnt(int) []
+2022-06-30 09:51:37,756 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [5] []
+2022-06-30 09:51:37,770 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.014초 []
+2022-06-30 09:51:37,771 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,774 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.snsboard.service.ISnsBoardService.likeCnt(int) []
+2022-06-30 09:51:37,775 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [4] []
+2022-06-30 09:51:37,884 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.113초 []
+2022-06-30 09:51:37,885 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 중인 클래스 : com.spring.myweb.snsboard.service.SnsBoardService@2dcbcede []
+2022-06-30 09:51:37,885 INFO [com.spring.myweb.util.aop.LogAdvice] 실행 메서드 : int com.spring.myweb.snsboard.service.ISnsBoardService.likeCnt(int) []
+2022-06-30 09:51:37,885 INFO [com.spring.myweb.util.aop.LogAdvice] 매개 값 : [3] []
+2022-06-30 09:51:37,896 INFO [com.spring.myweb.util.aop.LogAdvice] 메서드 소요 시간 : 0.011초 []
+2022-06-30 09:52:30,284 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated... []
+2022-06-30 09:52:30,498 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed. []
+2022-06-30 10:31:05,345 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 10:31:05,962 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... []
+2022-06-30 10:31:07,437 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed. []
+2022-06-30 10:31:07,967 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 2617 ms []
+2022-06-30 10:31:08,024 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 10:31:10,221 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2193 ms []
+2022-06-30 10:31:51,406 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated... []
+2022-06-30 10:31:51,543 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed. []
+2022-06-30 10:32:16,343 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 10:32:16,942 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... []
+2022-06-30 10:32:18,254 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed. []
+2022-06-30 10:32:18,841 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 2493 ms []
+2022-06-30 10:32:18,876 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 10:32:21,153 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2275 ms []
+2022-06-30 10:32:34,573 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated... []
+2022-06-30 10:32:34,706 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed. []
+2022-06-30 10:36:09,931 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 10:36:10,535 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... []
+2022-06-30 10:36:12,133 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed. []
+2022-06-30 10:36:12,676 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 2737 ms []
+2022-06-30 10:36:12,710 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 10:36:14,897 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2187 ms []
+2022-06-30 10:40:40,914 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated... []
+2022-06-30 10:40:41,112 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed. []
+2022-06-30 12:04:48,244 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 12:04:48,700 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 12:04:49,546 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Start completed. []
+2022-06-30 12:04:49,988 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 1737 ms []
+2022-06-30 12:04:50,029 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 12:04:52,135 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2106 ms []
+2022-06-30 12:05:44,952 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown initiated... []
+2022-06-30 12:05:45,127 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown completed. []
+2022-06-30 12:05:54,152 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 12:05:54,548 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 12:05:58,629 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Start completed. []
+2022-06-30 12:05:59,133 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 4979 ms []
+2022-06-30 12:05:59,176 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 12:06:01,416 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2239 ms []
+2022-06-30 12:07:19,104 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown initiated... []
+2022-06-30 12:07:19,371 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown completed. []
+2022-06-30 12:07:28,428 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 12:07:28,908 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 12:07:29,933 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Start completed. []
+2022-06-30 12:07:30,388 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 1955 ms []
+2022-06-30 12:07:30,430 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 12:07:32,843 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2412 ms []
+2022-06-30 12:13:30,341 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown initiated... []
+2022-06-30 12:13:30,558 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown completed. []
+2022-06-30 12:13:39,837 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 12:13:40,230 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 12:13:41,287 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Start completed. []
+2022-06-30 12:13:41,794 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 1954 ms []
+2022-06-30 12:13:41,836 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 12:13:44,210 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2373 ms []
+2022-06-30 12:17:06,621 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown initiated... []
+2022-06-30 12:17:06,910 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown completed. []
+2022-06-30 12:17:15,829 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 12:17:16,350 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 12:17:17,393 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Start completed. []
+2022-06-30 12:17:17,875 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 2039 ms []
+2022-06-30 12:17:17,920 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 12:17:20,388 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2466 ms []
+2022-06-30 12:25:37,075 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown initiated... []
+2022-06-30 12:25:37,239 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown completed. []
+2022-06-30 12:26:22,530 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 12:26:22,993 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 12:26:23,880 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Start completed. []
+2022-06-30 12:26:24,341 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 1808 ms []
+2022-06-30 12:26:24,389 INFO [org.springframework.web.servlet.FrameworkServlet] Initializing Servlet 'appServlet' []
+2022-06-30 12:26:26,791 INFO [org.springframework.web.servlet.FrameworkServlet] Completed initialization in 2402 ms []
+2022-06-30 12:58:17,451 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown initiated... []
+2022-06-30 12:58:17,580 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Shutdown completed. []
+2022-06-30 13:00:34,837 INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started []
+2022-06-30 13:00:35,219 INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-2 - Starting... []
+2022-06-30 13:00:35,602 ERROR [com.zaxxer.hikari.pool.HikariPool] HikariPool-2 - Exception during pool initialization. []
+java.sql.SQLRecoverableException: IO 오류: Unable to initialize ssl context.
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:874)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:807)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:77)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:767)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:572)
+	at net.sf.log4jdbc.sql.jdbcapi.DriverSpy.connect(DriverSpy.java:401)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:353)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:562)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:311)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:296)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:401)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:292)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4768)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5230)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:835)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:263)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:432)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:772)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:476)
+Caused by: oracle.net.ns.NetException: Unable to initialize ssl context.
+	at oracle.net.nt.CustomSSLSocketFactory.createSSLContext(CustomSSLSocketFactory.java:346)
+	at oracle.net.nt.CustomSSLSocketFactory.getSSLContext(CustomSSLSocketFactory.java:307)
+	at oracle.net.nt.CustomSSLSocketFactory.getSSLSocketEngine(CustomSSLSocketFactory.java:273)
+	at oracle.net.nt.TcpsNTAdapter.newSSLEngine(TcpsNTAdapter.java:621)
+	at oracle.net.nt.TcpsNTAdapter.renegotiateSession(TcpsNTAdapter.java:384)
+	at oracle.net.ns.SessionAtts.renegotiateSSLSession(SessionAtts.java:522)
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:297)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:364)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1625)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:606)
+	... 64 more
+Caused by: oracle.net.ns.NetException: Unable to initialize the key store.
+	at oracle.net.nt.CustomSSLSocketFactory.getKeyManagerArray(CustomSSLSocketFactory.java:619)
+	at oracle.net.nt.CustomSSLSocketFactory.createSSLContext(CustomSSLSocketFactory.java:324)
+	... 73 more
+Caused by: java.nio.channels.OverlappingFileLockException
+	at sun.nio.ch.SharedFileLockTable.checkList(FileLockTable.java:255)
+	at sun.nio.ch.SharedFileLockTable.add(FileLockTable.java:152)
+	at sun.nio.ch.FileChannelImpl.tryLock(FileChannelImpl.java:1107)
+	at oracle.security.pki.FileLockProvider.a(Unknown Source)
+	at oracle.security.pki.OracleSSOKeyStoreSpi.engineLoad(Unknown Source)
+	at java.security.KeyStore.load(KeyStore.java:1445)
+	at oracle.net.nt.CustomSSLSocketFactory.loadFileBasedKeyStore(CustomSSLSocketFactory.java:924)
+	at oracle.net.nt.CustomSSLSocketFactory.loadKeyStore(CustomSSLSocketFactory.java:908)
+	at oracle.net.nt.CustomSSLSocketFactory.getKeyManagerArray(CustomSSLSocketFactory.java:610)
+	... 74 more
+2022-06-30 13:00:35,614 WARN [org.springframework.context.support.AbstractApplicationContext] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ds' defined in ServletContext resource [/WEB-INF/spring/root-context.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Constructor threw exception; nested exception is com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Unable to initialize ssl context. []
+2022-06-30 13:00:35,626 ERROR [org.springframework.web.context.ContextLoader] Context initialization failed []
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ds' defined in ServletContext resource [/WEB-INF/spring/root-context.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Constructor threw exception; nested exception is com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Unable to initialize ssl context.
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:315)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:296)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:401)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:292)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4768)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5230)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:835)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:263)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:432)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:772)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:476)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Constructor threw exception; nested exception is com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Unable to initialize ssl context.
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:311)
+	... 45 more
+Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Unable to initialize ssl context.
+	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:597)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211)
+	... 47 more
+Caused by: java.sql.SQLRecoverableException: IO 오류: Unable to initialize ssl context.
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:874)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:807)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:77)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:767)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:572)
+	at net.sf.log4jdbc.sql.jdbcapi.DriverSpy.connect(DriverSpy.java:401)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:353)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:562)
+	... 54 more
+Caused by: oracle.net.ns.NetException: Unable to initialize ssl context.
+	at oracle.net.nt.CustomSSLSocketFactory.createSSLContext(CustomSSLSocketFactory.java:346)
+	at oracle.net.nt.CustomSSLSocketFactory.getSSLContext(CustomSSLSocketFactory.java:307)
+	at oracle.net.nt.CustomSSLSocketFactory.getSSLSocketEngine(CustomSSLSocketFactory.java:273)
+	at oracle.net.nt.TcpsNTAdapter.newSSLEngine(TcpsNTAdapter.java:621)
+	at oracle.net.nt.TcpsNTAdapter.renegotiateSession(TcpsNTAdapter.java:384)
+	at oracle.net.ns.SessionAtts.renegotiateSSLSession(SessionAtts.java:522)
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:297)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:364)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1625)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:606)
+	... 64 more
+Caused by: oracle.net.ns.NetException: Unable to initialize the key store.
+	at oracle.net.nt.CustomSSLSocketFactory.getKeyManagerArray(CustomSSLSocketFactory.java:619)
+	at oracle.net.nt.CustomSSLSocketFactory.createSSLContext(CustomSSLSocketFactory.java:324)
+	... 73 more
+Caused by: java.nio.channels.OverlappingFileLockException
+	at sun.nio.ch.SharedFileLockTable.checkList(FileLockTable.java:255)
+	at sun.nio.ch.SharedFileLockTable.add(FileLockTable.java:152)
+	at sun.nio.ch.FileChannelImpl.tryLock(FileChannelImpl.java:1107)
+	at oracle.security.pki.FileLockProvider.a(Unknown Source)
+	at oracle.security.pki.OracleSSOKeyStoreSpi.engineLoad(Unknown Source)
+	at java.security.KeyStore.load(KeyStore.java:1445)
+	at oracle.net.nt.CustomSSLSocketFactory.loadFileBasedKeyStore(CustomSSLSocketFactory.java:924)
+	at oracle.net.nt.CustomSSLSocketFactory.loadKeyStore(CustomSSLSocketFactory.java:908)
+	at oracle.net.nt.CustomSSLSocketFactory.getKeyManagerArray(CustomSSLSocketFactory.java:610)
+	... 74 more
