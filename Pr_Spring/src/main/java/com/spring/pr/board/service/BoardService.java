@@ -23,10 +23,15 @@ public class BoardService implements IBoardService {
 	public List<BoardVO> listBoard() {
 		return mapper.listBoard();
 	}
+	
+	@Override
+	public BoardVO contentBoard(int BNum) {
+		return mapper.contentBoard(BNum);
+	}
 
 	@Override
-	public void modiBoard(String title, String content) {
-		mapper.modiBoard(title, content);
+	public void modiBoard(BoardVO board) {
+		mapper.modiBoard(board);
 	}
 
 	@Override

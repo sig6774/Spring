@@ -191,6 +191,7 @@
 			}
 
 			$.ajax({
+				// 비동기 통신으로 페이지 변경없이 데이터를 서버와 왔다 갔다 할 수 있게 함 
 				type : 'POST',
 				url : '<c:url value ="/user/checkId" />',
 				data : id,
@@ -227,31 +228,31 @@
 									+ $('#userEmail2').val();
 							// 완성된 이메일 주소 
 							console.log('완성된 이메일 : ' + email);
-							$
-									.ajax({
-										type : 'get',
-										url : '<c:url value="/user/mailCheck?email="/>'
-												+ email,
-										// 특정 경로로 서버에 요청을 보냄 
+							
+							$.ajax({
+								type : 'get',
+								url : '<c:url value="/user/mailCheck?email="/>'
+										+ email,
+								// 특정 경로로 서버에 데이터와 함께 요청을 보냄 
 
-										success : function(result) {
-											console.log('컨트롤러에서 전달받은 인증번호 : '
-													+ result);
+								success : function(result) {
+									console.log('컨트롤러에서 전달받은 인증번호 : '
+											+ result);
 
-											$('.mail-check-input').attr(
-													"disabled", false); // 비활성화된 인증번호 창 활성화
-											// 속성 변경 
+									$('.mail-check-input').attr(
+											"disabled", false); // 비활성화된 인증번호 창 활성화
+									// 속성 변경 
 
-											// controller로 전달받은 값을 code에 넣어줌 
-											// 나중에 인증번호 인증 여부 확인 값 
-											code = result;
+									// controller로 전달받은 값을 code에 넣어줌 
+									// 나중에 인증번호 인증 여부 확인 값 
+									code = result;
 
-											alert('인증번호가 전송되었습니다. 확인 후 입력한에 정확하게 입력하세요.');
-										},
-										error : function() {
+									alert('인증번호가 전송되었습니다. 확인 후 입력한에 정확하게 입력하세요.');
+								},
+								error : function() {
 
-										}
-									}); // end ajax(이메일 전송)
+								}
+							}); // end ajax(이메일 전송)
 
 							// 인증 번호 비교 
 							// blur -> focus가 벗어나는 경우 발생 
@@ -271,7 +272,8 @@
 
 													$('#mail-check-btn').attr(
 															'disabled', true);
-													// 이메일 인증 버튼 비활성화(화면에 보이지 않도록)
+													// 이메일 인증 버튼 비활성화(화면에 보이지 않도록) 
+													// 다시 이메일 인증을 못하게 
 
 													$('#userEmail1').attr(
 															'readonly', true);

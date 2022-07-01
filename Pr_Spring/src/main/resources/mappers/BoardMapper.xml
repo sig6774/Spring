@@ -6,7 +6,7 @@
 <mapper namespace="com.spring.pr.board.mapper.IBoardMapper">
 
 
-	<resultMap type="com.spring.pr.command.BoardVO" id="MappginBoard">
+	<resultMap type="com.spring.pr.command.BoardVO" id="MappingBoard">
 		<!-- VO객체와 DB에 있는 테이블의 변수들 이름이 다르기 때문에 맞춰주는 작업  -->
 		<id property="bNum" column = "B_NUM"/>
 		
@@ -22,8 +22,25 @@
 		VALUES (b_num_seq.NEXTVAL, #{bWriter}, #{bTitle}, #{bContent})
 	</insert>
 	
-	<select id="listBoard" resultMap="MappginBoard">
+	<select id="listBoard" resultMap="MappingBoard">
 		SELECT * FROM 
 		PRBOARD
 	</select>
+	
+	<select id="contentBoard" resultMap="MappingBoard">
+		SELECT * FROM 
+		PRBOARD 
+		WHERE B_NUM = #{BNum}
+	</select>
+	
+	<update id="modiBoard">
+		UPDATE PRBOARD SET B_TITLE = #{bTitle}, B_CONTENT = #{bContent} 
+		WHERE B_NUM = #{bNum}
+	
+	</update>
+	
+	<delete id="delBoard">
+		DELETE FROM PRBOARD
+		WHERE B_NUM = #{bNum}
+	</delete>
 </mapper>

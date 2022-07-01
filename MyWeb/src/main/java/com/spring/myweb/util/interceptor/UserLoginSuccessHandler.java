@@ -48,8 +48,11 @@ public class UserLoginSuccessHandler implements HandlerInterceptor{
 			// 작성한 경로로 돌아갈 수 있도록 작성 
 		} else {
 			System.out.println("로그인 성공");
-			// 로그인을 성공했으면 session을 생성해서 로그인 유지할 수 있는 수단으로 사용 
+			// 로그인을 성공했으면 session을 생성해서 로그인 유지할 수 있는 수단으로 사용
+			
 			session.setAttribute("login", user);
+			// 로그인한 유저의 정보를 유지할 수 있도록 session에 저장 
+			
 			response.sendRedirect(request.getContextPath());
 			// /myweb으로 리턴하는 건데 contextroot는 바뀔 수 있으므로 위처럼 작성 
 		}

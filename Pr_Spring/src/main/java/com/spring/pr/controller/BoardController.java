@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.pr.board.service.IBoardService;
@@ -20,12 +22,12 @@ public class BoardController {
 	@Autowired
 	private IBoardService service; 
 	
-	@GetMapping("/BoardRegist")
+	@GetMapping("/boardRegist")
 	public String moveRegist() {
-		return "boardRegist";
+		return "/board/boardRegist";
 	}
 
-	@PostMapping("/BoardRegist")
+	@PostMapping("boardRegist")
 	public String regist(BoardVO board, RedirectAttributes ra) {
 		// 커맨드 객체 이용 
 		
@@ -54,6 +56,49 @@ public class BoardController {
 //		}
 		model.addAttribute("bList", listboard);
 		return "/board/boardList";
+	}
+	
+	// 게시물 상세보기 
+	@GetMapping("/boardDetail/{BNum}")
+	public String moveDetail(@PathVariable int BNum, Model model) {
+		System.out.println("상세보기 파라미터 가져오는지 확인 : " + BNum);
+		
+		BoardVO board = service.contentBoard(BNum);
+		model.addAttribute("board", board);
+		return "/board/boardDetail";
+	}
+	
+	@GetMapping("/boardModify/{BNum}")
+	public String moveModify(@PathVariable int BNum, Model model) {
+		System.out.println("수정 요청 파라미터 가져오는지 확인 : " + BNum);
+		
+		BoardVO board = service.contentBoard(BNum);
+		model.addAttribute("board", board);
+		return "/board/boardModify";
+	}
+	
+	@PostMapping("/boardModify")
+	public String Modify(BoardVO board, RedirectAttributes ra) {
+		System.out.println("수정 게시글 가져오는지 확인 : " + board);
+		BoardVO upboard = service.contentBoard(board.getBNum());
+		upboard.setBTitle(board.getBTitle());
+		upboard.setBContent(board.getBContent());
+		// 게시글 수정 
+		System.out.println("수정 확인  : " + upboard);
+		service.modiBoard(upboard);
+		
+		ra.addFlashAttribute("msg", "수정이 완되었습니다.");
+
+		return "redirect:/board/boardList";
+	}
+	
+	@GetMapping("/boardDelete/{BNum}")
+	public String Delete(@PathVariable int BNum, RedirectAttributes ra) {
+		System.out.println("삭제 요청 파라미터 가져오는지 확인 : " + BNum);
+		
+		service.delBoard(BNum);
+		ra.addAttribute("msg", "삭제가 완료되었습니다.");
+		return "redirect:/board/boardList";
 	}
 	
 }

@@ -12,9 +12,12 @@ public interface IBoardService {
 	// 글 목록 
 	List<BoardVO> listBoard();
 	
+	// 글 가져오기 
+	BoardVO contentBoard(int BNum);
+	
 	// 글 수정 
 	// 글 제목이랑 글 내용만 수정 가능 
-	void modiBoard(String title, String content);
+	void modiBoard(BoardVO board);
 	
 	// 글 삭제 
 	void delBoard(int bNum);

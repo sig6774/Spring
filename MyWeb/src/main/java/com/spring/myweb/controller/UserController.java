@@ -27,6 +27,7 @@ public class UserController {
 	
 	@Autowired
 	private MailSendService mailService;
+	// 이메일 인증을 하기 위한 객체를 의존성 등록 
 	
 	// 도로명 주소 승인 키 : devU01TX0FVVEgyMDIyMDYyMjE2MTc1MDExMjcxNjE=
 	
@@ -35,10 +36,13 @@ public class UserController {
 	@ResponseBody
 	// RestController가 아닌 경우에는 @ResponseBody를 붙여야 비동기 통신이 가능
 	public String check(@RequestBody String id) {
+		// client에서 보낸 요청의 데이터 (비동기 통신)
 		System.out.println("/user/checkId : POST");
 		System.out.println("아이디 중복 확인 요청 아이디 값 : " + id);
 		
 		int num = service.idCheck(id);
+		// 중복 확인 테스트 
+		
 		System.out.println(num);
 		if (num >= 1) {
 			return "checkFail";
@@ -118,6 +122,8 @@ public class UserController {
 		
 		
 		return "/user/userLogin";
+		// interceptor에서 디스패처에 가기전 가로채서 검증을 끝내고 거기서 요청을 보내기 때문에 controller에 있는 
+		// return은 안먹
 	}
 	
 	// MyPage 이동 요청 

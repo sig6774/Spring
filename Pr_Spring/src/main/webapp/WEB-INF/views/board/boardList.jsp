@@ -54,7 +54,8 @@
 								<%-- <td>${b }</td> --%>
 								<!-- 변수는 bNum인데 get할 떄 b가 대문자 B가 됨  -->
 								<td>${b.BNum}</td>
-								<td><a>${b.BTitle}</a></td>
+								<td><a href="<c:url value='/board/boardDetail/${b.BNum }'/>">${b.BTitle}</a></td>
+								<!-- 제목을 클릭하게 된다면 해당 게시물의 번호도 같이 서버에 전송되도록 진행 -->
 								<td>${b.BWriter}</td>
 								<td>${b.BContent}</td>
 								<td><fmt:formatDate value="${b.BDate }" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
@@ -73,14 +74,36 @@
 						<li><a href="#">5</a></li>
 						<li><a href="#">다음</a></li>
 					</ul>
-					<button class="btn btn-info pull-right">글쓰기</button>
-				</div> -->
+					-->
+					<button class="btn btn-info pull-right" id="regiBtn">글쓰기</button>
+					<!-- 글쓰기 클릭하게 된다면 요청 보내기  -->
+				</div> 
 
 			</div>
-		</div>
+		<!-- </div> -->
 	</section>
 	
 	<%@ include file="../includes/footer.jsp" %>
+	<script>
+	
+		$(function() {
+			const msg = '${msg}';
+			if (msg !== ''){
+				alert(msg);
+				}
+			
+			$('#regiBtn').click(function() {
+				console.log('글쓰기 버튼 클릭 ');
+				if (confirm('게시글을 작성하시겠습니까?')){
+					location.href='<c:url value="/board/boardRegist" />';
+				}
+				else {
+					return;
+				}
+			});
+		});
+		
+	</script>
 	
 	
 </body>
