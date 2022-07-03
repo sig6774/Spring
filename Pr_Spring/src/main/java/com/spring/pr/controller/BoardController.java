@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.pr.board.service.IBoardService;
 import com.spring.pr.command.BoardVO;
+import com.spring.pr.utils.PageCreator;
+import com.spring.pr.utils.PageVO;
 
 @Controller
 @RequestMapping("/board")
@@ -46,25 +48,35 @@ public class BoardController {
 	
 	// 게시물 목록 요청 
 	@GetMapping("/boardList")
-	public String listBoard(Model model) {
+	public String listBoard(Model model, PageVO pageInfo) {
 		
-		List<BoardVO> listboard = service.listBoard();
+		List<BoardVO> listboard = service.listBoard(pageInfo);
 		// db에서 값을 가져옴 
 		System.out.println(listboard);
 //		for (BoardVO b : listboard) {
 //			System.out.println(b.getBNum());
 //		}
 		model.addAttribute("bList", listboard);
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(pageInfo);
+		pc.settotalAritcle(service.getAllCount());
+		// 페이지에 대한 정보 
+		
+		model.addAttribute("page", pc);
+		
 		return "/board/boardList";
 	}
 	
 	// 게시물 상세보기 
 	@GetMapping("/boardDetail/{BNum}")
-	public String moveDetail(@PathVariable int BNum, Model model) {
+	public String moveDetail(@PathVariable int BNum, Model model, PageVO pageInfo) {
 		System.out.println("상세보기 파라미터 가져오는지 확인 : " + BNum);
 		
 		BoardVO board = service.contentBoard(BNum);
 		model.addAttribute("board", board);
+		
+		model.addAttribute("page", pageInfo);
 		return "/board/boardDetail";
 	}
 	

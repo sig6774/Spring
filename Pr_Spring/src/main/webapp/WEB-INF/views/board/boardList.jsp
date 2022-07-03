@@ -54,7 +54,7 @@
 								<%-- <td>${b }</td> --%>
 								<!-- 변수는 bNum인데 get할 떄 b가 대문자 B가 됨  -->
 								<td>${b.BNum}</td>
-								<td><a href="<c:url value='/board/boardDetail/${b.BNum }'/>">${b.BTitle}</a></td>
+								<td><a href="<c:url value='/board/boardDetail/${b.BNum }/${page.makeURI(page.paging.pageNum) }'/>">${b.BTitle}</a></td>
 								<!-- 제목을 클릭하게 된다면 해당 게시물의 번호도 같이 서버에 전송되도록 진행 -->
 								<td>${b.BWriter}</td>
 								<td>${b.BContent}</td>
@@ -64,23 +64,35 @@
 					</tbody>
 				</table>
 
-<!-- 				<div class="text-center">
-					<ul class="pagination pagination-sm">
-						<li><a href="#">이전</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">다음</a></li>
+		    <form action="<c:url value= '/board/boardList'/>" name="pageForm">
+
+				<div class="text-center">
+					<ul class="pagination pagination-sm" id="paging">
+					<c:if test="${page.previous }">
+						<li><a href="#" data-pagenum="${page.beginPage-1 }">이전</a></li>
+					</c:if>
+					
+					<c:forEach var="pc" begin="${page.beginPage}" end = "${page.endPage }">
+						<li class="${page.paging.pageNum == pc ? 'acive' : '' }"><a href="#" data-pagenum="${pc }">${pc }</a></li>
+					</c:forEach>
+						
+					<c:if test="${page.next }">
+						<li><a href="#" data-pagenum= "${page.endPage+1 }">다음</a></li>
+					</c:if>
 					</ul>
-					-->
+					
 					<button class="btn btn-info pull-right" id="regiBtn">글쓰기</button>
 					<!-- 글쓰기 클릭하게 된다면 요청 보내기  -->
 				</div> 
+				
+			     <!-- 페이지 관련 버튼(이전, 다음 , 페이지 번호) 클릭 시 같이 숨겨서 보내줄 공통 값 -->
+                 <input type="hidden" name="pageNum" value="${pcv.paging.pageNum }">
+                 <input type="hidden" name="cpp" value="${pcv.paging.cpp }">
+		    </form>
+			
 
 			</div>
-		<!-- </div> -->
+		 </div> 
 	</section>
 	
 	<%@ include file="../includes/footer.jsp" %>
@@ -100,6 +112,21 @@
 				else {
 					return;
 				}
+			}); 
+			// 글쓰기 이벤트 끄읏 
+			
+			$('#paging').on('click', 'a', function(event){
+				
+				event.preventDefault();
+				// a태그의 고유 기능을 없앰 
+				
+				const value = $(event.target).data('pagenum'); 
+				console.log('pagenum 값 : ' + value);
+				// 이벤트가 발생한 곳의 data-pagenum 속성의 값을 가져옴 
+				document.pageForm.pageNum.value=value;
+				document.pageForm.submit();
+				// 페이지 이동 버튼을 클릭하게 된다면 클릭한 곳의 값을 가지고 와서 pageNum이라는 input의 value에 값을 넣어서 다시 요청을 보냄 
+				
 			});
 		});
 		

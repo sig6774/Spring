@@ -67,7 +67,8 @@
 				console.log('목록 요청 버튼 클릭 ');
 				
 				if (confirm('게시글 목록으로 이동하시겠습니까? ')){
-					location.href='<c:url value="/board/boardList" />';
+					location.href='<c:url value="/board/boardList?pageNum=${page.pageNum}&countPerPage=${page.countPerPage}" />';
+					// 다시 목록으로 갔을 때 사용자가 이전에 요청한 페이지번호를 그대로 가지고 와서 계속 작업을 진행할 수 있도록 진
 				}
 				else{
 					return;

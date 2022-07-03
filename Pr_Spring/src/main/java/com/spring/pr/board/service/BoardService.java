@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.pr.board.mapper.IBoardMapper;
 import com.spring.pr.command.BoardVO;
+import com.spring.pr.utils.PageVO;
 
 @Service
 public class BoardService implements IBoardService {
@@ -20,8 +21,14 @@ public class BoardService implements IBoardService {
 	}
 
 	@Override
-	public List<BoardVO> listBoard() {
-		return mapper.listBoard();
+	public List<BoardVO> listBoard(PageVO pageInfo) {
+		return mapper.listBoard(pageInfo);
+	}
+	
+	@Override
+	public int getAllCount() {
+		// TODO Auto-generated method stub
+		return mapper.getAllCount();
 	}
 	
 	@Override

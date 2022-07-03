@@ -23,8 +23,15 @@
 	</insert>
 	
 	<select id="listBoard" resultMap="MappingBoard">
-		SELECT * FROM 
-		PRBOARD
+		select * from 
+		(select tb.* , ROWNUM AS RN from 
+		(select * from prboard order by b_num DESC) tb)
+		<![CDATA[
+		WHERE RN > (#{pageNum} -1) * #{countPerPage} 
+		and RN <= #{pageNum} * ${countPerPage}
+		]]>
+
+
 	</select>
 	
 	<select id="contentBoard" resultMap="MappingBoard">
@@ -32,6 +39,12 @@
 		PRBOARD 
 		WHERE B_NUM = #{BNum}
 	</select>
+
+	<select id="getAllCount" resultType="int">
+		SELECT count(*) FROM 
+		PRBOARD
+	</select>
+	
 	
 	<update id="modiBoard">
 		UPDATE PRBOARD SET B_TITLE = #{bTitle}, B_CONTENT = #{bContent} 
