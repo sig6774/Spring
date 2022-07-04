@@ -65,6 +65,11 @@
 		때문 -->
 	<mybatis-spring:scan
 		base-package="com.spring.pr.board.mapper" />
+	<!-- board에 관한 mapper -->
+	
+	<mybatis-spring:scan
+		base-package="com.spring.pr.user.mapper" />
+	<!-- user에 관한 mapper -->
 
 	
  </beans>

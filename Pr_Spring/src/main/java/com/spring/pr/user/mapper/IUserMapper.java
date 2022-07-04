@@ -5,7 +5,7 @@ import com.spring.pr.command.UserVO;
 public interface IUserMapper {
 	
 	// 아이디 중복 체크 
-	boolean checkId(String userId);
+	int checkId(String userId);
 	
 	// 아이디 등록 
 	void registUser(UserVO user);

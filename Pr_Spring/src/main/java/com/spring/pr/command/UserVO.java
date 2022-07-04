@@ -33,6 +33,7 @@ public class UserVO {
 	
 	private String userAddr1;
 	private String userAddr2;
+	private String userAddr3;
 	
 	private String totalUserTel;
 	private String totalUserEmail;

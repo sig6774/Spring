@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.pr.user.mapper.IUserMapper">
+
+
+	<resultMap type="com.spring.pr.command.UserVO" id="mappingUser">
+	<!-- VO객체와 DB의 컬럼명이 다른 것을 mybatis에서 인식할 수 있도록 맞춰주는 작업  -->
+		<id property="userId" column="u_UserId" />
+		<!-- 기본키는 id로 지정  -->
+		
+		<result property="userPw" column="u_UserPw"/>
+		<result property="userName" column="u_UserName"/>
+		<result property="totalUserTel" column="u_UserTel"/>
+		<result property="totalUserEmail" column="u_UserEmail"/>
+		<result property="totalUserAddr" column="u_UserAddr"/>
+
+	</resultMap>
+	
+	<select id="checkId" resultType="int">
+		SELECT count(*) 
+		FROM pruser
+		WHERE u_UserPw = #{userId}
+	</select>
+	
+	<insert id="registUser" parameterMap="mappingUser">
+		INESRT INTO pruser(U_USERID, U_USERPW, U_USERNAME, U_USERTEL, U_USEREMAIL, U_USERADDR)
+		VALUES(#{userId}, #{userPw}, #{userName}, #{totalUserTel}, #{totalUserEmail}, #{totalUserAddr})
+		
+	</insert>
+</mapper>

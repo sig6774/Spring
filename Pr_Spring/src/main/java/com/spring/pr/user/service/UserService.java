@@ -1,18 +1,25 @@
 package com.spring.pr.user.service;
 
-import com.spring.pr.command.UserVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.spring.pr.command.UserVO;
+import com.spring.pr.user.mapper.IUserMapper;
+
+@Service
 public class UserService implements IUserService {
+	
+	@Autowired
+	private IUserMapper mapper;
 
 	@Override
-	public boolean checkId(String userId) {
-		// TODO Auto-generated method stub
-		return false;
+	public int checkId(String userId) {
+		return mapper.checkId(userId);
 	}
 
 	@Override
 	public void registUser(UserVO user) {
-		// TODO Auto-generated method stub
+		mapper.registUser(user);
 
 	}
 
