@@ -17,13 +17,11 @@ public interface IUserService {
 	
 	// 로그인 유저 
 	UserVO loginUser(@Param("id") String id, @Param("pw") String pw);
-	
-	// 유저 비밀번호 변경 
-	void chUserPw(UserVO user);
+
 	
 	// 유저 정보 변경 
 	void chUser(UserVO user);
 	
 	// 유저 삭제 
-	void delUser(UserVO user);
+	void delUser(String userPw);
 }

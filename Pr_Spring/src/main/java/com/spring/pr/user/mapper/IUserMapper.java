@@ -20,13 +20,11 @@ public interface IUserMapper {
 	// mybatis는 한개이상의 값을 보낼 때 인식을 하지 못하는 경우가 있으므로 @Param annotation을 사용하거나 
 	// 여러 다른 방법을 활용해서 mybatis가 인식할 수 있도록 만들어야 인식이 가능 
 	
-	// 유저 비밀번호 변경 
-	void chUserPw(UserVO user);
 	
 	// 유저 정보 변경 
 	void chUser(UserVO user);
 	
 	// 유저 삭제 
-	void delUser(UserVO user);
+	void delUser(String userPw);
 
 }

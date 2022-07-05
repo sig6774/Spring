@@ -36,7 +36,7 @@
 					<div class="delete-hidden">
 						<form>
 							<input type="password" class="form-control"
-								placeholder="비밀번호를 입력하세요">
+								placeholder="비밀번호를 입력하세요" id="delPw">
 							<button type="button" id = "delBtn" class="btn btn-primary">확인</button>
 						</form>
 					</div>
@@ -99,13 +99,49 @@
         
         $(function() {
         	
+        	// 회원정보 수정 요청
         	$('#modiBtn').click(function(){
         		location.href = "<c:url value='/user/userMypageInfo'/>";
         	});
-        	// 회원정보 수정 요청 
         	
-        	
+			// 회원 삭제         	
+        	$('#delBtn').click(function(){
+        		const pw = $('#delPw').val(); 
+        		
+        		if (pw === ''){
+        			alert('비밀번호를 입력해주세요.');
+        			return 
+        		}
+        		
+        		$.ajax({
+        			type : 'post',
+        			url : '<c:url value="/user/userDel"/>',
+        			data : pw, 
+        			dataType : 'text',
+        			contentType : 'application/json',
+        			
+        			success : function(result){
+        				
+        				if (result === 'SuccessDel'){
+        					alert('삭제가 완료되었습니다.');
+        					location.href = '<c:url value="/user/userLogin"/>';
+        				}
+        				else{
+        					alert('비밀번호가 틀립니다. 다시 확인해주세요.');
+        				}
+        			},
+        			error : function(){
+        				alert('오류입니다. 관리자에게 문의하세요.');
+        			}
+        			
+        		});
+        		// ajax 끄읏 
+        		
+        	});
+			// 회원삭제 끄읏 
         });
+        
+        
     </script>
 
 </body>

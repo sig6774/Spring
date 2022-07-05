@@ -40,4 +40,18 @@
 	
 	</select>
 	
+	 <update id="chUser">
+		
+		UPDATE pruser SET U_USERPW = #{userPw}, U_USERNAME = #{userName}, U_USERTEL = #{totalUserTel}, 
+		U_USEREMAIL = #{totalUserEmail}, U_USERADDR = #{totalUserAddr} 
+		WHERE U_USERID = #{userId}
+	
+	</update>
+	
+	<delete id="delUser">
+		
+		DELETE FROM pruser 
+		WHERE U_USERPW = #{userPw}
+		
+	</delete>
 </mapper>

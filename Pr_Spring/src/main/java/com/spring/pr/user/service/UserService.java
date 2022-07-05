@@ -35,22 +35,16 @@ public class UserService implements IUserService {
 		return null;
 	}
 
-	@Override
-	public void chUserPw(UserVO user) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void chUser(UserVO user) {
-		// TODO Auto-generated method stub
+		mapper.chUser(user);
 
 	}
 
 	@Override
-	public void delUser(UserVO user) {
-		// TODO Auto-generated method stub
-
+	public void delUser(String userPw) {
+		mapper.delUser(userPw);
 	}
 
 }

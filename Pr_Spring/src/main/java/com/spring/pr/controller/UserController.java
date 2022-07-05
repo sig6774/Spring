@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.pr.command.UserVO;
 import com.spring.pr.user.service.IUserService;
@@ -105,6 +106,7 @@ public class UserController {
 
 			return "/user/userMypage";
 		}
+
 	}
 	
 	@GetMapping("/userMypageInfo")
@@ -123,4 +125,37 @@ public class UserController {
 		
 		return "/user/userMypageInfo";
 	}
+	
+	@PostMapping("/userMyPageInfo")
+	public String upUserInfo(UserVO upuser) {
+		System.out.println("수정요청 ");
+		System.out.println("수정 객체 가져오는지 확인 : " + upuser);
+		
+		service.chUser(upuser);
+		
+		return "redirect:/user/userLogin";
+	}
+	
+	@PostMapping("/userDel")
+	@ResponseBody 
+	public String del(@RequestBody String pw, HttpSession session) {
+		System.out.println("삭제 요청 ");
+		System.out.println("유저 비밀번호 가져오는지 확인 " + pw );
+		
+		String chPw = ((UserVO) session.getAttribute("login")).getUserPw();
+		System.out.println("세션에 저장된 비밀번호 가져오는지 확인 " + chPw);
+		
+		if (pw.equals(chPw)) {
+			// 세션에 저장된 유저의 정보와 입력한 정보가 같으면 삭제 진행 
+			service.delUser(pw);
+			return "SuccessDel";
+		}
+		else {
+			return "FailDel";
+			
+		}
+		
+	}
+	
+	
 }
