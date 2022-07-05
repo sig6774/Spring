@@ -1,5 +1,6 @@
 package com.spring.pr.user.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,11 @@ public class UserService implements IUserService {
 	public void registUser(UserVO user) {
 		mapper.registUser(user);
 
+	}
+	
+	@Override
+	public UserVO loginUser(@Param("id") String id, @Param("pw") String pw) {
+		return mapper.loginUser(id, pw);
 	}
 
 	@Override

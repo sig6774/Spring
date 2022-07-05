@@ -150,10 +150,11 @@
 			if (regex.test($('#userId').val())){
 				document.getElementById("userId").style.borderColor="green";
 				document.getElementById("msgId").innerHTML = "아이디 중복체크는 필수입니다.";
+				$('#userId').attr('readonly', true);
 			}
 			else{
 				document.getElementById("userId").style.borderColor = "red";
-				document.getElementById("msgId").innerHTML = "";
+				document.getElementById("msgId").innerHTML = "사용불가능한 아이디형식입니다.";
 			}
 		} 
 		// 아이디 형식 검사 끄읏 ~ 
@@ -219,7 +220,7 @@
 						}
 						else {
 							alert('사용가능한 아이디입니다.');
-							document.getElementId('msgId').innerHTML = "사용가능한 아이디입니다.";
+							document.getElementById('msgId').innerHTML = "사용가능한 아이디입니다.";
 						}
 					},
 					

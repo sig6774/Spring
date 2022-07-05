@@ -1,5 +1,7 @@
 package com.spring.pr.user.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.pr.command.UserVO;
 
 public interface IUserService {
@@ -12,6 +14,9 @@ public interface IUserService {
 	
 	// 유저 정보 가져오기 
 	UserVO getUser(UserVO user);
+	
+	// 로그인 유저 
+	UserVO loginUser(@Param("id") String id, @Param("pw") String pw);
 	
 	// 유저 비밀번호 변경 
 	void chUserPw(UserVO user);

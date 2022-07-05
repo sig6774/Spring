@@ -20,14 +20,24 @@
 	</resultMap>
 	
 	<select id="checkId" resultType="int">
+	
 		SELECT count(*) 
 		FROM pruser
-		WHERE u_UserPw = #{userId}
+		WHERE u_UserId = #{userId}
+		
 	</select>
 	
-	<insert id="registUser" parameterMap="mappingUser">
-		INESRT INTO pruser(U_USERID, U_USERPW, U_USERNAME, U_USERTEL, U_USEREMAIL, U_USERADDR)
+	<insert id="registUser">
+	
+		INSERT INTO pruser(U_USERID, U_USERPW, U_USERNAME, U_USERTEL, U_USEREMAIL, U_USERADDR)
 		VALUES(#{userId}, #{userPw}, #{userName}, #{totalUserTel}, #{totalUserEmail}, #{totalUserAddr})
 		
 	</insert>
+	
+	<select id="loginUser" resultMap = "mappingUser" resultType= "com.spring.pr.command.UserVO">
+	
+		SELECT * FROM pruser WHERE u_userid = #{id} and u_userpw = #{pw}
+	
+	</select>
+	
 </mapper>
