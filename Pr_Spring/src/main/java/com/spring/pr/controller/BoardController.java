@@ -28,7 +28,7 @@ public class BoardController {
 		return "/board/boardRegist";
 	}
 
-	@PostMapping("boardRegist")
+	@PostMapping("/boardRegist")
 	public String regist(BoardVO board, RedirectAttributes ra) {
 		// 커맨드 객체 이용 
 		

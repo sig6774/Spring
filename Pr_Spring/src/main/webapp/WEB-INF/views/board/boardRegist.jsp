@@ -80,7 +80,7 @@
 					$('input[name=bTitle]').focus();
 					return;
 				}
-				else if ($('input[name=bContent]').val() ==''){
+				else if ($('textarea[name=bContent]').val() ==''){
 					alert('내용은 필수 값입니다.');
 					$('input[name=bContent]').focus();
 					return;

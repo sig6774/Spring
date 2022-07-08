@@ -81,7 +81,7 @@
 					</c:if>
 					</ul>
 					
-					<button class="btn btn-info pull-right" id="regiBtn">글쓰기</button>
+					<button type = "button" class="btn btn-info pull-right" id="regiBtn">글쓰기</button>
 					<!-- 글쓰기 클릭하게 된다면 요청 보내기  -->
 				</div> 
 				

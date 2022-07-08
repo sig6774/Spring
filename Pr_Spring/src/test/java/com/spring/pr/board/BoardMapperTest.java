@@ -20,7 +20,7 @@ public class BoardMapperTest {
 	// 삽입 테스트 
 	@Test
 	public void re() {
-		for (int i = 1; i<=50; i++) {
+		for (int i = 51; i<=100; i++) {
 			BoardVO board = new BoardVO();
 			board.setBWriter("writer 더미 " + i);
 			board.setBTitle("title 더미 데이터 : " + i);
