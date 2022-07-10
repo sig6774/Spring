@@ -95,37 +95,37 @@
 	<!-- DB연결에 관련된 이벤트를 기록(Connection pool 등) 
 		 문제가 발생한다면  해당 내용만 출력 -->
 	<logger name = "jdbc.connection" additivity="false">
-		<level valuie="warn"/>
+		<level value="warn"/>
 		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- Resultset을 제외한 모든 JDBC 호출 내역을 기록 -->
 	<logger name = "jdbc.audit" additivity="false">
-		<level valuie="warn"/>
+		<level value="warn"/>
 		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- Resultset을 포함한 모든 JDBC 호출 내역을 기록 -->
 	<logger name = "jdbc.resultset" additivity="false">
-		<level valuie="warn"/>
+		<level value="warn"/>
 		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- sql문만 기록하는 로그(?값이 드러남) -->
 	<logger name = "jdbc.sqlonly" additivity="false">
-		<level valuie="info"/>
+		<level value="info"/>
 		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- table 모양으로 조회된 내용을 기록  -->
 	<logger name = "jdbc.resultsettable" additivity="false">
-		<level valuie="info"/>
+		<level value="info"/>
 		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- 해당 sql을 실행시키는데 소요된 시간 정보 기록(밀릴초)  -->
 	<logger name = "jdbc.sqltiming" additivity="false">
-		<level valuie="info"/>
+		<level value="info"/>
 		<appender-ref ref="console" />
 	</logger>
 

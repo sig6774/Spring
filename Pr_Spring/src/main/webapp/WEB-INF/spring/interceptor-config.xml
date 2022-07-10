@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- namespace에서 기능 추가  -->
+	
+	<bean id="LoginAuth" class="com.spring.pr.utils.interceptor.LoginAuth" />
+	<!-- bean 등록  -->
+	
+	<bean id="BoardAuth" class="com.spring.pr.utils.interceptor.UpDel" />
+	
+	
+	<mvc:interceptors>
+	
+<!-- 		<mvc:interceptor>
+			<mvc:mapping path="/user/userLogin"/>
+			<ref bean ="LoginAuth"/>
+		</mvc:interceptor> -->
+		
+		<mvc:interceptor>
+		
+			<mvc:mapping path="/board/boardRegist" />
+			<ref bean="LoginAuth"/>
+			<!-- 특정 요청(게시글 등록)이 들어왔을 떄 위에서 설정한 인터셉터가 발동하도록  -->
+			
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/board/boardModify/{BNum}/" />
+			<mvc:mapping path="/board/boardDelete/{BNum}/"/>
+			<!-- 요청 url은 controller가 받는 요청과 동일하게 작성해야함 -->
+			
+			<ref bean="BoardAuth"/>
+		
+		</mvc:interceptor>
+	
+	</mvc:interceptors>
+	 
+	
+	
+</beans>

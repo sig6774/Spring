@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.pr.board.service.IBoardService;
@@ -79,8 +80,9 @@ public class BoardController {
 		return "/board/boardDetail";
 	}
 	
-	@GetMapping("/boardModify/{BNum}")
-	public String moveModify(@PathVariable int BNum, Model model) {
+	@GetMapping("/boardModify")
+//	public String moveModify(@PathVariable int BNum,  Model model) {
+	public String moveModify(@RequestParam("BNum") int BNum,  Model model) {
 		System.out.println("수정 요청 파라미터 가져오는지 확인 : " + BNum);
 		
 		BoardVO board = service.contentBoard(BNum);
@@ -98,7 +100,7 @@ public class BoardController {
 		System.out.println("수정 확인  : " + upboard);
 		service.modiBoard(upboard);
 		
-		ra.addFlashAttribute("msg", "수정이 완되었습니다.");
+		ra.addFlashAttribute("msg", "수정이 완료 되었습니다.");
 
 		return "redirect:/board/boardList";
 	}

@@ -24,7 +24,8 @@
 						게시판 상세보기<small>(디자인이궁금하세요?)</small>
 					</h2>
 
-					<form action="<c:url value='/board/boardModify/${board.BNum }'/>" method="get" name="modiBtn">
+					<form action="<c:url value='/board/boardModify?BNum=${board.BNum }&writer=${board.BWriter }'/>" method="get" name="modiBtn">
+					<!-- 이거 왜 파라미터 안먹히는거지? -->
 						<div class="form-group">
 							<label>등록일</label> <input type="text" class="form-control"
 								value="${board.BDate} }" id="Bdate" readonly>

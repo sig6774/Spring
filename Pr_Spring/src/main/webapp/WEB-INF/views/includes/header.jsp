@@ -49,8 +49,17 @@ body {
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">접속하기<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="<c:url value='/user/userLogin' />">로그인</a></li>
-						<li><a href="<c:url value='/user/userJoin' />">회원가입</a></li>
+					<c:choose>
+						<c:when test="${login == null }">
+							<li><a href="<c:url value='/user/userLogin' />">로그인</a></li>
+							<li><a href="<c:url value='/user/userJoin' />">회원가입</a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="<c:url value='/user/userMypageInfo' />">마이페이지</a></li>
+							<li><a href="<c:url value='/user/userLogout' />">로그아웃</a></li>
+						</c:otherwise>
+					</c:choose>
 					</ul></li>
 			</ul>
 
