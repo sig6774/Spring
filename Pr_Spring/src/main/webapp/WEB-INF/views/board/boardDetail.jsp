@@ -24,7 +24,7 @@
 						게시판 상세보기<small>(디자인이궁금하세요?)</small>
 					</h2>
 
-					<form action="<c:url value='/board/boardModify?BNum=${board.BNum }&writer=${board.BWriter }'/>" method="get" name="modiBtn">
+					<form action="<c:url value='/board/boardModify'/>"  name="modForm">
 					<!-- 이거 왜 파라미터 안먹히는거지? -->
 						<div class="form-group">
 							<label>등록일</label> <input type="text" class="form-control"
@@ -32,11 +32,11 @@
 						</div>
 						<div class="form-group">
 							<label>글번호</label> <input type="text" class="form-control"
-								value="${board.BNum }" id="Bnum" readonly>
+								value="${board.BNum }" id="Bnum" name="BNum" readonly>
 						</div>
 						<div class="form-group">
 							<label>글쓴이</label> <input type="text" class="form-control"
-								value="${board.BWriter }" id="Bwriter" readonly>
+								value="${board.BWriter }" id="Bwriter" name="BWriter" readonly>
 						</div>
 						<div class="form-group">
 							<label>제목</label> <input type="text" class="form-control"
@@ -80,7 +80,7 @@
 				console.log('수정 요청 버튼 클릭 ');
 				
 				if (confirm('수정하시겠습니까?')){
-					document.modiBtn.submit();
+					document.modForm.submit();
 				}
 			});
 		});

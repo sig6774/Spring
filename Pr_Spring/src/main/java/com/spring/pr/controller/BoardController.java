@@ -82,10 +82,10 @@ public class BoardController {
 	
 	@GetMapping("/boardModify")
 //	public String moveModify(@PathVariable int BNum,  Model model) {
-	public String moveModify(@RequestParam("BNum") int BNum,  Model model) {
-		System.out.println("수정 요청 파라미터 가져오는지 확인 : " + BNum);
+	public String moveModify(BoardVO vo, Model model) {
+		System.out.println("수정 요청 파라미터 가져오는지 확인 : " + vo.getBNum());
 		
-		BoardVO board = service.contentBoard(BNum);
+		BoardVO board = service.contentBoard(vo.getBNum());
 		model.addAttribute("board", board);
 		return "/board/boardModify";
 	}
