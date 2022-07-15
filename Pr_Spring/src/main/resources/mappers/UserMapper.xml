@@ -2,56 +2,20 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.spring.pr.user.mapper.IUserMapper">
-
-
-	<resultMap type="com.spring.pr.command.UserVO" id="mappingUser">
-	<!-- VO객체와 DB의 컬럼명이 다른 것을 mybatis에서 인식할 수 있도록 맞춰주는 작업  -->
-		<id property="userId" column="u_UserId" />
-		<!-- 기본키는 id로 지정  -->
-		
-		<result property="userPw" column="u_UserPw"/>
-		<result property="userName" column="u_UserName"/>
-		<result property="totalUserTel" column="u_UserTel"/>
-		<result property="totalUserEmail" column="u_UserEmail"/>
-		<result property="totalUserAddr" column="u_UserAddr"/>
-
-	</resultMap>
+	<!-- namespace는 어떤 interface를 참조하는지 지정  -->
 	
-	<select id="checkId" resultType="int">
-	
-		SELECT count(*) 
-		FROM pruser
-		WHERE u_UserId = #{userId}
-		
-	</select>
-	
-	<insert id="registUser">
-	
-		INSERT INTO pruser(U_USERID, U_USERPW, U_USERNAME, U_USERTEL, U_USEREMAIL, U_USERADDR)
-		VALUES(#{userId}, #{userPw}, #{userName}, #{totalUserTel}, #{totalUserEmail}, #{totalUserAddr})
-		
+	<insert id="join">
+	INSERT INTO pruser
+	(u_UserId, u_UserPw, u_UserName, u_UserTel, u_UserEmail, u_UserAddr)
+	VALUES 
+	(#{userId}, #{userPw}, #{userName}, #{totalUserTel}, #{totalUserEmail}, #{totalUserAddr})
 	</insert>
 	
-	<select id="loginUser" resultMap = "mappingUser" resultType= "com.spring.pr.command.UserVO">
-	
-		SELECT * FROM pruser WHERE u_userid = #{id} and u_userpw = #{pw}
-	
+	<select id="login" resultType="user">
+		SELECT * FROM pruser
+		WHERE u_UserId = #{id}
+		AND u_UserPw = #{pw}
 	</select>
-	
-	 <update id="chUser">
-		
-		UPDATE pruser SET U_USERPW = #{userPw}, U_USERNAME = #{userName}, U_USERTEL = #{totalUserTel}, 
-		U_USEREMAIL = #{totalUserEmail}, U_USERADDR = #{totalUserAddr} 
-		WHERE U_USERID = #{userId}
-	
-	</update>
-	
-	<delete id="delUser">
-		
-		DELETE FROM pruser 
-		WHERE U_USERPW = #{userPw}
-		
-	</delete>
 </mapper>

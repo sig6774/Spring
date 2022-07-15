@@ -9,16 +9,16 @@ import lombok.ToString;
 @ToString
 public class UserVO {
 	
-//	CREATE TABLE pruser(
-//		    u_UserId VARCHAR2(30) primary key, 
-//		    u_UserPw VARCHAR2(30) not null,
-//		    u_UserName VARCHAR2(30) not null, 
-//		    
-//		    u_UserTel VARCHAR2(50),
-//		    u_UserEmail VARCHAR2(50), 
-//		    u_UserAddr VARCHAR2(100)
-//		    
-//		);
+	//	CREATE TABLE pruser(
+	//    u_UserId VARCHAR2(30) primary key, 
+	//    u_UserPw VARCHAR2(30) not null,
+	//    u_UserName VARCHAR2(30) not null, 
+	//    
+	//    u_UserTel VARCHAR2(50),
+	//    u_UserEmail VARCHAR2(50), 
+	//    u_UserAddr VARCHAR2(100)
+	//    
+	//);
 	
 	private String userId;
 	private String userPw;
@@ -33,9 +33,29 @@ public class UserVO {
 	
 	private String userAddr1;
 	private String userAddr2;
-	private String userAddr3;
 	
 	private String totalUserTel;
 	private String totalUserEmail;
 	private String totalUserAddr;
+	
+	public void setTotalUserTel(){
+		this.totalUserTel = userTel1 + userTel2 + userTel3;
+	}
+	
+	public void setTotalUserEmail() {
+		this.totalUserEmail = userEmail1 +"@"+ userEmail2; 
+	}
+	
+	public void setTotalUserAddr() {
+		this.totalUserAddr = userAddr1 + userAddr2;
+	}
+	
+
 }
+
+
+
+
+
+
+

@@ -18,7 +18,7 @@
 
 	<!-- css, img, js ... 의 파일 경로가 복잡할 때 많이 사용  -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/images/**" location="/resources/images/" />
+	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/fonts/**" location="/resources/fonts/" />
 	<resources mapping="/js/**" location="/resources/js/" />
@@ -29,38 +29,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-<!-- 		 interceptor bean 등록 
-	<beans:bean id="userInterceptor"
-		class="com.spring.myweb.util.interceptor.UserLoginSuccessHandler" />
-	interceptor는 해당 위치에 있다는 것을 의미
-
-	<interceptors>
-
-		<interceptor>
-
-			<mapping path="/user/userLogin" />
-			특정 요청일 때만 interceptor 진행
-
-			<mapping path="/board/**"/>
-			
-			<beans:ref bean="userInterceptor" />
-
-			<mapping path="/board/write"/> 이렇게 개별 요청에 대해서도 작성할 수 있음
-
-		</interceptor>
-	</interceptors> -->
-	
-	<!-- 파일 업로드 -->
-	<!-- 반드시 id를 저렇게 작성해야 함 
-		 Multipart 형식으로 전달되는 데이터를 스프링 MVC에서 사용할 수 있도록 변환해주는 객체  -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 업로드 가능한 파일의 최대 크기(바이트 단위)  -->
-		<beans:property name="maxUploadSize" value="10485760" />
-		<!-- 최대 업로드 용량 10메가로 고정 -->
-		
-		<!-- 업로드 요청을 반환할 때 사용할 문자 인코딩 방식  -->
-		<beans:property name="defaultEncoding" value="utf-8" />
-	</beans:bean>
 	
 	<!-- annotation으로 등록된 클래스 객체들을 탐색해 주는 설정 태그이며 
 		 base-package에다가 탐색한 패키지 경로를 작성하면 하위 패키지까지 모두 검색  -->

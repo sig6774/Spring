@@ -6,22 +6,21 @@ import com.spring.pr.command.UserVO;
 
 public interface IUserService {
 
-	// 아이디 중복 체크 
-	int checkId(String userId);
+	// 아이디 중복 확인 
+	int idCheck(String userId);
 	
-	// 아이디 등록 
-	void registUser(UserVO user);
+	// 회원 가입 
+	void join(UserVO user);
 	
-	// 유저 정보 가져오기 
-	UserVO getUser(UserVO user);
+	// 로그인
+	UserVO login(@Param("id") String id, @Param("pw") String pw);
 	
-	// 로그인 유저 
-	UserVO loginUser(@Param("id") String id, @Param("pw") String pw);
-
+	// 회원정보 얻어오기 
+	UserVO getInfo(String userId);
 	
-	// 유저 정보 변경 
-	void chUser(UserVO user);
+	// 회원 정보 수정 
+	void updateUser(UserVO user);
 	
-	// 유저 삭제 
-	void delUser(String userPw);
+	// 회원 정보 삭제 
+	void deleteUser(@Param("id") String id, @Param("pw") String pw);
 }

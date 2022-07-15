@@ -23,8 +23,7 @@ body {
 
 <body>
 
-	<%--  <%@ include file="include/header.jsp" %>--%>
-<jsp:include page="includes/header.jsp"/> 
+	<jsp:include page="include/header.jsp"/> 
 	
 
 	<section>
@@ -66,8 +65,8 @@ body {
 		</div>
 	</section>
 
-	<%@ include file="includes/footer.jsp" %>
-
+<%-- 	<%@ include file="includes/footer.jsp" %>
+ --%>
 
 
 
