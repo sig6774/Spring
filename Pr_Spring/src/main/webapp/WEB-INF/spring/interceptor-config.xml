@@ -28,9 +28,10 @@
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/board/boardModify/{BNum}/" />
-			<mvc:mapping path="/board/boardDelete/{BNum}/"/>
-			<!-- 요청 url은 controller가 받는 요청과 동일하게 작성해야함 -->
+			<mvc:mapping path="/board/boardModify" />
+			<mvc:mapping path="/board/boardDelete"/>
+			<!-- 요청 url은 controller가 받는 요청과 동일하게 작성해야하며 
+				 특정 요청이 들어왔을때 interceptor가 구동되도록 진행 -->
 			
 			<ref bean="BoardAuth"/>
 		

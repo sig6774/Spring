@@ -24,7 +24,7 @@
 						게시판 상세보기<small>(디자인이궁금하세요?)</small>
 					</h2>
 
-					<form action="<c:url value='/board/boardModify'/>"  name="modForm">
+					<form action="<c:url value='/board/boardModify?writer=${board.BWriter }'/>"  name="modForm">
 					<!-- 이거 왜 파라미터 안먹히는거지? -->
 						<div class="form-group">
 							<label>등록일</label> <input type="text" class="form-control"
@@ -40,11 +40,11 @@
 						</div>
 						<div class="form-group">
 							<label>제목</label> <input type="text" class="form-control"
-								value="${board.BTitle }" id="Btitle" >
+								value="${board.BTitle }" id="Btitle" readonly>
 						</div>
 						<div class="form-group">
 							<label>내용</label>
-							<textarea class="form-control" rows="5" id="Bcontent">${board.BContent }</textarea>
+							<textarea class="form-control" rows="5" id="Bcontent" readonly>${board.BContent }</textarea>
 						</div>
 
 						<!--구현로직: 버튼은 온클릭을 사용하던 자바스크립트를 이용해야 합니다-->
